@@ -1,0 +1,6 @@
+<deploy>
+	<description>Tal om Lolland</description>
+	<version>1.0.0</version>
+    <makedir dir="[cbinfo.wwwroot.dir]/modules/talomlolland" />
+    <copydir fromdir="[module:talomlolland.dir]/dist" todir="[cbinfo.wwwroot.dir]/modules/talomlolland" replacetext="true"/>
+</deploy>
