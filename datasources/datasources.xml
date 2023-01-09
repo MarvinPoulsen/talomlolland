@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<datasources>
+    <endpoint endpointtype="postgis" name="ep_lk_talomlolland">
+        <connect>[cbinfo.pg_endpoint.connect]</connect>
+        <user>[cbinfo.pg_endpoint.usr]</user>
+        <pwd>[cbinfo.pg_endpoint.pwd]</pwd>
+    </endpoint>
+    <datasource displayname="" endpoint="ep_lk_talomlolland" name="lk_talomlolland_ejer_bopalsregion">
+        <table name="ejer_bopalsregion" pkcolumn="id" schema="cog_sommerhuse"/>
+    </datasource>
+    <datasource endpoint="ep_lk_talomlolland" name="lk_talomlolland_sommerhusomrader_navne">
+        <table name="sommerhusomrader_navne" pkcolumn="id" schema="cog_sommerhuse" geometrycolumn="geom"/>
+    </datasource>
+	
+	
+	<!-- <datasource endpoint="ep_lk_cog_sommerhuse" name="ds_cog_sommerhuse_sommerhusomrader_navne"> -->
+        <!-- <table geometrycolumn="geom" name="sommerhusomrader_navne" pkcolumn="id" schema="cog_sommerhuse"/> -->
+    <!-- </datasource> -->
+    <!-- <datasource endpoint="ep_lk_talomlolland" name="lk_talomlolland_count_flexboliger"> -->
+        <!-- <table geometrycolumn="geom" name="count_flexboliger" pkcolumn="id" schema="byg_flex"/> -->
+    <!-- </datasource> -->
+    <datasource endpoint="ep_lk_talomlolland" name="lk_talomlolland_aldersfordeling">
+        <table name="aldersfordeling" pkcolumn="id" schema="cog_borger"/>
+    </datasource>
+    <datasource endpoint="ep_lk_talomlolland" name="lk_talomlolland_alder_koen">
+        <table name="alder_koen" pkcolumn="id" schema="cog_borger"/>
+    </datasource>
+    <datasource endpoint="ep_lk_talomlolland" name="lk_talomlolland_sogne_beboelsesenhed">
+        <table name="sogne_beboelsesenhed" pkcolumn="id" schema="talomlolland" geometrycolumn="geom"/>
+    </datasource>
+    <endpoint endpointtype="postgis" name="ep_lk_dem_flytning">
+        <connect>[cbinfo.pg_endpoint.connect]</connect>
+        <user>[cbinfo.pg_endpoint.usr]</user>
+        <pwd>[cbinfo.pg_endpoint.pwd]</pwd>
+    </endpoint>
+	<datasource endpoint="ep_lk_dem_flytning" name="lk_dem_flytning_flyttedata">
+        <table name="flyttedata" pkcolumn="id" schema="dem_flytning"/>
+		<sortorder>
+			<column name="aar" descending="false"/>
+		</sortorder>
+    </datasource>
+    <endpoint endpointtype="postgis" name="ep_lk_byg_flex">
+        <connect>[cbinfo.pg_endpoint.connect]</connect>
+        <user>[cbinfo.pg_endpoint.usr]</user>
+        <pwd>[cbinfo.pg_endpoint.pwd]</pwd>
+    </endpoint>
+    <datasource displayname="Flexbolig distrikter"  endpoint="ep_lk_byg_flex" name="lk_byg_flex_count_flexboliger">
+        <table geometrycolumn="geom" name="count_flexboliger" pkcolumn="id" schema="byg_flex"/>
+    </datasource>
+    <datasource displayname="Boligmarked" endpoint="ep_lk_talomlolland" name="lk_talomlolland_boligmarked">
+        <table name="boligmarked_view" schema="talomlolland"/>
+    </datasource>
+    <datasource displayname="Boligmarked områder" endpoint="ep_lk_talomlolland" name="lk_talomlolland_boligmarked_omraader">
+        <table name="boligmarked_omraader_view" pkcolumn="id" schema="talomlolland" geometrycolumn="geom"/>
+    </datasource>
+    <endpoint endpointtype="postgis" name="ep_lk_pv_vej">
+        <connect>[cbinfo.pg_endpoint.connect]</connect>
+        <user>[cbinfo.pg_endpoint.usr]</user>
+        <pwd>[cbinfo.pg_endpoint.pwd]</pwd>
+    </endpoint>
+    <datasource displayname="Uheld sogn" endpoint="ep_lk_pv_vej" name="lk_pv_vej_accidents_parish">
+        <table name="accidents_parish" pkcolumn="id" schema="pv_vej" geometrycolumn="geom"/>
+    </datasource>
+    <datasource displayname="Uheld" endpoint="ep_lk_pv_vej" name="lk_pv_vej_accident_involved">
+        <table name="accident_involved" pkcolumn="id" schema="pv_vej" geometrycolumn="geom"/>
+    </datasource>
+</datasources>

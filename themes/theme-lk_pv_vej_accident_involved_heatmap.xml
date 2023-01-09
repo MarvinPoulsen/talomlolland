@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<theme>
+    <clientlayers>
+        <clientlayer name="clientlayer">
+            <singletile>true</singletile>
+        </clientlayer>
+    </clientlayers>
+    <cbinfo-metadata/>
+    <layer name="lk_pv_vej_accident_involved_heatmap" type="raster">
+		<CONNECTIONTYPE>kerneldensity</CONNECTIONTYPE>
+		<CONNECTION>lk_pv_vej_accident_involved_point</CONNECTION>
+		<PROCESSING>"RANGE_COLORSPACE=HSL"</PROCESSING>
+		<PROCESSING>"KERNELDENSITY_RADIUS=20"</PROCESSING>
+		<PROCESSING>"KERNELDENSITY_COMPUTE_BORDERS=ON"</PROCESSING>
+		<PROCESSING>"KERNELDENSITY_NORMALIZATION=AUTO"</PROCESSING>      
+		   <class>
+				<name>Sogne med uheldsdata</name>
+				<style>
+					<colorrange>"#0000ff00"  "#0000ffff"</colorrange>
+					<datarange>0 16</datarange>
+				</style>
+				<style>
+					<colorrange>"#0000ffff"  "#ff0000ff"</colorrange>
+					<datarange>16 255</datarange>
+				</style>			
+			</class>
+    </layer>	
+    <layer datasource="lk_pv_vej_accident_involved" name="lk_pv_vej_accident_involved_point" type="point">[datasource:lk_pv_vej_accident_involved.mapfile-datasource]
+
+    </layer>
+</theme>

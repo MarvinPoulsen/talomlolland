@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<presentation>
+    <text name="overskrift" plural="flertal" value="ental"/>
+    <columns>
+        <column format="heading">
+            <label>'overskrift1'</label>
+            <value>navn</value>
+        </column>
+		<column>
+            <label>'id'</label>
+            <value>id</value>
+            <condition/>
+        </column>
+        <column>
+            <label>'Navn'</label>
+            <value>navn</value>
+            <condition/>
+        </column>
+        <column>
+            <label>'Sognekode'</label>
+            <value>sognekode</value>
+            <condition/>
+        </column>
+        <column>
+            <label>'Areal (ha)'</label>
+            <value>FormatDecimal ("#,###.#",areal_ha)</value>
+            <condition/>
+        </column>
+        <column>
+            <label>'År'</label>
+            <value>aar</value>
+            <condition/>
+        </column>
+        <column>
+            <label>'Alvorlig tilskadekomne'</label>
+            <value>alv_tilskadekomne</value>
+            <condition/>
+        </column>
+        <column>
+            <label>'Bløde trafikanter'</label>
+            <value>bloede_trafikanter'</value>
+            <condition/>
+        </column>
+        <column>
+            <label>'Dræbte'</label>
+            <value>draebte'</value>
+            <condition/>
+        </column>
+        <column>
+            <label>'Lette tilskadekomne'</label>
+            <value>let_tilskadekomne'</value>
+            <condition/>
+        </column>
+        <column>
+            <label>'Uskadte'</label>
+            <value>uskadte'</value>
+            <condition/>
+        </column>
+        <column>
+            <label>'Antal uheld'</label>
+            <value>uhelds_count'</value>
+            <condition/>
+        </column>
+    </columns>
+</presentation>

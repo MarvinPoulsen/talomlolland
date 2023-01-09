@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<presentation>
+    <text name="overskrift" plural="flertal" value="ental"/>
+    <columns>
+        <column format="heading">
+            <label>'overskrift1'</label>
+            <value>'Områdenavn'</value>
+        </column>
+        <column>
+            <label>'Områdenavn'</label>
+            <value>navn</value>
+            <condition/>
+        </column>
+    </columns>
+</presentation>

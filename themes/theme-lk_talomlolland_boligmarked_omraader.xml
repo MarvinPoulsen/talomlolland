@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<theme>
+    <clientlayers>
+        <clientlayer name="clientlayer">
+            <singletile>true</singletile>
+        </clientlayer>
+    </clientlayers>
+    <cbinfo-metadata/>
+    <layer datasource="lk_talomlolland_boligmarked_omraader" name="lk_talomlolland_boligmarked_omraader" type="polygon">[datasource:lk_talomlolland_boligmarked_omraader.mapfile-datasource]
+        <class>
+            <name>Nakskov</name>
+            <expression>/nakskov/</expression>
+            <style>
+                <color>153 0 0</color>
+				<opacity>30</opacity>
+           </style>
+            <style>
+                <outlinecolor>153 0 0</outlinecolor>
+            </style>
+        </class>
+        <class>
+            <name>Maribo</name>
+            <expression>/maribo/</expression>
+            <style>
+                <color>0 0 153</color>
+				<opacity>30</opacity>
+           </style>
+            <style>
+                <outlinecolor>0 0 153</outlinecolor>
+            </style>
+        </class>
+        <class>
+            <name>Rødby</name>
+            <expression>/roedby/</expression>
+            <style>
+                <color>0 153 153</color>
+				<opacity>30</opacity>
+           </style>
+            <style>
+                <outlinecolor>0 153 153</outlinecolor>
+            </style>
+        </class>
+        <class>
+            <name>Øvrigt</name>
+            <expression>/landomraader/</expression>
+            <style>
+                <color>153 153 0</color>
+				<opacity>30</opacity>
+           </style>
+            <style>
+                <outlinecolor>153 153 0</outlinecolor>
+            </style>
+        </class>
+        <classitem>omraade</classitem>
+    </layer>
+</theme>

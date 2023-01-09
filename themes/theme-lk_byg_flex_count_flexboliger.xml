@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<theme>
+    <clientlayers>
+        <clientlayer name="clientlayer">
+            <singletile>true</singletile>
+        </clientlayer>
+    </clientlayers>
+    <cbinfo-metadata/>
+    <layer datasource="lk_byg_flex_count_flexboliger" name="lk_byg_flex_count_flexboliger" type="polygon">[datasource:lk_byg_flex_count_flexboliger.mapfile-datasource]
+        <class>
+            <name>navn</name>
+            <style>
+                <color>0 0 255</color>
+                <opacity>9</opacity>
+           </style>
+            <style>
+                <outlinecolor>0 0 255</outlinecolor>
+				<width>2</width>
+            </style>
+        </class>
+    </layer>
+</theme>

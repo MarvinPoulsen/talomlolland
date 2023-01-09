@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<presentation>
+    <text name="overskrift" plural="flertal" value="ental"/>
+    <columns>
+        <column format="heading">
+            <label>'overskrift1'</label>
+            <value>uhelds_id</value>
+        </column>
+		<column>
+            <label>'id'</label>
+            <value>id</value>
+            <condition/>
+        </column>
+        <column>
+            <label>'uheldsart'</label>
+            <value>uheldsart</value>
+            <condition/>
+        </column>
+        <column>
+            <label>'sprit'</label>
+            <value>sprit</value>
+            <condition/>
+        </column>
+        <column>
+            <label>'År'</label>
+            <value>aar</value>
+            <condition/>
+        </column>
+        <column>
+            <label>'Alvorlig tilskadekomne'</label>
+            <value>antal_alv__skadet</value>
+            <condition/>
+        </column>
+        <column>
+            <label>'Bløde trafikanter'</label>
+            <value>antal_bloede_trafik'</value>
+            <condition/>
+        </column>
+        <column>
+            <label>'Dræbte'</label>
+            <value>antal_draebte'</value>
+            <condition/>
+        </column>
+        <column>
+            <label>'Lette tilskadekomne'</label>
+            <value>antal_lettere_skadet'</value>
+            <condition/>
+        </column>
+    </columns>
+</presentation>

@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<themes>
+	<theme module="talomlolland" name="theme-lk_talomlolland_sogne_beboelsesenhed">
+		<themeselector>
+			<initialstate>[common.themes.initialstate]</initialstate>
+			<group>talomlolland</group>
+			<selectable>true</selectable>
+			<displayname>Sogne med beboelsesenhed</displayname>
+		</themeselector>
+	</theme>
+	<theme module="talomlolland" name="theme-lk_talomlolland_boligmarked_omraader">
+		<themeselector>
+			<initialstate>[common.themes.initialstate]</initialstate>
+			<group>talomlolland</group>
+			<selectable>true</selectable>
+			<displayname>Boligmarked områder</displayname>
+		</themeselector>
+	</theme>
+	<theme module="talomlolland" name="theme-lk_byg_flex_count_flexboliger">
+		<themeselector>
+			<initialstate>[common.themes.initialstate]</initialstate>
+			<group>talomlolland</group>
+			<selectable>true</selectable>
+			<displayname>Flexbolig områder</displayname>
+		</themeselector>
+	</theme>
+	<theme module="talomlolland" name="theme-lk_pv_vej_accidents_parish">
+		<themeselector>
+			<initialstate>[common.themes.initialstate]</initialstate>
+			<group>talomlolland</group>
+			<selectable>true</selectable>
+			<displayname>Uheld områder</displayname>
+		</themeselector>
+	</theme>
+	<theme module="talomlolland" name="theme-lk_pv_vej_accident_involved">
+		<themeselector>
+			<initialstate>[common.themes.initialstate]</initialstate>
+			<group>talomlolland</group>
+			<selectable>true</selectable>
+			<displayname>Uheld</displayname>
+		</themeselector>
+	</theme>
+	<theme module="talomlolland" name="theme-lk_pv_vej_accident_involved_heatmap">
+		<themeselector>
+			<initialstate>[common.themes.initialstate]</initialstate>
+			<group>talomlolland</group>
+			<selectable>true</selectable>
+			<displayname>Uheldssteder heatmap</displayname>
+		</themeselector>
+	</theme>
+	<theme module="talomlolland" name="theme-lk_talomlolland_sommerhusomrader_navne">
+		<themeselector>
+		<initialstate>[common.themes.initialstate]</initialstate>
+			<group>talomlolland</group>
+			<selectable>true</selectable>
+			<displayname>Sommerhusområder - navne</displayname>
+		</themeselector>
+	</theme>
+</themes>

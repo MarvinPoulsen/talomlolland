@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<targetset maxresult="500" name="talomlolland">
+    <target displayname="Sogne med beboelsesenhed" name="lk_talomlolland_sogne_beboelsesenhed" presentation="[module:talomlolland.dir]/presentations/pres-lk_talomlolland_sogne_beboelsesenhed" themecondition="theme-lk_talomlolland_sogne_beboelsesenhed">
+        <datasource name="lk_talomlolland_sogne_beboelsesenhed"/>
+    </target>
+    <target displayname="Boligmarked områder" name="lk_talomlolland_boligmarked_omraader" presentation="[module:talomlolland.dir]/presentations/pres-lk_talomlolland_boligmarked_omraader" themecondition="theme-lk_talomlolland_boligmarked_omraader">
+        <datasource name="lk_talomlolland_boligmarked_omraader"/>
+    </target>
+    <target displayname="Flexbolig distrikter" name="lk_byg_flex_count_flexboliger" presentation="[module:byg_flex.dir]/presentations/pres-lk_byg_flex_count_flexboliger" themecondition="theme-lk_byg_flex_count_flexboliger">
+        <datasource name="lk_byg_flex_count_flexboliger"/>
+    </target>
+    <target displayname="Sogne med uheldsdata" name="lk_pv_vej_accidents_parish" presentation="[module:pv_vej.dir]/presentations/pres-lk_pv_vej_accidents_parish" themecondition="theme-lk_pv_vej_accidents_parish">
+        <datasource name="lk_pv_vej_accidents_parish"/>
+    </target>
+    <target displayname="Uheld" name="lk_pv_vej_accident_involved" presentation="[module:pv_vej.dir]/presentations/pres-lk_pv_vej_accident_involved" themecondition="theme-lk_pv_vej_accident_involved">
+        <datasource name="lk_pv_vej_accident_involved"/>
+    </target>
+	
+	
+    <target displayname="Sommerhusområder - navne" name="lk_talomlolland_sommerhusomrader_navne" presentation="[module:talomlolland.dir]/presentations/pres-lk_talomlolland_sommerhusomrader_navne" themecondition="theme-lk_talomlolland_sommerhusomrader_navne">
+        <datasource name="lk_talomlolland_sommerhusomrader_navne"/>
+    </target>
+</targetset>

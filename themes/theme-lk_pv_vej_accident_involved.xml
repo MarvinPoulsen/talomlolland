@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<theme>
+    <clientlayers>
+        <clientlayer name="clientlayer">
+            <singletile>true</singletile>
+        </clientlayer>
+    </clientlayers>
+    <cbinfo-metadata/>
+    <layer datasource="lk_pv_vej_accident_involved" editable="true" name="lk_pv_vej_accident_involved" type="point">[datasource:lk_pv_vej_accident_involved.mapfile-datasource]
+        <class>
+            <name>Sogne med uheldsdata</name>
+            <style>
+            <COLORRANGE>"#0000ff00"  "#0000ffff"</COLORRANGE>
+            <DATARANGE>0 32</DATARANGE>
+                <size>12</size>
+                <symbol>circle</symbol>
+            </style>
+        </class>
+    </layer>
+</theme>

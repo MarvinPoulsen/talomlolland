@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<theme>
+    <clientlayers>
+        <clientlayer name="clientlayer">
+            <singletile>true</singletile>
+        </clientlayer>
+    </clientlayers>
+    <cbinfo-metadata/>
+    <layer datasource="lk_talomlolland_sommerhusomrader_navne" name="cog_sommerhuse_sommerhusomrader_navne" type="polygon">[datasource:lk_talomlolland_sommerhusomrader_navne.mapfile-datasource]
+        <class>
+            <name>Sommerhusområder- navne</name>
+            <style>
+                <color>51 51 255</color>
+                <outlinecolor>51 0 255</outlinecolor>
+                <width>6</width>
+                <angle>45</angle>
+                <opacity>66</opacity>
+            </style>
+        </class>
+    </layer>
+</theme>

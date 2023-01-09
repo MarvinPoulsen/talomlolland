@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<presentation>
+    <text name="overskrift" plural="flertal" value="ental"/>
+    <columns>
+        <column format="heading">
+            <label>'overskrift1'</label>
+            <value>'overskrift2'</value>
+        </column>
+		<column>
+			<label>'id'</label>
+			<value>id</value>
+			<condition/>
+		</column>
+		<column>
+			<label>'navn'</label>
+			<value>navn</value>
+			<condition/>
+		</column>
+		<column>
+			<label>'flexboliger_count'</label>
+			<value>flexboliger_count</value>
+			<condition/>
+		</column>
+    </columns>
+</presentation>

@@ -1,0 +1,19 @@
+
+th.th-vandret{
+	vertical-align: middle;
+}
+.table th.th-lodret{
+	writing-mode: vertical-rl; 
+	transform: rotate(180deg);
+	
+}
+th.six-columns{
+	text-align: center !important;
+}
+th.two-rows{
+	vertical-align: bottom !important;
+}
+.table tr.is-selected {
+	background-color: #3e8ed0;
+	color: #fff;
+}

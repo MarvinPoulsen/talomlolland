@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<presentation>
+    <text name="overskrift" plural="flertal" value="ental"/>
+    <columns>
+        <column format="heading">
+            <label>'overskrift1'</label>
+            <value>navn</value>
+        </column>
+		<column>
+            <label>'id'</label>
+            <value>id</value>
+            <condition/>
+        </column>
+        <column>
+            <label>'navn'</label>
+            <value>navn</value>
+            <condition/>
+        </column>
+        <column>
+            <label>'sognekode'</label>
+            <value>sognekode</value>
+            <condition/>
+        </column>
+        <column>
+            <label>'areal_ha'</label>
+            <value>areal_ha</value>
+            <condition/>
+        </column>
+        <column>
+            <label>'beboelses_enheder'</label>
+            <value>beboelses_enheder</value>
+            <condition/>
+        </column>
+        <column>
+            <label>'tomme_bolig_enheder'</label>
+            <value>tomme_bolig_enheder</value>
+            <condition/>
+        </column>
+        <column>
+            <label>'procent_tomme_beboelses_enheder'</label>
+            <value>procent_tomme_beboelses_enheder</value>
+            <condition/>
+        </column>
+    </columns>
+</presentation>
