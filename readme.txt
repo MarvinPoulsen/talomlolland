@@ -25,3 +25,4 @@ Date		Version		Ini		Description
 --------------------
 TODO
 --------------------
+Mapsize på Demografi kan ændres fra 660x546 til 428x499, det kunne give plads til en graf over udvikligen i aldersfordelingen over tid.
