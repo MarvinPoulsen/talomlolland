@@ -9,6 +9,7 @@ import FlexHousePage from '../../pages/FlexHouse';
 import DemographicsPage from '../../pages/Demographics';
 import HousingMarketPage from '../../pages/HousingMarket';
 import AccidentsPage from '../../pages/Accidents';
+import ResidentAgesPage from '../../pages/ResidentAges';
 
 
 const App: FC = () => {
@@ -27,6 +28,7 @@ const App: FC = () => {
                         <Route path='/demografi' element={<DemographicsPage />} />
                         <Route path='/boligmarked' element={<HousingMarketPage />} />
                         <Route path='/uheld' element={<AccidentsPage />} />
+                        <Route path='/boligomrade' element={<ResidentAgesPage />} />
                     </Route>
                 </Routes>
 		    </section>

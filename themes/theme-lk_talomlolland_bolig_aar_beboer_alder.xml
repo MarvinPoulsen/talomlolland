@@ -1,0 +1,90 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<theme>
+    <clientlayers>
+        <clientlayer name="clientlayer">
+            <singletile>true</singletile>
+        </clientlayer>
+    </clientlayers>
+    <cbinfo-metadata>
+        <param name="metadata.text">Viser opførselsår fra BBR (LOIS)</param>
+    </cbinfo-metadata>
+    <layer datasource="lk_talomlolland_bolig_aar_beboer_alder" name="lk_talomlolland_bolig_aar_beboer_alder" type="polygon">[datasource:lk_talomlolland_bolig_aar_beboer_alder.mapfile-datasource]
+        <class>
+            <name>Før 1950</name>
+            <expression>([opfoerselsaar] lt 1950)</expression>
+            <style>
+                <color>255 153 0</color>
+                <opacity>60</opacity>
+            </style>
+            <style>
+                <outlinecolor>255 153 0</outlinecolor>
+            </style>
+        </class>
+        <class>
+            <name>1950-1959</name>
+            <expression>([opfoerselsaar] gt 1949 and [opfoerselsaar] lt 1960)</expression>
+            <style>
+                <color>153 255 0</color>
+                <opacity>60</opacity>
+            </style>
+            <style>
+                <outlinecolor>153 255 0</outlinecolor>
+            </style>
+        </class>
+        <class>
+            <name>1960-1969</name>
+            <expression>([opfoerselsaar] gt 1959 and [opfoerselsaar] lt 1970)</expression>
+            <style>
+                <color>51 204 51</color>
+                <opacity>60</opacity>
+            </style>
+            <style>
+                <outlinecolor>51 204 51</outlinecolor>
+            </style>
+        </class>
+        <class>
+            <name>1970-1979</name>
+            <expression>([opfoerselsaar] gt 1969 and [opfoerselsaar] lt 1980)</expression>
+            <style>
+                <color>51 255 255</color>
+                <opacity>60</opacity>
+            </style>
+            <style>
+                <outlinecolor>51 255 255</outlinecolor>
+            </style>
+        </class>
+        <class>
+            <name>1980-1989</name>
+            <expression>([opfoerselsaar] gt 1979 and [opfoerselsaar] lt 1990)</expression>
+            <style>
+                <color>0 102 204</color>
+                <opacity>60</opacity>
+            </style>
+            <style>
+                <outlinecolor>0 102 204</outlinecolor>
+            </style>
+        </class>
+        <class>
+            <name>1990-1999</name>
+            <expression>([opfoerselsaar] gt 1989 and [opfoerselsaar] lt 2000)</expression>
+            <style>
+                <color>153 0 204</color>
+                <opacity>60</opacity>
+            </style>
+            <style>
+                <outlinecolor>153 0 204</outlinecolor>
+            </style>
+        </class>
+        <class>
+            <name>Efter 1999</name>
+            <expression>([opfoerselsaar] gt 1999)</expression>
+            <style>
+                <color>255 0 0</color>
+                <opacity>60</opacity>
+            </style>
+            <style>
+                <outlinecolor>255 0 0</outlinecolor>
+            </style>
+        </class>
+    </layer>
+</theme>

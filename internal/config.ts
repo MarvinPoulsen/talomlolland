@@ -1,3 +1,7 @@
+const residentagesMinimapIdParam = '[module.talomlolland.residentages.minimapid]';
+const residentagesMinimapIdDev = 'bb623664-baee-4c20-a890-0baebcbac1ba';
+export const residentagesMinimapId = residentagesMinimapIdParam.includes('[') ? residentagesMinimapIdDev : residentagesMinimapIdParam;
+
 const accidentsMinimapIdParam = '[module.talomlolland.accidents.minimapid]';
 const accidentsMinimapIdDev = 'e2b08eb0-121c-4575-b3f6-3ef442a7a3ed';
 export const accidentsMinimapId = accidentsMinimapIdParam.includes('[') ? accidentsMinimapIdDev : accidentsMinimapIdParam;

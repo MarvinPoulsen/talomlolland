@@ -1,7 +1,7 @@
 import { Link, useLocation } from 'react-router-dom';
 import React, { FC, useState } from 'react';
 import Icon from '@mdi/react';
-import { mdiBagSuitcase, mdiCarEmergency, mdiHome, mdiHomeGroup, mdiHumanMaleChild, mdiPauseCircle } from '@mdi/js';
+import { mdiBagSuitcase, mdiCarEmergency, mdiHome, mdiHomeGroup, mdiHumanMaleChild, mdiPauseCircle, mdiCity } from '@mdi/js';
 enum Tab {
   SummerHouse,
   Patterns,
@@ -9,6 +9,7 @@ enum Tab {
   Demography,
   Estate,
   Accidents,
+  ResidentAges,
 }
 const HeroNavigation: FC = () => {
   let location = useLocation();
@@ -34,6 +35,9 @@ const HeroNavigation: FC = () => {
         break;
       case '/uheld':
         setActiveTab(Tab.Accidents);
+        break;
+      case '/boligomrade':
+        setActiveTab(Tab.ResidentAges);
         break;
       default:
         setActiveTab(null);
@@ -117,6 +121,17 @@ const HeroNavigation: FC = () => {
                     size={1}/>
                   </span>
                   <span>Uheld</span>
+                </Link>
+              </li>
+              <li
+                className={isActiveTab === Tab.ResidentAges ? 'is-active' : ''}
+              >
+                <Link to="/boligomrade">
+                  <span>
+                  <Icon path={mdiCity}
+                    size={1}/>
+                  </span>
+                  <span>Boligområder</span>
                 </Link>
               </li>
             </ul>
