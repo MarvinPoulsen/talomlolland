@@ -1,12 +1,12 @@
 import React from 'react';
-import { render } from 'react-dom';
+import { createRoot } from 'react-dom/client';
 import { HashRouter } from 'react-router-dom';
 import App from './components/app/App';
 import './index.scss';
 
-render(
+const MOUNT_NODE = document.getElementById('root');
+const root = createRoot(MOUNT_NODE);
+root.render(
     <HashRouter>
         <App />
-    </HashRouter>,
-    document.getElementById('root')
-);
+    </HashRouter>);
