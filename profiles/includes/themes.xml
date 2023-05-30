@@ -64,4 +64,12 @@
 			<displayname>Boligområders opførselsår</displayname>
 		</themeselector>
 	</theme>
+	<theme module="talomlolland" name="theme-lk_talomlolland_baba_vector">
+		<themeselector>
+			<initialstate>[common.themes.initialstate]</initialstate>
+			<group>talomlolland</group>
+			<selectable>true</selectable>
+			<displayname>Boligområders opførselsår vector</displayname>
+		</themeselector>
+	</theme>
 </themes>

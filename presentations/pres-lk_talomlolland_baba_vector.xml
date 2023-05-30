@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<presentation>
+    <text name="overskrift" plural="flertal" value="ental"/>
+    <columns>
+        <column format="heading">
+            <label>'overskrift1'</label>
+            <value>id</value>
+        </column>
+        <column>
+            <label>'omraade'</label>
+            <value>omraade</value>
+        </column>
+        <column>
+            <label>'Navn'</label>
+            <value>navn</value>
+        </column>
+        <column>
+            <label>'Opførelsesår'</label>
+            <value>opfoerselsaar</value>
+        </column>
+    </columns>
+</presentation>

@@ -23,4 +23,7 @@
     <target displayname="Boligområders opførselsår" name="lk_talomlolland_bolig_aar_beboer_alder" presentation="[module:talomlolland.dir]/presentations/pres-lk_talomlolland_bolig_aar_beboer_alder" themecondition="theme-lk_talomlolland_bolig_aar_beboer_alder">
         <datasource name="lk_talomlolland_bolig_aar_beboer_alder"/>
     </target>
+    <target displayname="Boligområders opførselsår vector" name="lk_talomlolland_baba_vector" presentation="[module:talomlolland.dir]/presentations/pres-lk_talomlolland_baba_vector" themecondition="theme-lk_talomlolland_baba_vector">
+        <datasource name="lk_talomlolland_baba_vector"/>
+    </target>
 </targetset>

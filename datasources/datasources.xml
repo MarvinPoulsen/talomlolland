@@ -63,4 +63,7 @@
     <datasource endpoint="ep_lk_talomlolland" name="lk_talomlolland_bolig_aar_beboer_alder">
         <table name="bolig_aar_beboer_alder" pkcolumn="id" schema="talomlolland" geometrycolumn="geom"/>
     </datasource>
+    <datasource endpoint="ep_lk_talomlolland" name="lk_talomlolland_baba_vector">
+        <table name="bolig_aar_beboer_alder" pkcolumn="id" schema="talomlolland" geometrycolumn="geom"/>
+    </datasource>
 </datasources>

@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<theme>
+    <clientlayers>
+        <clientlayer name="clientlayer">
+            <singletile>true</singletile>
+        </clientlayer>
+    </clientlayers>
+    <cbinfo-metadata>
+        <param name="metadata.text">Viser opførselsår fra BBR (LOIS)</param>
+    </cbinfo-metadata>
+    <layer datasource="lk_talomlolland_baba_vector" name="lk_talomlolland_baba_vector" type="polygon">[datasource:lk_talomlolland_baba_vector.mapfile-datasource]
+        <class>
+            <name>Boligområde</name>
+            <style>
+                <color>0 0 0</color>
+                <opacity>60</opacity>
+            </style>
+            <style>
+                <outlinecolor>0 0 0</outlinecolor>
+            </style>
+        </class>
+    </layer>
+</theme>
