@@ -36,7 +36,7 @@ interface StackedbarData {
 const cityExtents = {
     Nakskov: [634872, 6075272, 641315, 6080602], // [x1, y1, x2, y2] ~ [minx, miny, maxx, maxy] ~ [left, bottom, right, top]
     Maribo: [658889, 6069513, 665332, 6074843],
-}; 
+};
 
 //FUNCTIONS
 // using map() method to create a new array epopulated with dates. With new Set() method creates a collection of unique values (dates)
@@ -48,12 +48,107 @@ const getDates = (data: ResidentAgesRow[]) => {
 
     return uniqueDates;
 };
+
+const getYearOfConstruction = (data: ResidentAgesRow[], area, dataDate) => {
+    const omraade = area;
+    const dato = dataDate;
+    const before1950 = data.filter((row) => parseInt(row.opfoerselsaar) < 1950);
+    const result: object[] = [
+        {
+            opfoersel: 'before1950',
+            omraade,
+            age0_19: before1950.reduce((sum, cur) => sum + parseInt(cur.age0_19), 0),
+            age20_59: before1950.reduce((sum, cur) => sum + parseInt(cur.age20_59), 0),
+            age60_75: before1950.reduce((sum, cur) => sum + parseInt(cur.age60_75), 0),
+            age75plus: before1950.reduce((sum, cur) => sum + parseInt(cur.age75plus), 0),
+            dato,
+        },
+    ];
+    const between50_59 = data.filter((row) => parseInt(row.opfoerselsaar) >= 1950 && parseInt(row.opfoerselsaar) < 1960);
+    result.push({
+        opfoersel: 'between50_59',
+        omraade,
+        age0_19: between50_59.reduce((sum, cur) => sum + parseInt(cur.age0_19), 0),
+        age20_59: between50_59.reduce((sum, cur) => sum + parseInt(cur.age20_59), 0),
+        age60_75: between50_59.reduce((sum, cur) => sum + parseInt(cur.age60_75), 0),
+        age75plus: between50_59.reduce((sum, cur) => sum + parseInt(cur.age75plus), 0),
+        dato,
+    });
+    const between60_69 = data.filter((row) => parseInt(row.opfoerselsaar) >= 1960 && parseInt(row.opfoerselsaar) < 1970);
+    result.push({
+        opfoersel: 'between60_69',
+        omraade,
+        age0_19: between60_69.reduce((sum, cur) => sum + parseInt(cur.age0_19), 0),
+        age20_59: between60_69.reduce((sum, cur) => sum + parseInt(cur.age20_59), 0),
+        age60_75: between60_69.reduce((sum, cur) => sum + parseInt(cur.age60_75), 0),
+        age75plus: between60_69.reduce((sum, cur) => sum + parseInt(cur.age75plus), 0),
+        dato,
+    });
+    const between70_79 = data.filter((row) => parseInt(row.opfoerselsaar) >= 1970 && parseInt(row.opfoerselsaar) < 1980);
+    result.push({
+        opfoersel: 'between70_79',
+        omraade,
+        age0_19: between70_79.reduce((sum, cur) => sum + parseInt(cur.age0_19), 0),
+        age20_59: between70_79.reduce((sum, cur) => sum + parseInt(cur.age20_59), 0),
+        age60_75: between70_79.reduce((sum, cur) => sum + parseInt(cur.age60_75), 0),
+        age75plus: between70_79.reduce((sum, cur) => sum + parseInt(cur.age75plus), 0),
+        dato,
+    });
+    const between80_89 = data.filter((row) => parseInt(row.opfoerselsaar) >= 1980 && parseInt(row.opfoerselsaar) < 1990);
+    result.push({
+        opfoersel: 'between80_89',
+        omraade,
+        age0_19: between80_89.reduce((sum, cur) => sum + parseInt(cur.age0_19), 0),
+        age20_59: between80_89.reduce((sum, cur) => sum + parseInt(cur.age20_59), 0),
+        age60_75: between80_89.reduce((sum, cur) => sum + parseInt(cur.age60_75), 0),
+        age75plus: between80_89.reduce((sum, cur) => sum + parseInt(cur.age75plus), 0),
+        dato,
+    });
+    const between90_99 = data.filter((row) => parseInt(row.opfoerselsaar) >= 1990 && parseInt(row.opfoerselsaar) < 2000);
+    result.push({
+        opfoersel: 'between90_99',
+        omraade,
+        age0_19: between90_99.reduce((sum, cur) => sum + parseInt(cur.age0_19), 0),
+        age20_59: between90_99.reduce((sum, cur) => sum + parseInt(cur.age20_59), 0),
+        age60_75: between90_99.reduce((sum, cur) => sum + parseInt(cur.age60_75), 0),
+        age75plus: between90_99.reduce((sum, cur) => sum + parseInt(cur.age75plus), 0),
+        dato,
+    });
+    const after1999 = data.filter((row) => parseInt(row.opfoerselsaar) > 1999);
+    result.push({
+        opfoersel: 'after1999',
+        omraade,
+        age0_19: after1999.reduce((sum, cur) => sum + parseInt(cur.age0_19), 0),
+        age20_59: after1999.reduce((sum, cur) => sum + parseInt(cur.age20_59), 0),
+        age60_75: after1999.reduce((sum, cur) => sum + parseInt(cur.age60_75), 0),
+        age75plus: after1999.reduce((sum, cur) => sum + parseInt(cur.age75plus), 0),
+        dato,
+    });
+    return result;
+};
+
+const getSummatedData = (data, area, dataDate) => {
+    const omraade = area;
+    const dato = dataDate;
+    const age0_19 = data.reduce((sum, cur) => sum + parseInt(cur.age0_19), 0);
+    const age20_59 = data.reduce((sum, cur) => sum + parseInt(cur.age20_59), 0);
+    const age60_75 = data.reduce((sum, cur) => sum + parseInt(cur.age60_75), 0);
+    const age75plus = data.reduce((sum, cur) => sum + parseInt(cur.age75plus), 0);
+    const result: object[] = [
+        {
+            omraade,
+            age0_19,
+            age20_59,
+            age60_75,
+            age75plus,
+            dato,
+        },
+    ];
+    return result;
+};
+
 // createTablesData
 const createTablesData = (data, columnNames, analysisParams, dataDate) => {
-    console.log('data: ',data)
-    console.log('columnNames: ',columnNames)
-    console.log('analysisParams: ',analysisParams)
-    console.log('date: ',dataDate)
     const tablesData: TablesData[] = [];
     for (let i = 0; i < analysisParams.length; i++) {
         const analysisParam = analysisParams[i];
@@ -61,7 +156,7 @@ const createTablesData = (data, columnNames, analysisParams, dataDate) => {
         const values: number[] = [];
         for (let i = 0; i < columnNames.length; i++) {
             const columnName = columnNames[i];
-            const filteredData = data.length > 0 && data.filter((row) => row.omraade === columnName && row.dato === dataDate);
+            const filteredData = data.length > 0 && data.filter((row) => row.opfoersel === columnName && row.dato === dataDate);
             const value: number = filteredData && parseInt(filteredData[0][analysisParam.code]);
             tableSum += value;
             values.push(value);
@@ -96,14 +191,10 @@ const createLegendTableData = (data, columnNames, analysisParams, date) => {
             on: analysisParam.on,
         });
     }
-    // console.log('legendTableData: ',legendTableData)
     return legendTableData;
 };
 //createStackedbarData
 const createStackedbarData = (data, columnNames, analysisParams) => {
-    // console.log('data: ',data)
-    // console.log('columnNames: ',columnNames)
-    // console.log('analysisParams: ',analysisParams)
     const stackedbarData: StackedbarData = {};
     for (let i = 0; i < columnNames.length; i++) {
         const columnName = columnNames[i];
@@ -125,8 +216,6 @@ const createStackedbarData = (data, columnNames, analysisParams) => {
             });
         }
     }
-    
-    // console.log('stackedbarData: ',stackedbarData)
     return stackedbarData;
 };
 
@@ -134,7 +223,7 @@ const ResidentAgesPage: FC = () => {
     const minimap: any = useRef(null);
     const [residentAgesData, setResidentAgesData] = useState([]);
     const [cityArea, setCityArea] = useState('Nakskov'); // alternativ 'Maribo'
-    const [residentialArea, setResidentialArea] = useState(''); // alternativ 'Maribo'
+    const [residentialArea, setResidentialArea] = useState(undefined); // alternativ
     const [residentAgesGroups, setResidentAgesGroups] = useState<AnalysisParams[]>([
         { title: '0-19 år', code: 'age0_19', on: true },
         { title: '20-59 år', code: 'age20_59', on: true },
@@ -150,34 +239,32 @@ const ResidentAgesPage: FC = () => {
             setResidentAgesData(rows);
         });
         mm.getEvents().addListener('FEATURE_SELECTED', function (_e, feature) {
-            // console.log('clickonMap: ', feature);
             mm.getMapControl().setMarkingGeometry(feature.wkt, false, null, 3000);
             setResidentialArea(feature.attributes.navn);
         });
         mm.getEvents().addListener('FEATURE_DESELECTED', function (_e) {
             mm.getMapControl().setMarkingGeometry();
-            setResidentialArea('');
+            setResidentialArea(undefined);
         });
     };
     const handleCityArea = (event) => {
         setCityArea(event.target.value);
         minimap.current.getMapControl().zoomToExtent(cityExtents[event.target.value]);
+        setResidentialArea(undefined);
     };
 
     const residentialCityFilter = residentAgesData.filter((row) => row.omraade === cityArea);
-    const residentAgesDateFilter = residentialCityFilter.filter((row) => row.dato === date);
+    const sumData = getSummatedData(residentialCityFilter, cityArea, date);
 
-    const residentialAreaData = residentAgesDateFilter.filter((row) => row.navn === residentialArea);
-
-    // const filteredData = data.length > 0 && data.filter((row) => row.omraade === cityArea && row.dato === date);
-
-    // console.log('residentialAreaData: ', residentialAreaData);
+    const residentialAreaData = residentialArea
+        ? residentialCityFilter.filter((row) => row.navn === residentialArea)
+        : getSummatedData(residentialCityFilter, cityArea, date);
 
     const columnNames: string[] = [''];
     columnNames[0] = cityArea;
 
     const dates = getDates(residentAgesData);
-    
+
     //Label til timeseries
     const labels: string[] = [];
     const month: string[] = ['Jan', 'Feb', 'Mar', 'Apr', 'Maj', 'Jun', 'Jul', 'Aug', 'Sep', 'Okt', 'Nov', 'Dec'];
@@ -191,7 +278,12 @@ const ResidentAgesPage: FC = () => {
 
     // DATA
     // Boligtype
-    const residentAgeTableData:LegendTableData[] = createLegendTableData(residentialAreaData, columnNames, residentAgesGroups, date);
+    const residentAgeTableData: LegendTableData[] = createLegendTableData(
+        residentialAreaData,
+        columnNames,
+        residentAgesGroups,
+        date
+    );
 
     const onResidentAgeToggle = (rowIndex: number) => {
         const updatedResidentAgesGroups = [...residentAgesGroups];
@@ -204,9 +296,6 @@ const ResidentAgesPage: FC = () => {
     const residentAgeStackedbar: HTMLDivElement[] = [];
     for (let i = 0; i < columnNames.length; i++) {
         const columnName = columnNames[i];
-        // console.log('labels: ',labels)
-        // console.log('residentAgeStackedData: ',residentAgeStackedData)
-        // console.log('residentAgesGroups: ',residentAgesGroups)
         residentAgeStackedbar.push(
             <div className="column is-6 resident-age-stackedbar" key={columnName}>
                 <StackedbarNoLegend
@@ -220,24 +309,42 @@ const ResidentAgesPage: FC = () => {
     }
 
     // Boligområder
-    const residentialAreas: string[] = [];
-
-    const residentialAreaParams = [
+    const yearOfConductParams = [
         { title: '0-19 år', code: 'age0_19' },
         { title: '20-59 år', code: 'age20_59' },
         { title: '60-75 år', code: 'age60_75' },
         { title: '76 og op', code: 'age75plus' },
     ];
+    const yearOfConstructCode: string[] = [
+        'before1950',
+        'between50_59',
+        'between60_69',
+        'between70_79',
+        'between80_89',
+        'between90_99',
+        'after1999',
+    ];
 
-    // getAreas(residentialAreaData);
-    const yearOfConductData = createTablesData(residentialAreaData, columnNames, residentialAreaParams, date);
+    const yearOfConstructData = getYearOfConstruction(residentialCityFilter, cityArea, date);
+    const yearOfConductData: TablesData[] = createTablesData(
+        yearOfConstructData,
+        yearOfConstructCode,
+        yearOfConductParams,
+        date
+    );
 
     return (
         <>
             <div id="residentages-tab-content" className="container hidden">
                 <div className="block">
                     <div className="columns">
-                        <Map id={residentagesMinimapId} name="residentages" size="is-6" onReady={onMapReady} />
+                        <Map
+                            id={residentagesMinimapId}
+                            name="residentages"
+                            size="is-6"
+                            infoDiv="infoview"
+                            onReady={onMapReady}
+                        />
                         <div className="column is-6">
                             <div className="field is-grouped">
                                 <div className="control">
@@ -263,41 +370,33 @@ const ResidentAgesPage: FC = () => {
                                     </button>
                                 </div>
                             </div>
-                            <div className="block blue">
-                                    <div className="content">
-                                        <h1>{cityArea}</h1>
-                                    </div>
-                                    <div className="columns">
-                                        <div id="year-of-conduct-table" className="year-of-conduct-legend column is-full purple">
-                                            <Tables
-                                                headers={[
-                                                    'Aldersgruppe',
-                                                    'Før 1950',
-                                                    '1950-1959',
-                                                    '1960-1969',
-                                                    '1970-1979',
-                                                    '1980-1989',
-                                                    '1990-1999',
-                                                    'Efter 1999',
-                                                    'I alt',
-                                                ]}
-                                                data={yearOfConductData}
-                                            />
-                                        </div>
-                                        {/* <div className="column">
-                                            <div className="content">
-                                                <p>
-                                                    Egnethed til beboelse beregnes udfra BBR, Kode for Kondemneret boligenhed
-                                                    (BoligKondemKode) fra enhedsniveauet
-                                                </p>
-                                                <p>Samt Lolland Kommunes egne registreringer af nedrevne boliger</p>
-                                            </div>
-                                        </div> */}
-                                    </div>
+                            <div className="block">
+                                <div className="content">
+                                    <h1>{cityArea}</h1>
+                                </div>
+                                <div id="year-of-conduct-table" className="year-of-conduct-legend content">
+                                    <Tables
+                                        headers={[
+                                            'Aldersgruppe',
+                                            'Før 1950',
+                                            '1950-1959',
+                                            '1960-1969',
+                                            '1970-1979',
+                                            '1980-1989',
+                                            '1990-1999',
+                                            'Efter 1999',
+                                            'I alt',
+                                        ]}
+                                        data={yearOfConductData}
+                                    />
+                                </div>
                             </div>
-                            <div className="block yellow">
+                            <div className="block">
+                                <div className="content">
+                                    <h1>{residentialArea ? residentialArea : 'Hele ' + cityArea + ' området'}</h1>
+                                </div>
                                 <div className="columns">
-                                    <div className="column is-4 red">
+                                    <div className="column is-4">
                                         <div id="resident-age-table" className="legend">
                                             <LegendTableMulti
                                                 headers={['Aldersgrupper', 'Antal boliger']}
@@ -306,7 +405,7 @@ const ResidentAgesPage: FC = () => {
                                             />
                                         </div>
                                     </div>
-                                    <div className="column is-8 green">
+                                    <div className="column is-8">
                                         <div className="columns">{residentAgeStackedbar}</div>
                                     </div>
                                 </div>
