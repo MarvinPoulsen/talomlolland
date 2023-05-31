@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<theme>
+    <clientlayers>
+        <clientlayer name="clientlayer">
+            <singletile>true</singletile>
+        </clientlayer>
+    </clientlayers>
+    <cbinfo-metadata>
+        <param name="metadata.text">Administrative Geografiske Inddeling (DAGI)</param>
+        <!-- <param name="metadata.url"></param> -->
+    </cbinfo-metadata>
+    <layer datasource="lk_dagi_sogneinddeling" name="lk_dagi_sogneinddeling" type="polygon">[datasource:lk_dagi_sogneinddeling.mapfile-datasource]
+        <class>
+            <name>Sogneinddeling i Lolland Kommune</name>
+            <!-- <style> -->
+                <!-- <color>0 0 0</color> -->
+                <!-- <opacity>75</opacity> -->
+            <!-- </style> -->
+            <style>
+                <outlinecolor>255 0 0</outlinecolor>
+				<width>2</width>
+            </style>
+        </class>
+    </layer>
+</theme>

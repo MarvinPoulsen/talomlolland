@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<theme>
+    <clientlayers>
+        <clientlayer name="clientlayer">
+            <singletile>true</singletile>
+        </clientlayer>
+    </clientlayers>
+    <cbinfo-metadata>
+        <param name="metadata.text">Administrative Geografiske Inddeling (DAGI)</param>
+        <!-- <param name="metadata.url"></param> -->
+    </cbinfo-metadata>
+    <layer datasource="lk_dagi_kommunegraenser" name="lk_dagi_kommunegraenser" type="polygon">[datasource:lk_dagi_kommunegraenser.mapfile-datasource]
+        <class>
+            <name>Kommunegrænser</name>
+            <style>
+                <color>0 0 0</color>
+                <opacity>15</opacity>
+            </style>
+            <style>
+                <outlinecolor>255 0 102</outlinecolor>
+            </style>
+        </class>
+    </layer>
+</theme>

@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<presentation>
+    <text name="overskrift" plural="flertal" value="ental"/>
+    <columns>
+        <column format="heading">
+            <label>'overskrift1'</label>
+            <value>navn</value>
+        </column>
+		<column>
+			<label>'Beregnet Areal (m²)'</label>
+			<value>FormatDecimal ("#,###.#",GeometryArea(shape_wkt)*0.0001)</value>
+			<condition/>
+		</column>
+    </columns>
+</presentation>

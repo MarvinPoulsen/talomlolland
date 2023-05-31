@@ -1,4 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <themegroups>
     <themegroup displayname="Tal om Lolland" expanded="false" name="talomlolland" type="checkbutton"/>
+    <themegroup displayname="Danmarks Administrative Geografiske Inddeling (DAGI)" expanded="false" name="dagi" type="checkbutton"/>
 </themegroups>

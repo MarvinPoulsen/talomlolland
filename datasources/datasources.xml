@@ -20,6 +20,21 @@
     <datasource endpoint="ep_lk_talomlolland" name="lk_talomlolland_alder_koen">
         <table name="alder_koen" pkcolumn="id" schema="lois_borger"/>
     </datasource>
+    <datasource endpoint="ep_lk_talomlolland" name="lk_talomlolland_sogne_beboelsesenhed">
+        <table name="sogne_beboelsesenhed" pkcolumn="id" schema="talomlolland" geometrycolumn="geom"/>
+    </datasource>
+    <datasource displayname="Boligmarked" endpoint="ep_lk_talomlolland" name="lk_talomlolland_boligmarked">
+        <table name="boligmarked_view" schema="talomlolland"/>
+    </datasource>
+    <datasource displayname="Boligmarked områder" endpoint="ep_lk_talomlolland" name="lk_talomlolland_boligmarked_omraader">
+        <table name="boligmarked_omraader_view" pkcolumn="id" schema="talomlolland" geometrycolumn="geom"/>
+    </datasource>
+    <datasource endpoint="ep_lk_talomlolland" name="lk_talomlolland_bolig_aar_beboer_alder">
+        <table name="bolig_aar_beboer_alder" pkcolumn="id" schema="talomlolland" geometrycolumn="geom"/>
+    </datasource>
+    <datasource endpoint="ep_lk_talomlolland" name="lk_talomlolland_baba_vector">
+        <table name="bolig_aar_beboer_alder" pkcolumn="id" schema="talomlolland" geometrycolumn="geom"/>
+    </datasource>
     <endpoint endpointtype="postgis" name="ep_lk_dem_flytning">
         <connect>[cbinfo.pg_endpoint.connect]</connect>
         <user>[cbinfo.pg_endpoint.usr]</user>
@@ -51,19 +66,22 @@
         <table geometrycolumn="geom" name="count_flexboliger" pkcolumn="id" schema="byg_flex"/>
     </datasource>
 
-    <datasource displayname="Boligmarked" endpoint="ep_lk_talomlolland" name="lk_talomlolland_boligmarked">
-        <table name="boligmarked_view" schema="talomlolland"/>
+    <endpoint endpointtype="postgis" name="ep_lk_dagi">
+        <connect>[cbinfo.pg_endpoint.connect]</connect>
+        <user>[cbinfo.pg_endpoint.usr]</user>
+        <pwd>[cbinfo.pg_endpoint.pwd]</pwd>
+    </endpoint>
+    <datasource displayname="Lolland Kommune" endpoint="ep_lk_dagi" name="lk_dagi_kommune">
+        <table geometrycolumn="geom" name="kommune" pkcolumn="id" schema="dagi"/>
     </datasource>
-    <datasource displayname="Boligmarked områder" endpoint="ep_lk_talomlolland" name="lk_talomlolland_boligmarked_omraader">
-        <table name="boligmarked_omraader_view" pkcolumn="id" schema="talomlolland" geometrycolumn="geom"/>
+    <datasource displayname="Kommuneflade udenfor Lolland Kommune" endpoint="ep_lk_dagi" name="lk_dagi_kommuneflade_udenfor_lolland">
+        <table geometrycolumn="geom" name="kommuneflade_udenfor_lolland" pkcolumn="id" schema="dagi"/>
     </datasource>
-    <datasource endpoint="ep_lk_talomlolland" name="lk_talomlolland_sogne_beboelsesenhed">
-        <table name="sogne_beboelsesenhed" pkcolumn="id" schema="talomlolland" geometrycolumn="geom"/>
+    <datasource displayname="Kommunegrænser" endpoint="ep_lk_dagi" name="lk_dagi_kommunegraenser">
+        <table geometrycolumn="geom" name="kommunegraenser" pkcolumn="id" schema="dagi"/>
     </datasource>
-    <datasource endpoint="ep_lk_talomlolland" name="lk_talomlolland_bolig_aar_beboer_alder">
-        <table name="bolig_aar_beboer_alder" pkcolumn="id" schema="talomlolland" geometrycolumn="geom"/>
+    <datasource displayname="Sogneinddeling i Lolland Kommune" endpoint="ep_lk_dagi" name="lk_dagi_sogneinddeling">
+        <table geometrycolumn="geom" name="sogneinddeling" pkcolumn="id" schema="dagi"/>
     </datasource>
-    <datasource endpoint="ep_lk_talomlolland" name="lk_talomlolland_baba_vector">
-        <table name="bolig_aar_beboer_alder" pkcolumn="id" schema="talomlolland" geometrycolumn="geom"/>
-    </datasource>
+
 </datasources>

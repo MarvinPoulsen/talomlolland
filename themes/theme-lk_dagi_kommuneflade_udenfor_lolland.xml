@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<theme>
+    <clientlayers>
+        <clientlayer name="clientlayer">
+            <singletile>true</singletile>
+        </clientlayer>
+    </clientlayers>
+    <cbinfo-metadata>
+        <param name="metadata.text">Administrative Geografiske Inddeling (DAGI)</param>
+        <!-- <param name="metadata.url"></param> -->
+    </cbinfo-metadata>
+    <layer datasource="lk_dagi_kommuneflade_udenfor_lolland" name="lk_dagi_kommuneflade_udenfor_lolland" type="polygon">[datasource:lk_dagi_kommuneflade_udenfor_lolland.mapfile-datasource]
+        <class>
+            <name>Kommuneflade udenfor Lolland Kommune</name>
+            <style>
+                <color>0 0 0</color>
+                <opacity>75</opacity>
+            </style>
+            <!-- <style> -->
+                <!-- <outlinecolor>255 0 102</outlinecolor> -->
+            <!-- </style> -->
+        </class>
+    </layer>
+</theme>
