@@ -230,7 +230,7 @@ const ResidentAgesPage: FC = () => {
         { title: '60-75 år', code: 'age60_75', on: true },
         { title: '76 og op', code: 'age75plus', on: true },
     ]);
-    const [date, setDate] = useState<string>('2023-05-26 00:00:00.0'); //2023-05-26
+    const [date, setDate] = useState<string>('2023-06-07 00:00:00.0'); //2023-05-26
     const onMapReady = (mm) => {
         minimap.current = mm;
         const ses = mm.getSession();
