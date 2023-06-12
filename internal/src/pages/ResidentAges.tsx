@@ -34,8 +34,8 @@ interface StackedbarData {
 
 //CONSTANTS
 const cityExtents = {
-    Nakskov: [634872, 6075272, 641315, 6080602], // [x1, y1, x2, y2] ~ [minx, miny, maxx, maxy] ~ [left, bottom, right, top]
-    Maribo: [658889, 6069513, 665332, 6074843],
+    Nakskov: [634800, 6076400, 640000, 6080600], // [x1, y1, x2, y2] ~ [minx, miny, maxx, maxy] ~ [left, bottom, right, top]
+    Maribo: [659500, 6070800, 663300, 6073800], 
 };
 
 //FUNCTIONS
@@ -345,6 +345,7 @@ const ResidentAgesPage: FC = () => {
                             infoDiv="infoview"
                             onReady={onMapReady}
                         />
+                        <div id="infoview"></div>
                         <div className="column is-6">
                             <div className="field is-grouped">
                                 <div className="control">

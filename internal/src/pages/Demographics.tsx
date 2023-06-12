@@ -65,7 +65,7 @@ const DemographicsPage: FC = () => {
     });
     mm.getEvents().addListener('FEATURE_SELECTED', function (_e, feature) {
       mm.getMapControl().setMarkingGeometry(feature.wkt, false, null, 3000);
-      setParishCode(feature.attributes.sognekode);
+      setParishCode(feature.attributes.sognekode.toString());
     });
     mm.getEvents().addListener('FEATURE_DESELECTED', function (_e) {
       mm.getMapControl().setMarkingGeometry();
@@ -386,8 +386,10 @@ const dataSeriesParishSum: LinechartDataSeries[] =[
               id={demographyMinimapId}
               name="demography"
               size="is-6"
+              infoDiv="infoview"
               onReady={onMapReady}
             />
+            <div id="infoview"></div>
             <div className="column is-6">
               <article className="message is-info">
                 <div className="message-header">

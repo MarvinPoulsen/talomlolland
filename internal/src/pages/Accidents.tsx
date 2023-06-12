@@ -205,8 +205,10 @@ const AccidentsPage: FC = () => {
                 id={accidentsMinimapId}
                 name="accidents"
                 size="is-6"
+                infoDiv="infoview"
                 onReady={onMapReady}
               />
+              <div id="infoview"></div>
             <div className="column is-6">
               <article className="message is-dark">
                 <div className="message-header">
