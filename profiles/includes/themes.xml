@@ -104,4 +104,12 @@
 			<displayname>Sogneinddeling i Lolland Kommune</displayname>
 		</themeselector>
 	</theme>
+	<theme module="talomlolland" name="theme-lk_talomlolland_landsbyafgraensning">
+		<themeselector>
+			<initialstate>[common.themes.initialstate]</initialstate>
+			<group>talomlolland</group>
+			<selectable>true</selectable>
+			<displayname>Landsbyafgrænsning</displayname>
+		</themeselector>
+	</theme>
 </themes>

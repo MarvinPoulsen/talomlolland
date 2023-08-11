@@ -5,6 +5,12 @@
         <user>[cbinfo.pg_endpoint.usr]</user>
         <pwd>[cbinfo.pg_endpoint.pwd]</pwd>
     </endpoint>
+    <datasource displayname="" endpoint="ep_lk_talomlolland" name="lk_talomlolland_landsbyer">
+        <table name="landsbyer" pkcolumn="id" schema="talomlolland"/>
+    </datasource>
+    <datasource displayname="Landsbyafgrænsning" endpoint="ep_lk_talomlolland" name="lk_talomlolland_landsbyafgraensning">
+        <table name="landsbyafgraensning" pkcolumn="id" schema="talomlolland" geometrycolumn="geom"/>
+    </datasource>
     <datasource displayname="" endpoint="ep_lk_talomlolland" name="lk_talomlolland_ejer_bopalsregion">
         <table name="ejer_bopalsregion" pkcolumn="id" schema="lois_sommerhus"/>
     </datasource>

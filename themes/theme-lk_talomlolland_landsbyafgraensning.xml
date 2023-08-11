@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<theme>
+    <clientlayers>
+        <clientlayer name="clientlayer">
+            <singletile>true</singletile>
+        </clientlayer>
+    </clientlayers>
+    <cbinfo-metadata>
+        <param name="metadata.text">Landsbyafgraensning fra Danmarks Statistik</param>
+        <!-- <param name="metadata.url"></param> -->
+    </cbinfo-metadata>
+    <layer datasource="lk_talomlolland_landsbyafgraensning" name="lk_talomlolland_landsbyafgraensning" type="polygon">[datasource:lk_talomlolland_landsbyafgraensning.mapfile-datasource]
+        <class>
+            <name>Landsbyafgrænsning</name>
+            <style>
+                <color>0 0 0</color>
+                <opacity>75</opacity>
+            </style>
+            <style>
+                <outlinecolor>0 0 0</outlinecolor>
+				<width>2</width>
+            </style>
+        </class>
+    </layer>
+</theme>

@@ -21,3 +21,12 @@ export const estateMinimapId = estateMinimapIdParam.includes('[') ? estateMinima
 const summerhouseMinimapIdParam = '[module.talomlolland.summerhouse.minimapid]';
 const summerhouseMinimapIdDev = '307f05d8-793f-44ae-9698-79990ac50a84';
 export const summerhouseMinimapId = summerhouseMinimapIdParam.includes('[') ? summerhouseMinimapIdDev : summerhouseMinimapIdParam;
+
+const villagesMinimapIdParam = '[module.talomlolland.villages.minimapid]';
+const villagesMinimapIdDev = 'a793b41c-5eb6-4b09-922c-ff758689497f';
+export const villagesMinimapId = villagesMinimapIdParam.includes('[') ? villagesMinimapIdDev : villagesMinimapIdParam;
+
+const villagesTwoMinimapIdParam = '[module.talomlolland.villagestwo.minimapid]';
+const villagesTwoMinimapIdDev = '4ac4dfa7-f31e-446a-8ca1-9452d4006b63';
+export const villagesTwoMinimapId = villagesTwoMinimapIdParam.includes('[') ? villagesTwoMinimapIdDev : villagesTwoMinimapIdParam;
+

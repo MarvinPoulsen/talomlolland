@@ -26,6 +26,9 @@
     <target displayname="Boligområders opførselsår vector" name="lk_talomlolland_baba_vector" presentation="[module:talomlolland.dir]/presentations/pres-lk_talomlolland_baba_vector" themecondition="theme-lk_talomlolland_baba_vector">
         <datasource name="lk_talomlolland_baba_vector"/>
     </target>
+    <target displayname="Landsbyafgrænsning" name="lk_talomlolland_landsbyafgraensning" presentation="[module:talomlolland.dir]/presentations/pres-lk_talomlolland_landsbyafgraensning" themecondition="theme-lk_talomlolland_landsbyafgraensning">
+        <datasource name="lk_talomlolland_landsbyafgraensning"/>
+    </target>
 	
 	
     <target displayname="Lolland Kommune" name="lk_dagi_kommune" presentation="[module:dagi.dir]/presentations/pres-lk_dagi_kommune" themecondition="theme-lk_dagi_kommune">
