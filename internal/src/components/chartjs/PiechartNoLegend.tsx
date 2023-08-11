@@ -1,7 +1,7 @@
 import React, { useRef, useEffect } from 'react';
 import colors from '../../../colors';
 import { Chart as ChartJS, ArcElement, Tooltip, Legend, InteractionMode } from 'chart.js';
-import { Pie } from 'react-chartjs-2';
+import { Pie, Doughnut } from 'react-chartjs-2';
 
 ChartJS.register(ArcElement, Tooltip, Legend);
 export const options = {
@@ -47,6 +47,7 @@ export interface PiechartData {
 }
 
 export interface PiechartProps {
+  type?: string;
   data: PiechartData[];
   visibility: boolean[];
 }
@@ -82,13 +83,12 @@ export function PiechartNoLegend(props: PiechartProps) {
     labels: props.data.map(row=>row.name),
     datasets,
   };
+  const chartForm = props.type === 'doughnut' ?
+    <Doughnut ref={chartRef} options={options} data={data} /> :
+    <Pie ref={chartRef} options={options} data={data} />;
   return (
     <>
-      <Pie
-        ref={chartRef}
-        options={options} 
-        data={data} 
-      />
+      {chartForm}
     </>
   );
 }
