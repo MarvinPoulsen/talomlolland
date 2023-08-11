@@ -1,7 +1,7 @@
 import { Link, useLocation } from 'react-router-dom';
 import React, { FC, useState } from 'react';
 import Icon from '@mdi/react';
-import { mdiBagSuitcase, mdiCarEmergency, mdiHome, mdiHomeGroup, mdiHumanMaleChild, mdiPauseCircle, mdiCity } from '@mdi/js';
+import { mdiBagSuitcase, mdiCarEmergency, mdiHome, mdiHomeGroup, mdiHumanMaleChild, mdiPauseCircle, mdiCity, mdiHomeAnalytics, mdiSignRealEstate, mdiAmbulance, mdiBandage, mdiBeach, mdiDolly, mdiHomeSwitch, mdiBriefcaseArrowLeftRight, mdiCompareHorizontal, mdiHomeThermometer, mdiHomeLightningBolt } from '@mdi/js';
 enum Tab {
   SummerHouse,
   Patterns,
@@ -10,6 +10,7 @@ enum Tab {
   Estate,
   Accidents,
   ResidentAges,
+  Villages,
 }
 const HeroNavigation: FC = () => {
   let location = useLocation();
@@ -39,6 +40,9 @@ const HeroNavigation: FC = () => {
       case '/boligomrade':
         setActiveTab(Tab.ResidentAges);
         break;
+        case '/landsbyer':
+          setActiveTab(Tab.Villages);
+          break;
       default:
         setActiveTab(null);
     }
@@ -60,7 +64,7 @@ const HeroNavigation: FC = () => {
               >
                 <Link to="/sommerhus">
                   <span>
-                  <Icon path={mdiHome}
+                  <Icon path={mdiBeach}
                     size={1}/>
                   </span>
                   <span className="navigation-text">
@@ -73,7 +77,7 @@ const HeroNavigation: FC = () => {
               >
                 <Link to="/flyttemonstre">
                   <span>
-                  <Icon path={mdiBagSuitcase}
+                  <Icon path={mdiDolly}
                     size={1}/>
                   </span>
                   <span>Flyttemønstre</span>
@@ -106,7 +110,7 @@ const HeroNavigation: FC = () => {
               >
                 <Link to="/boligmarked">
                   <span>
-                  <Icon path={mdiHomeGroup}
+                  <Icon path={mdiSignRealEstate}
                     size={1}/>
                   </span>
                   <span>Boligmarked</span>
@@ -117,7 +121,7 @@ const HeroNavigation: FC = () => {
               >
                 <Link to="/uheld">
                   <span>
-                  <Icon path={mdiCarEmergency}
+                  <Icon path={mdiBandage}
                     size={1}/>
                   </span>
                   <span>Uheld</span>
@@ -132,6 +136,17 @@ const HeroNavigation: FC = () => {
                     size={1}/>
                   </span>
                   <span>Boligområder</span>
+                </Link>
+              </li>
+              <li
+                className={isActiveTab === Tab.Villages ? 'is-active' : ''}
+              >
+                <Link to="/landsbyer">
+                  <span>
+                  <Icon path={mdiHomeThermometer}
+                    size={1}/>
+                  </span>
+                  <span>Landsbyer</span>
                 </Link>
               </li>
             </ul>
