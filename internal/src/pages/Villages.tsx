@@ -37,9 +37,9 @@ const columnKeys: string[] = ['varmeinstallation_total_count', 'bygningenssamlbo
 
 // FUNCTIONS
 const createLegendTableData = (data, dataKeys, analysisParams) => {
-    console.log('data: ', data);
-    console.log('dataKeys: ', dataKeys);
-    console.log('analysisParams: ', analysisParams);
+    // console.log('data: ', data);
+    // console.log('dataKeys: ', dataKeys);
+    // console.log('analysisParams: ', analysisParams);
     const legendTableData: LegendTableData[] = [];
     for (let i = 0; i < analysisParams.length; i++) {
         const analysisParam = analysisParams[i];
@@ -49,8 +49,8 @@ const createLegendTableData = (data, dataKeys, analysisParams) => {
             const dataKey = dataKeys[i];
             const findData = data.find((item) => item.varmeinstallation_t === analysisParam.title);
             const value: number = findData && findData[dataKey] ? parseInt(findData[dataKey]) : 0;
-            console.log('value: ', value);
-            tableSum += value;
+            // console.log('value: ', value);
+            tableSum += dataKey === 'varmeinstallation_total_count' ? 0 : value;
             values.push(value);
         }
         values.push(tableSum);
@@ -131,8 +131,8 @@ const VillagesPage: FC = () => {
 
     const villagesOneFilter = villagesData.filter((row) => row.navn === villagesAreaOne);
     const villagesTwoFilter = villagesData.filter((row) => row.navn === villagesAreaTwo);
-    console.log('villagesOneFilter: ', villagesOneFilter);
-    console.log('villagesTwoFilter: ', villagesTwoFilter);
+    // console.log('villagesOneFilter: ', villagesOneFilter);
+    // console.log('villagesTwoFilter: ', villagesTwoFilter);
     const firstButtonRow: HTMLDivElement[] = [];
     for (let i = 0; i < villages.length; i++) {
         const village = villages[i];
@@ -181,7 +181,7 @@ const VillagesPage: FC = () => {
     };
     const villagesOnePiechartData = createPiechartData(villagesOneFilter, villagesOne);
     const villagesTwoPiechartData = createPiechartData(villagesTwoFilter, villagesTwo);
-    console.log('villagesData: ', villagesData);
+    // console.log('villagesData: ', villagesData);
 
     return (
         <>
@@ -208,7 +208,7 @@ const VillagesPage: FC = () => {
                                                     'Antal bygninger',
                                                     'Samlet boligareal',
                                                     'Samlet erhvervsareal',
-                                                    'I alt',
+                                                    'Areal i alt',
                                                 ]}
                                                 data={villagesOneTableData}
                                                 onRowToggle={onVillagesOneToggle}
@@ -254,7 +254,7 @@ const VillagesPage: FC = () => {
                                                     'Antal bygninger',
                                                     'Samlet boligareal',
                                                     'Samlet erhvervsareal',
-                                                    'I alt',
+                                                    'Areal i alt',
                                                 ]}
                                                 data={villagesTwoTableData}
                                                 onRowToggle={onVillagesTwoToggle}
