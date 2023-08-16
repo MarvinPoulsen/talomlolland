@@ -2,7 +2,7 @@ import React from 'react';
 import { useTable } from 'react-table';
 import './legendTable.scss'
 import colors from '../../../colors';
-import {toPrettyNumber} from '../../../utils'
+import {toPrettyNumber, getBackgroundColor, getBorderColor} from '../../../utils'
 
 export interface LegendTableData {
   name:string;
@@ -10,6 +10,7 @@ export interface LegendTableData {
   on: boolean;
 }
 interface LegendTableProps {
+  colorsStart?: number;
   headers: string[];
   data: LegendTableData[];
   onRowToggle: (rowIndex:number) => void;
@@ -68,7 +69,9 @@ function LegendTableMulti(props: LegendTableProps) {
       <tbody {...getTableBodyProps()}>
         {rows.map((row) => {
           prepareRow(row);
-          const isOff = !props.data[row.index].on          
+          const isOff = !props.data[row.index].on
+          const background = getBackgroundColor(props.colorsStart)
+          const borderColor = getBorderColor(props.colorsStart)
           return (
             <tr {...row.getRowProps()} onClick={()=> props.onRowToggle(row.index)}>
               {row.cells.map((cell) => {
@@ -78,8 +81,8 @@ function LegendTableMulti(props: LegendTableProps) {
                       <span 
                         className='color-box' 
                         style={{
-                          background: colors.bgColors[row.index],
-                          borderColor: colors.borderColors[row.index]
+                          background: background[row.index],
+                          borderColor: borderColor[row.index]
                         }}
                       >                        
                       </span>

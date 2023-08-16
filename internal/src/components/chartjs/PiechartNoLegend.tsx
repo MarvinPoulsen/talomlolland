@@ -1,5 +1,5 @@
 import React, { useRef, useEffect } from 'react';
-import colors from '../../../colors';
+import {getBackgroundColor, getBorderColor} from '../../../utils'
 import { Chart as ChartJS, ArcElement, Tooltip, Legend, InteractionMode } from 'chart.js';
 import { Pie, Doughnut } from 'react-chartjs-2';
 
@@ -47,6 +47,7 @@ export interface PiechartData {
 }
 
 export interface PiechartProps {
+  colorsStart?: number;
   type?: string;
   data: PiechartData[];
   visibility: boolean[];
@@ -61,6 +62,7 @@ interface PieData {
   labels: string[];
   datasets: PiechartDatasets[];
 }
+
 export function PiechartNoLegend(props: PiechartProps) {
   const chartRef = useRef();
   useEffect(()=>{
@@ -74,8 +76,8 @@ export function PiechartNoLegend(props: PiechartProps) {
   const datasets: PiechartDatasets[] = [
     {
       data: props.data.map(row=>row.value),
-      backgroundColor: colors.bgColors,
-      borderColor: colors.borderColors,
+      backgroundColor: getBackgroundColor(props.colorsStart),
+      borderColor: getBorderColor(props.colorsStart),
       borderWidth: 1,
     },
   ];

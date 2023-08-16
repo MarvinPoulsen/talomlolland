@@ -18,6 +18,11 @@ const bgColors: string[] =
         'rgba(255, 0, 0, 0.6)',
         'rgba(0, 255, 0, 0.6)',
         'rgba(75, 192, 192, 0.4)',
+        'rgba(0, 204, 0, 0.9)',       // index 13
+        'rgba(255, 255, 0, 0.9)',
+        'rgba(255, 153, 0, 0.9)',
+        'rgba(255, 51, 51, 0.9)',
+        'rgba(102, 102, 255, 0.9)',
     ];
 const borderColors: string[] =
     [
@@ -34,6 +39,11 @@ const borderColors: string[] =
         'rgba(255, 0, 0, 1)',
         'rgba(0, 255, 0, 1)',
         'rgba(75, 192, 192, 1)',
+        'rgba(0, 153, 0, 1)',       // index 13
+        'rgba(204, 204, 0, 1)',
+        'rgba(204, 102, 0, 1)',
+        'rgba(204, 0, 0, 1)',
+        'rgba(51, 51, 204, 1)',
     ];
 
 const colors: Colors ={
