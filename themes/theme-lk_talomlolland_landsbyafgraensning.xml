@@ -12,12 +12,12 @@
     <layer datasource="lk_talomlolland_landsbyafgraensning" name="lk_talomlolland_landsbyafgraensning" type="polygon">[datasource:lk_talomlolland_landsbyafgraensning.mapfile-datasource]
         <class>
             <name>Landsbyafgrænsning</name>
+            <!-- <style> -->
+                <!-- <color>0 0 0</color> -->
+                <!-- <opacity>75</opacity> -->
+            <!-- </style> -->
             <style>
-                <color>0 0 0</color>
-                <opacity>75</opacity>
-            </style>
-            <style>
-                <outlinecolor>0 0 0</outlinecolor>
+                <outlinecolor>255 255 255</outlinecolor>
 				<width>2</width>
             </style>
         </class>

@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<theme>
+    <clientlayers>
+        <clientlayer name="clientlayer">
+            <singletile>true</singletile>
+        </clientlayer>
+    </clientlayers>
+    <cbinfo-metadata>
+        <param name="metadata.text">(Invert) Landsbyafgraensning fra Danmarks Statistik</param>
+        <!-- <param name="metadata.url"></param> -->
+    </cbinfo-metadata>
+    <layer datasource="lk_talomlolland_invert_landsbyafgr" name="lk_talomlolland_invert_landsbyafgr" type="polygon">[datasource:lk_talomlolland_invert_landsbyafgr.mapfile-datasource]
+        <class>
+            <name>Invert Landsbyafgrænsning</name>
+            <style>
+                <color>0 0 0</color>
+                <opacity>75</opacity>
+            </style>
+            <!-- <style> -->
+                <!-- <outlinecolor>255 255 255</outlinecolor> -->
+				<!-- <width>1</width> -->
+            <!-- </style> -->
+        </class>
+    </layer>
+</theme>

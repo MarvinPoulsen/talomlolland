@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<presentation>
+    <text name="overskrift" plural="flertal" value="ental"/>
+    <columns>
+        <column format="heading">
+            <label>'overskrift1'</label>
+            <value>varme</value>
+        </column>
+        <column>
+            <label>'id'</label>
+            <value>id</value>
+        </column>
+        <column>
+            <label>'navn'</label>
+            <value>navn</value>
+        </column>
+        <column>
+            <label>'bbruuid'</label>
+            <value>bbruuid</value>
+        </column>
+        <column>
+            <label>'byg039bygningenssamlboligareal'</label>
+            <value>byg039bygningenssamlboligareal</value>
+        </column>
+		<column>
+            <label>'byg040bygsamlerhvervareal'</label>
+            <value>byg040bygsamlerhvervareal</value>
+        </column>
+		<column>
+            <label>'byg056varmeinstallation'</label>
+            <value>byg056varmeinstallation</value>
+        </column>
+		 <column>
+            <label>'byg056varmeinstallation_t'</label>
+            <value>byg056varmeinstallation_t</value>
+        </column>
+        <column>
+            <label>'byg057opvarmningsmiddel'</label>
+            <value>byg057opvarmningsmiddel</value>
+        </column>
+        <column>
+            <label>'byg057opvarmningsmiddel_t'</label>
+            <value>byg057opvarmningsmiddel_t</value>
+        </column>
+        <column>
+            <label>'varme'</label>
+            <value>varme</value>
+        </column>
+    </columns>
+</presentation>

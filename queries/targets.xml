@@ -29,6 +29,12 @@
     <target displayname="Landsbyafgrænsning" name="lk_talomlolland_landsbyafgraensning" presentation="[module:talomlolland.dir]/presentations/pres-lk_talomlolland_landsbyafgraensning" themecondition="theme-lk_talomlolland_landsbyafgraensning">
         <datasource name="lk_talomlolland_landsbyafgraensning"/>
     </target>
+    <target displayname="Invert Landsbyafgrænsning" name="lk_talomlolland_invert_landsbyafgr" presentation="[module:talomlolland.dir]/presentations/pres-lk_talomlolland_invert_landsbyafgr" themecondition="theme-lk_talomlolland_invert_landsbyafgr">
+        <datasource name="lk_talomlolland_invert_landsbyafgr"/>
+    </target>
+    <target displayname="Varmekilder" name="lk_talomlolland_varmekilder" presentation="[module:talomlolland.dir]/presentations/pres-lk_talomlolland_varmekilder" themecondition="theme-lk_talomlolland_varmekilder">
+        <datasource name="lk_talomlolland_varmekilder"/>
+    </target>
 	
 	
     <target displayname="Lolland Kommune" name="lk_dagi_kommune" presentation="[module:dagi.dir]/presentations/pres-lk_dagi_kommune" themecondition="theme-lk_dagi_kommune">

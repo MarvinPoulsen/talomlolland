@@ -11,6 +11,12 @@
     <datasource displayname="Landsbyafgrænsning" endpoint="ep_lk_talomlolland" name="lk_talomlolland_landsbyafgraensning">
         <table name="landsbyafgraensning" pkcolumn="id" schema="talomlolland" geometrycolumn="geom"/>
     </datasource>
+    <datasource displayname="Invert Landsbyafgrænsning" endpoint="ep_lk_talomlolland" name="lk_talomlolland_invert_landsbyafgr">
+        <table name="invert_landsbyafgr" pkcolumn="id" schema="talomlolland" geometrycolumn="geom"/>
+    </datasource>
+    <datasource displayname="Varmekilder" endpoint="ep_lk_talomlolland" name="lk_talomlolland_varmekilder">
+        <table name="varmekilder" pkcolumn="id" schema="talomlolland" geometrycolumn="geom"/>
+    </datasource>
     <datasource displayname="" endpoint="ep_lk_talomlolland" name="lk_talomlolland_ejer_bopalsregion">
         <table name="ejer_bopalsregion" pkcolumn="id" schema="lois_sommerhus"/>
     </datasource>

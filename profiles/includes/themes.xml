@@ -112,4 +112,20 @@
 			<displayname>Landsbyafgrænsning</displayname>
 		</themeselector>
 	</theme>
+	<theme module="talomlolland" name="theme-lk_talomlolland_invert_landsbyafgr">
+		<themeselector>
+			<initialstate>[common.themes.initialstate]</initialstate>
+			<group>talomlolland</group>
+			<selectable>true</selectable>
+			<displayname>Invert Landsbyafgrænsning</displayname>
+		</themeselector>
+	</theme>
+	<theme module="talomlolland" name="theme-lk_talomlolland_varmekilder">
+		<themeselector>
+			<initialstate>[common.themes.initialstate]</initialstate>
+			<group>talomlolland</group>
+			<selectable>true</selectable>
+			<displayname>Varmekilder</displayname>
+		</themeselector>
+	</theme>
 </themes>

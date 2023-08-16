@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<theme>
+    <clientlayers>
+        <clientlayer name="clientlayer">
+            <singletile>true</singletile>
+        </clientlayer>
+    </clientlayers>
+    <cbinfo-metadata>
+        <param name="metadata.text">Varmekilder fra BBR</param>
+        <!-- <param name="metadata.url"></param> -->
+    </cbinfo-metadata>
+    <layer datasource="lk_talomlolland_varmekilder" name="lk_talomlolland_varmekilder" type="point">[datasource:lk_talomlolland_varmekilder.mapfile-datasource]
+         <class>
+            <name>Fjernvarme/blokvarme</name>
+            <expression>/^Fjernvarme/blokvarme$/</expression>
+            <style>
+                <color>0 204 0</color>
+                <size>5</size>
+                <symbol>square</symbol>
+            </style>
+        </class>
+		<class>
+            <name>Elvarme/Varmepumpe</name>
+            <expression>/^Elvarme/Varmepumpe$/</expression>
+            <style>
+                <color>255 255 0</color>
+                <size>5</size>
+                <symbol>square</symbol>
+            </style>
+        </class>
+        <class>
+            <name>Biobrændsel</name>
+            <expression>/^Biobrændsel$/</expression>
+            <style>
+                <color>255 153 0</color>
+                <size>5</size>
+                <symbol>square</symbol>
+            </style>
+        </class>
+        <class>
+            <name>Olie</name>
+            <expression>/^Olie$/</expression>
+            <style>
+                <color>255 51 51</color>
+                <size>5</size>
+                <symbol>square</symbol>
+            </style>
+        </class>
+        <class>
+            <name>Andet</name>
+            <expression>/^Andet$/</expression>
+            <style>
+                <color>102 102 255</color>
+                <size>5</size>
+                <symbol>square</symbol>
+            </style>
+        </class>
+        <classitem>varme</classitem>
+    </layer>
+</theme>
