@@ -24,14 +24,15 @@ interface AnalysisParams {
 //CONSTANTS
 const colorStartIndex: number = 13;
 const cityExtents = {
-    Nørreballe: [654200, 6074000, 658200, 6078000], // [x1, y1, x2, y2] ~ [minx, miny, maxx, maxy] ~ [left, bottom, right, top]
-    Stokkemarke: [649900, 6077200, 653900, 6081200],
-    Dannemare: [638700, 6068300, 642700, 6072300],
-    Hunseby: [660100, 6073200, 664100, 6077200],
-    Sandby: [631900, 6080900, 635900, 6084900],
-    Langø: [627700, 6074000, 631700, 6078000],
-    Errindlev: [658900, 6058800, 662900, 6062800],
-    Hillested: [655500, 6068100, 659500, 6072100],
+// [x1, y1, x2, y2] ~ [minx, miny, maxx, maxy] ~ [left, bottom, right, top]
+Nørreballe: [655000, 6074700, 657100, 6076500],
+Stokkemarke: [650800, 6078700, 652900, 6079700],
+Dannemare: [639850, 6069800, 642400, 6070800],
+Hunseby: [660700, 6074400, 662520, 6075400],
+Sandby: [632680, 6082800, 634400, 6083400],
+Langø: [629100, 6075340, 630120, 6076400],
+Errindlev: [660400, 6060300, 661400, 6061450],
+Hillested: [656500, 6069300, 658000, 6071500],
 };
 const villages: string[] = ['Nørreballe', 'Stokkemarke', 'Dannemare', 'Hunseby', 'Sandby', 'Langø', 'Errindlev', 'Hillested'];
 const columnKeys: string[] = ['varmeinstallation_total_count', 'bygningenssamlboligareal_sum', 'samlerhvervareal_sum'];
