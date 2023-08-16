@@ -22,6 +22,7 @@ interface AnalysisParams {
 }
 
 //CONSTANTS
+const colorStartIndex: number = 13;
 const cityExtents = {
     Nørreballe: [654200, 6074000, 658200, 6078000], // [x1, y1, x2, y2] ~ [minx, miny, maxx, maxy] ~ [left, bottom, right, top]
     Stokkemarke: [649900, 6077200, 653900, 6081200],
@@ -38,20 +39,26 @@ const columnKeys: string[] = ['varmeinstallation_total_count', 'bygningenssamlbo
 // FUNCTIONS
 const createLegendTableData = (data, dataKeys, analysisParams) => {
     // console.log('data: ', data);
-    // console.log('dataKeys: ', dataKeys);
-    // console.log('analysisParams: ', analysisParams);
+    // console.log('dataKeys: ', dataKeys); // row
+    // console.log('analysisParams: ', analysisParams); // col
     const legendTableData: LegendTableData[] = [];
     for (let i = 0; i < analysisParams.length; i++) {
         const analysisParam = analysisParams[i];
+
         let tableSum = 0;
         const values: number[] = [];
         for (let i = 0; i < dataKeys.length; i++) {
             const dataKey = dataKeys[i];
             const findData = data.find((item) => item.varmeinstallation_t === analysisParam.title);
             const value: number = findData && findData[dataKey] ? parseInt(findData[dataKey]) : 0;
-            // console.log('value: ', value);
             tableSum += dataKey === 'varmeinstallation_total_count' ? 0 : value;
             values.push(value);
+
+            //tilføj kolonne med procenter
+            // const colSum = data.reduce((accumulator, object) => accumulator + parseInt(object[dataKey] ? object[dataKey] : 0), 0);
+            // const percentage: number = (value/colSum)*100
+            // values.push(percentage);
+
         }
         values.push(tableSum);
 
@@ -88,19 +95,17 @@ const VillagesPage: FC = () => {
     const [villagesAreaTwo, setVillagesAreaTwo] = useState('Stokkemarke'); // alternativ 'Maribo'
     const [villagesOne, setVillagesOne] = useState<AnalysisParams[]>([
         { title: 'Fjernvarme/blokvarme', on: true },
-        { title: 'Centralvarme med én fyringsenhed', on: true },
-        { title: 'Ovn til fast og flydende brændsel', on: true },
-        { title: 'Varmepumpe', on: true },
-        { title: 'Centralvarme med to fyringsenheder', on: true },
-        { title: 'Elvarme', on: true },
+        { title: 'Elvarme/Varmepumpe', on: true },
+        { title: 'Biobrændsel', on: true },
+        { title: 'Olie', on: true },
+        { title: 'Andet', on: true },
     ]);
     const [villagesTwo, setVillagesTwo] = useState<AnalysisParams[]>([
         { title: 'Fjernvarme/blokvarme', on: true },
-        { title: 'Centralvarme med én fyringsenhed', on: true },
-        { title: 'Ovn til fast og flydende brændsel', on: true },
-        { title: 'Varmepumpe', on: true },
-        { title: 'Centralvarme med to fyringsenheder', on: true },
-        { title: 'Elvarme', on: true },
+        { title: 'Elvarme/Varmepumpe', on: true },
+        { title: 'Biobrændsel', on: true },
+        { title: 'Olie', on: true },
+        { title: 'Andet', on: true },
     ]);
     const onMapReady = (mm) => {
         minimap.current = mm;
@@ -131,7 +136,6 @@ const VillagesPage: FC = () => {
 
     const villagesOneFilter = villagesData.filter((row) => row.navn === villagesAreaOne);
     const villagesTwoFilter = villagesData.filter((row) => row.navn === villagesAreaTwo);
-    // console.log('villagesOneFilter: ', villagesOneFilter);
     // console.log('villagesTwoFilter: ', villagesTwoFilter);
     const firstButtonRow: HTMLDivElement[] = [];
     for (let i = 0; i < villages.length; i++) {
@@ -174,14 +178,15 @@ const VillagesPage: FC = () => {
         const updatedVillagesOne = [...villagesOne];
         updatedVillagesOne[rowIndex].on = !updatedVillagesOne[rowIndex].on;
         setVillagesOne(updatedVillagesOne);
-    };const onVillagesTwoToggle = (rowIndex: number) => {
+    };
+    const onVillagesTwoToggle = (rowIndex: number) => {
         const updatedVillagesTwo = [...villagesTwo];
         updatedVillagesTwo[rowIndex].on = !updatedVillagesTwo[rowIndex].on;
         setVillagesTwo(updatedVillagesTwo);
     };
     const villagesOnePiechartData = createPiechartData(villagesOneFilter, villagesOne);
     const villagesTwoPiechartData = createPiechartData(villagesTwoFilter, villagesTwo);
-    // console.log('villagesData: ', villagesData);
+    // console.log('villagesOneTableData: ', villagesOneTableData);
 
     return (
         <>
@@ -191,12 +196,65 @@ const VillagesPage: FC = () => {
                         <Map id={villagesMinimapId} name="villages" size="is-4" infoDiv="infoview" onReady={onMapReady} />
                         <div id="infoview"></div>
                         <div className="column is-8">
-                            <div className="field is-grouped">
-                                {firstButtonRow}
-                            </div>
+                            <div className="field is-grouped">{firstButtonRow}</div>
                             <div className="block">
                                 <div className="content">
                                     <h1>{villagesAreaOne}</h1>
+                                </div>
+
+                                <div className="columns">
+                                    <div className="column">
+                                        <div id="housing-type-table" className="legend">
+                                            <LegendTableMulti
+                                                headers={[
+                                                    'Varmeinstalation',
+                                                    'Antal bygninger',
+                                                    // 'Procent bygninger',
+                                                    'Samlet boligareal',
+                                                    // 'Procent bygninger',
+                                                    'Samlet erhvervsareal',
+                                                    // 'Procent bygninger',
+                                                    'Areal i alt',
+                                                ]}
+                                                data={villagesOneTableData}
+                                                onRowToggle={onVillagesOneToggle}
+                                                colorsStart={colorStartIndex}
+                                            />
+                                        </div>
+                                    </div>
+                                    <div className="column is-4">
+                                        <div className="columns">
+                                            <div className="column is-12 housing-type-piechart">
+                                                <PiechartNoLegend
+                                                    colorsStart={colorStartIndex}
+                                                    type={'doughnut'}
+                                                    data={villagesOnePiechartData} // : PiechartData;
+                                                    visibility={villagesOnePiechartData.map((item) => item.on)}
+                                                />
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                {/* NYT KORT */}
+                <div className="block">
+                    <div className="columns">
+                        <Map
+                            id={villagesTwoMinimapId}
+                            name="villagesTwo"
+                            size="is-4"
+                            infoDiv="infoview"
+                            onReady={onMapReadyTwo}
+                        />
+                        <div id="infoview"></div>
+                        <div className="column is-8">
+                            <div className="field is-grouped">{secondButtonRow}</div>
+                            <div className="block">
+                                <div className="content">
+                                    <h1>{villagesAreaTwo}</h1>
                                 </div>
 
                                 <div className="columns">
@@ -210,54 +268,9 @@ const VillagesPage: FC = () => {
                                                     'Samlet erhvervsareal',
                                                     'Areal i alt',
                                                 ]}
-                                                data={villagesOneTableData}
-                                                onRowToggle={onVillagesOneToggle}
-                                            />
-                                        </div>
-                                    </div>
-                                    <div className="column is-4">
-                                        <div className="columns">
-                                            <div className="column is-12 housing-type-piechart">
-                                                <PiechartNoLegend
-                                                    type={'doughnut'}
-                                                    data={villagesOnePiechartData} // : PiechartData;
-                                                    visibility={villagesOnePiechartData.map((item) => item.on)}
-                                                />
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-{/* NYT KORT */}
-                <div className="block">
-                    <div className="columns">
-                        <Map id={villagesTwoMinimapId} name="villagesTwo" size="is-4" infoDiv="infoview" onReady={onMapReadyTwo} />
-                        <div id="infoview"></div>
-                        <div className="column is-8">
-                        <div className="field is-grouped">{secondButtonRow}</div>
-                        <div className="block">
-                            <div className="content">
-                                <h1>{villagesAreaTwo}</h1>
-                            </div>
-
-
-
-                            <div className="columns">
-                                    <div className="column">
-                                        <div id="housing-type-table" className="legend">
-                                            <LegendTableMulti
-                                                headers={[
-                                                    'Varmeinstalation',
-                                                    'Antal bygninger',
-                                                    'Samlet boligareal',
-                                                    'Samlet erhvervsareal',
-                                                    'Areal i alt',
-                                                ]}
                                                 data={villagesTwoTableData}
                                                 onRowToggle={onVillagesTwoToggle}
+                                                colorsStart={colorStartIndex}
                                             />
                                         </div>
                                     </div>
@@ -265,6 +278,7 @@ const VillagesPage: FC = () => {
                                         <div className="columns">
                                             <div className="column is-12 housing-type-piechart">
                                                 <PiechartNoLegend
+                                                    colorsStart={colorStartIndex}
                                                     type={'doughnut'}
                                                     data={villagesTwoPiechartData} // : PiechartData;
                                                     visibility={villagesTwoPiechartData.map((item) => item.on)}
@@ -273,9 +287,7 @@ const VillagesPage: FC = () => {
                                         </div>
                                     </div>
                                 </div>
-
-
-                        </div>
+                            </div>
                         </div>
                     </div>
                 </div>
