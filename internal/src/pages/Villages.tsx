@@ -101,7 +101,6 @@ const createStackedbarData = (data, barCatagories, analysisParams) => {
                 0
             );
             const percentage: number = (value / colSum) * 100;
-            console.log('colSum: ', colSum);
             values.push(percentage);
         }
         stackedbarData.push({

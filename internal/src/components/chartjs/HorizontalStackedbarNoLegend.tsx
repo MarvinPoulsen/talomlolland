@@ -87,7 +87,6 @@ export function StackedbarNoLegend(props: StackedbarProps) {
           // titleAlign: 'left' as 'left',
           callbacks: {
             label: (context) => {
-              console.log('context: ',context.dataIndex)
               const label = context.dataset.label.length > 15 ? context.dataset.label.substring(0,11) + '.. ' : context.dataset.label;
               const value = context.dataset.data[context.dataIndex].toFixed(1);
               const tooltipContent = `${label}: ${value}%`;
