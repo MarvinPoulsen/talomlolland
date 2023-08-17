@@ -1,8 +1,9 @@
 import React, { FC, useRef, useState } from 'react';
+import { villagesMinimapId, villagesTwoMinimapId } from '../../config';
 import Map from '../components/minimap/Minimap';
 import PiechartNoLegend, { PiechartData } from '../components/chartjs/PiechartNoLegend';
-import { villagesMinimapId, villagesTwoMinimapId } from '../../config';
 import LegendTableMulti, { LegendTableData } from '../components/chartjs/LegendTableMulti';
+import HorizontalStackedbarNoLegend, { StackedDataSeries } from '../components/chartjs/HorizontalStackedbarNoLegend';
 
 //INTERFACES
 export interface VillagesRow {
@@ -24,24 +25,21 @@ interface AnalysisParams {
 //CONSTANTS
 const colorStartIndex: number = 13;
 const cityExtents = {
-// [x1, y1, x2, y2] ~ [minx, miny, maxx, maxy] ~ [left, bottom, right, top]
-Nørreballe: [655000, 6074700, 657100, 6076500],
-Stokkemarke: [650800, 6078700, 652900, 6079700],
-Dannemare: [639850, 6069800, 642400, 6070800],
-Hunseby: [660700, 6074400, 662520, 6075400],
-Sandby: [632680, 6082800, 634400, 6083400],
-Langø: [629100, 6075340, 630120, 6076400],
-Errindlev: [660400, 6060300, 661400, 6061450],
-Hillested: [656500, 6069300, 658000, 6071500],
+    // [x1, y1, x2, y2] ~ [minx, miny, maxx, maxy] ~ [left, bottom, right, top]
+    Nørreballe: [655000, 6074700, 657100, 6076500],
+    Stokkemarke: [650800, 6078700, 652900, 6079700],
+    Dannemare: [639850, 6069800, 642400, 6070800],
+    Hunseby: [660700, 6074400, 662520, 6075400],
+    Sandby: [632680, 6082800, 634400, 6083400],
+    Langø: [629100, 6075340, 630120, 6076400],
+    Errindlev: [660400, 6060300, 661400, 6061450],
+    Hillested: [656500, 6069300, 658000, 6071500],
 };
 const villages: string[] = ['Nørreballe', 'Stokkemarke', 'Dannemare', 'Hunseby', 'Sandby', 'Langø', 'Errindlev', 'Hillested'];
 const columnKeys: string[] = ['varmeinstallation_total_count', 'bygningenssamlboligareal_sum', 'samlerhvervareal_sum'];
-
+const barCatagories: string[] = ['bygningenssamlboligareal_sum', 'samlerhvervareal_sum'];
 // FUNCTIONS
 const createLegendTableData = (data, dataKeys, analysisParams) => {
-    // console.log('data: ', data);
-    // console.log('dataKeys: ', dataKeys); // row
-    // console.log('analysisParams: ', analysisParams); // col
     const legendTableData: LegendTableData[] = [];
     for (let i = 0; i < analysisParams.length; i++) {
         const analysisParam = analysisParams[i];
@@ -59,7 +57,6 @@ const createLegendTableData = (data, dataKeys, analysisParams) => {
             // const colSum = data.reduce((accumulator, object) => accumulator + parseInt(object[dataKey] ? object[dataKey] : 0), 0);
             // const percentage: number = (value/colSum)*100
             // values.push(percentage);
-
         }
         values.push(tableSum);
 
@@ -86,6 +83,34 @@ const createPiechartData = (data, analysisParams) => {
         });
     }
     return piechartData;
+};
+
+//createStackedbarData
+const createStackedbarData = (data, barCatagories, analysisParams) => {
+    const stackedbarData: StackedDataSeries[] = [];
+    for (let i = 0; i < analysisParams.length; i++) {
+        const analysisParam = analysisParams[i];
+        const findData = data.find((item) => item.varmeinstallation_t === analysisParam.title);
+        const values: number[] = [];
+
+        for (let j = 0; j < barCatagories.length; j++) {
+            const barCatagory = barCatagories[j];
+            const value: number = findData && findData[barCatagory] ? parseInt(findData[barCatagory]) : 0;
+            const colSum = data.reduce(
+                (accumulator, object) => accumulator + parseInt(object[barCatagory] ? object[barCatagory] : 0),
+                0
+            );
+            const percentage: number = (value / colSum) * 100;
+            console.log('colSum: ', colSum);
+            values.push(percentage);
+        }
+        stackedbarData.push({
+            name: analysisParam.title,
+            values,
+            stack: '0',
+        });
+    }
+    return stackedbarData;
 };
 
 const VillagesPage: FC = () => {
@@ -137,6 +162,7 @@ const VillagesPage: FC = () => {
 
     const villagesOneFilter = villagesData.filter((row) => row.navn === villagesAreaOne);
     const villagesTwoFilter = villagesData.filter((row) => row.navn === villagesAreaTwo);
+
     // console.log('villagesTwoFilter: ', villagesTwoFilter);
     const firstButtonRow: HTMLDivElement[] = [];
     for (let i = 0; i < villages.length; i++) {
@@ -187,7 +213,10 @@ const VillagesPage: FC = () => {
     };
     const villagesOnePiechartData = createPiechartData(villagesOneFilter, villagesOne);
     const villagesTwoPiechartData = createPiechartData(villagesTwoFilter, villagesTwo);
-    // console.log('villagesOneTableData: ', villagesOneTableData);
+    const villagesOneBarchartData = createStackedbarData(villagesOneFilter, barCatagories, villagesOne);
+    const villagesTwoBarchartData = createStackedbarData(villagesTwoFilter, barCatagories, villagesTwo);
+
+    // console.log('villagesOneBarchartData: ', villagesOneBarchartData);
 
     return (
         <>
@@ -199,9 +228,7 @@ const VillagesPage: FC = () => {
                         <div className="column is-8">
                             <div className="field is-grouped">{firstButtonRow}</div>
                             <div className="block">
-                                <div className="content">
-                                    <h1>{villagesAreaOne}</h1>
-                                </div>
+                                <div className="content">{/* <h1>{villagesAreaOne}</h1> */}</div>
 
                                 <div className="columns">
                                     <div className="column">
@@ -222,10 +249,19 @@ const VillagesPage: FC = () => {
                                                 colorsStart={colorStartIndex}
                                             />
                                         </div>
+                                        <div className="villages-one-stackedbar">
+                                            <HorizontalStackedbarNoLegend
+                                                colorsStart={colorStartIndex}
+                                                categories={['Samlet boligareal', 'Samlet erhvervsareal']} // (Samlet boligareal, Samlet erhvervsareal)
+                                                dataSeries={villagesOneBarchartData} //(Fjernvarme/blokvarme, Elvarme/Varmepumpe, Biobrændsel,Olie, Andet)
+                                                visibility={villagesOne.map((item) => item.on)}
+                                                horizontal={true}
+                                            />
+                                        </div>
                                     </div>
                                     <div className="column is-4">
                                         <div className="columns">
-                                            <div className="column is-12 housing-type-piechart">
+                                            <div className="column is-12 villages-one-piechart">
                                                 <PiechartNoLegend
                                                     colorsStart={colorStartIndex}
                                                     type={'doughnut'}
@@ -254,9 +290,7 @@ const VillagesPage: FC = () => {
                         <div className="column is-8">
                             <div className="field is-grouped">{secondButtonRow}</div>
                             <div className="block">
-                                <div className="content">
-                                    <h1>{villagesAreaTwo}</h1>
-                                </div>
+                                <div className="content">{/* <h1>{villagesAreaTwo}</h1> */}</div>
 
                                 <div className="columns">
                                     <div className="column">
@@ -272,6 +306,15 @@ const VillagesPage: FC = () => {
                                                 data={villagesTwoTableData}
                                                 onRowToggle={onVillagesTwoToggle}
                                                 colorsStart={colorStartIndex}
+                                            />
+                                        </div>
+                                        <div className="villages-two-stackedbar">
+                                            <HorizontalStackedbarNoLegend
+                                                colorsStart={colorStartIndex}
+                                                categories={['Samlet boligareal', 'Samlet erhvervsareal']} // (Samlet boligareal, Samlet erhvervsareal)
+                                                dataSeries={villagesTwoBarchartData} //(Fjernvarme/blokvarme, Elvarme/Varmepumpe, Biobrændsel,Olie, Andet)
+                                                visibility={villagesTwo.map((item) => item.on)}
+                                                horizontal={true}
                                             />
                                         </div>
                                     </div>
