@@ -1,7 +1,6 @@
 import React from 'react';
 import { useTable } from 'react-table';
 import './legendTable.scss'
-import colors from '../../../colors';
 import {toPrettyNumber, getBackgroundColor, getBorderColor} from '../../../utils'
 
 export interface LegendTableData {
@@ -14,16 +13,18 @@ interface LegendTableProps {
   headers: string[];
   data: LegendTableData[];
   onRowToggle: (rowIndex:number) => void;
+  abbreviation?: string[] | undefined;
 }
 
-const createTableData = (data, headers) => {
+const createTableData = (data: LegendTableData[], headers: string[], abbreviations?: string[]) => {
   const tableData: object[] = [];
   const tableColumns: object[] = [];
   for (let i = 0; i < headers.length; i++){
     const header = headers[i];
+    const title = abbreviations && abbreviations[i] ? abbreviations[i] : header;
     tableColumns.push({ 
         Header: header,
-        title: header, // todo 
+        title,
         accessor: 'col'+(i+1).toString(),
         Footer: i===0 ? 'I alt': toPrettyNumber(data.filter(item=>item.on).reduce((sum, current) => sum + current.values[i-1], 0) )
     })
@@ -41,8 +42,8 @@ data.forEach(element => {
 
 function LegendTableMulti(props: LegendTableProps) {
   const [data, columns] = React.useMemo(
-    () => createTableData(props.data, props.headers),
-    [props.data, props.headers]
+    () => createTableData(props.data, props.headers, props.abbreviation),
+    [props.data, props.headers, props.abbreviation]
   );
   const { getTableProps, getTableBodyProps, headerGroups, footerGroups, rows, prepareRow } =
     useTable({ columns, data });

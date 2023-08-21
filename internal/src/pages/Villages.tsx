@@ -229,12 +229,16 @@ const VillagesPage: FC = () => {
                                                 headers={[
                                                     'Varmeinstalation',
                                                     'Antal bygninger',
-                                                    // 'Procent bygninger',
                                                     'Samlet boligareal',
-                                                    // 'Procent bygninger',
                                                     'Samlet erhvervsareal',
-                                                    // 'Procent bygninger',
                                                     'Areal i alt',
+                                                ]}
+                                                abbreviation={[
+                                                    'Varmeinstalation i bygningsenheden',
+                                                    'Antal bygninger med den pågældende varmeinstalation indenfor landsbyafgænsningen',
+                                                    'Samlet boligareal i m², med den pågældende varmeinstalation indenfor landsbyafgænsningen',
+                                                    'Samlet erhvervsareal i m², med den pågældende varmeinstalation indenfor landsbyafgænsningen',
+                                                    'Samlet boligareal og erhvervsareal i m².',
                                                 ]}
                                                 data={villagesOneTableData}
                                                 onRowToggle={onVillagesToggle}
@@ -295,6 +299,13 @@ const VillagesPage: FC = () => {
                                                     'Samlet erhvervsareal',
                                                     'Areal i alt',
                                                 ]}
+                                                abbreviation={[
+                                                    'Varmeinstalation i bygningsenheden',
+                                                    'Antal bygninger med den pågældende varmeinstalation indenfor landsbyafgænsningen',
+                                                    'Samlet boligareal i m², med den pågældende varmeinstalation indenfor landsbyafgænsningen',
+                                                    'Samlet erhvervsareal i m², med den pågældende varmeinstalation indenfor landsbyafgænsningen',
+                                                    'Samlet boligareal og erhvervsareal i m².',
+                                                ]}
                                                 data={villagesTwoTableData}
                                                 onRowToggle={onVillagesToggle}
                                                 colorsStart={colorStartIndex}
@@ -317,6 +328,7 @@ const VillagesPage: FC = () => {
                                                     type={'doughnut'}
                                                     data={villagesTwoPiechartData} // : PiechartData;
                                                     visibility={villagesTwoPiechartData.map((item) => item.on)}
+                                                    title={'Antal bygninger'}
                                                 />
                                             </div>
                                         </div>
