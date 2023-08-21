@@ -87,16 +87,19 @@ const createPiechartData = (data, analysisParams) => {
 
 //createStackedbarData
 const createStackedbarData = (data, barCatagories, analysisParams) => {
+    
+    const filteredParams = analysisParams.filter((item) => item.on).map(item=>item.title)
+    const filteredData = data.filter((item) => filteredParams.includes(item.varmeinstallation_t))
     const stackedbarData: StackedDataSeries[] = [];
     for (let i = 0; i < analysisParams.length; i++) {
         const analysisParam = analysisParams[i];
-        const findData = data.find((item) => item.varmeinstallation_t === analysisParam.title);
+        const findData = filteredData.find((item) => item.varmeinstallation_t === analysisParam.title);
         const values: number[] = [];
 
         for (let j = 0; j < barCatagories.length; j++) {
             const barCatagory = barCatagories[j];
             const value: number = findData && findData[barCatagory] ? parseInt(findData[barCatagory]) : 0;
-            const colSum = data.reduce(
+            const colSum = filteredData.reduce(
                 (accumulator, object) => accumulator + parseInt(object[barCatagory] ? object[barCatagory] : 0),
                 0
             );
@@ -118,14 +121,7 @@ const VillagesPage: FC = () => {
     const [villagesData, setVillagesData] = useState([]);
     const [villagesAreaOne, setVillagesAreaOne] = useState('Nørreballe'); // alternativ 'Maribo'
     const [villagesAreaTwo, setVillagesAreaTwo] = useState('Stokkemarke'); // alternativ 'Maribo'
-    const [villagesOne, setVillagesOne] = useState<AnalysisParams[]>([
-        { title: 'Fjernvarme/blokvarme', on: true },
-        { title: 'Elvarme/Varmepumpe', on: true },
-        { title: 'Biobrændsel', on: true },
-        { title: 'Olie', on: true },
-        { title: 'Andet', on: true },
-    ]);
-    const [villagesTwo, setVillagesTwo] = useState<AnalysisParams[]>([
+    const [villagesParams, setVillagesParams] = useState<AnalysisParams[]>([
         { title: 'Fjernvarme/blokvarme', on: true },
         { title: 'Elvarme/Varmepumpe', on: true },
         { title: 'Biobrændsel', on: true },
@@ -198,24 +194,21 @@ const VillagesPage: FC = () => {
         }
     }
 
-    const villagesOneTableData = createLegendTableData(villagesOneFilter, columnKeys, villagesOne);
-    const villagesTwoTableData = createLegendTableData(villagesTwoFilter, columnKeys, villagesTwo);
-    const onVillagesOneToggle = (rowIndex: number) => {
-        const updatedVillagesOne = [...villagesOne];
-        updatedVillagesOne[rowIndex].on = !updatedVillagesOne[rowIndex].on;
-        setVillagesOne(updatedVillagesOne);
+    const villagesOneTableData = createLegendTableData(villagesOneFilter, columnKeys, villagesParams);
+    const villagesTwoTableData = createLegendTableData(villagesTwoFilter, columnKeys, villagesParams);
+    const onVillagesToggle = (rowIndex: number) => {
+        const updatedVillagesParams = [...villagesParams];
+        updatedVillagesParams[rowIndex].on = !updatedVillagesParams[rowIndex].on;
+        setVillagesParams(updatedVillagesParams);
     };
-    const onVillagesTwoToggle = (rowIndex: number) => {
-        const updatedVillagesTwo = [...villagesTwo];
-        updatedVillagesTwo[rowIndex].on = !updatedVillagesTwo[rowIndex].on;
-        setVillagesTwo(updatedVillagesTwo);
-    };
-    const villagesOnePiechartData = createPiechartData(villagesOneFilter, villagesOne);
-    const villagesTwoPiechartData = createPiechartData(villagesTwoFilter, villagesTwo);
-    const villagesOneBarchartData = createStackedbarData(villagesOneFilter, barCatagories, villagesOne);
-    const villagesTwoBarchartData = createStackedbarData(villagesTwoFilter, barCatagories, villagesTwo);
+    const villagesOnePiechartData = createPiechartData(villagesOneFilter, villagesParams);
+    const villagesTwoPiechartData = createPiechartData(villagesTwoFilter, villagesParams);
+    const villagesOneBarchartData = createStackedbarData(villagesOneFilter, barCatagories, villagesParams);
+    const villagesTwoBarchartData = createStackedbarData(villagesTwoFilter, barCatagories, villagesParams);
 
-    // console.log('villagesOneBarchartData: ', villagesOneBarchartData);
+    
+    // console.log('data: ', villagesOneFilter);
+    // console.log('analysisParams: ', villagesOne);
 
     return (
         <>
@@ -244,7 +237,7 @@ const VillagesPage: FC = () => {
                                                     'Areal i alt',
                                                 ]}
                                                 data={villagesOneTableData}
-                                                onRowToggle={onVillagesOneToggle}
+                                                onRowToggle={onVillagesToggle}
                                                 colorsStart={colorStartIndex}
                                             />
                                         </div>
@@ -253,8 +246,7 @@ const VillagesPage: FC = () => {
                                                 colorsStart={colorStartIndex}
                                                 categories={['Samlet boligareal', 'Samlet erhvervsareal']} // (Samlet boligareal, Samlet erhvervsareal)
                                                 dataSeries={villagesOneBarchartData} //(Fjernvarme/blokvarme, Elvarme/Varmepumpe, Biobrændsel,Olie, Andet)
-                                                visibility={villagesOne.map((item) => item.on)}
-                                                horizontal={true}
+                                                visibility={villagesParams.map((item) => item.on)}
                                             />
                                         </div>
                                     </div>
@@ -266,6 +258,7 @@ const VillagesPage: FC = () => {
                                                     type={'doughnut'}
                                                     data={villagesOnePiechartData} // : PiechartData;
                                                     visibility={villagesOnePiechartData.map((item) => item.on)}
+                                                    title={'Antal bygninger'}
                                                 />
                                             </div>
                                         </div>
@@ -303,7 +296,7 @@ const VillagesPage: FC = () => {
                                                     'Areal i alt',
                                                 ]}
                                                 data={villagesTwoTableData}
-                                                onRowToggle={onVillagesTwoToggle}
+                                                onRowToggle={onVillagesToggle}
                                                 colorsStart={colorStartIndex}
                                             />
                                         </div>
@@ -312,8 +305,7 @@ const VillagesPage: FC = () => {
                                                 colorsStart={colorStartIndex}
                                                 categories={['Samlet boligareal', 'Samlet erhvervsareal']} // (Samlet boligareal, Samlet erhvervsareal)
                                                 dataSeries={villagesTwoBarchartData} //(Fjernvarme/blokvarme, Elvarme/Varmepumpe, Biobrændsel,Olie, Andet)
-                                                visibility={villagesTwo.map((item) => item.on)}
-                                                horizontal={true}
+                                                visibility={villagesParams.map((item) => item.on)}
                                             />
                                         </div>
                                     </div>
