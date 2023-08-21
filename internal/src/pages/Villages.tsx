@@ -9,11 +9,11 @@ import HorizontalStackedbarNoLegend, { StackedDataSeries } from '../components/c
 export interface VillagesRow {
     id: string;
     navn: string;
-    varmeinstallation_t: string;
-    varmeinstallation_total_count: number;
-    samlerhvervareal_sum: number;
-    bygningenssamlboligareal_sum: number;
-    samletbygningsareal_sum: number;
+    dato: Date;
+    varmeinstallation: string;
+    total_count: number;
+    samlerhvervareal: number;
+    bygningenssamlboligareal: number;
     shape_wkt: { wkt: string };
 }
 
@@ -36,8 +36,9 @@ const cityExtents = {
     Hillested: [656500, 6069300, 658000, 6071500],
 };
 const villages: string[] = ['Nørreballe', 'Stokkemarke', 'Dannemare', 'Hunseby', 'Sandby', 'Langø', 'Errindlev', 'Hillested'];
-const columnKeys: string[] = ['varmeinstallation_total_count', 'bygningenssamlboligareal_sum', 'samlerhvervareal_sum'];
-const barCatagories: string[] = ['bygningenssamlboligareal_sum', 'samlerhvervareal_sum'];
+const columnKeys: string[] = ['total_count', 'bygningenssamlboligareal', 'samlerhvervareal'];
+const barCatagories: string[] = ['bygningenssamlboligareal', 'samlerhvervareal'];
+
 // FUNCTIONS
 const createLegendTableData = (data, dataKeys, analysisParams) => {
     const legendTableData: LegendTableData[] = [];
@@ -48,15 +49,10 @@ const createLegendTableData = (data, dataKeys, analysisParams) => {
         const values: number[] = [];
         for (let i = 0; i < dataKeys.length; i++) {
             const dataKey = dataKeys[i];
-            const findData = data.find((item) => item.varmeinstallation_t === analysisParam.title);
+            const findData = data.find((item) => item.varmeinstallation === analysisParam.title);
             const value: number = findData && findData[dataKey] ? parseInt(findData[dataKey]) : 0;
-            tableSum += dataKey === 'varmeinstallation_total_count' ? 0 : value;
+            tableSum += dataKey === 'total_count' ? 0 : value;
             values.push(value);
-
-            //tilføj kolonne med procenter
-            // const colSum = data.reduce((accumulator, object) => accumulator + parseInt(object[dataKey] ? object[dataKey] : 0), 0);
-            // const percentage: number = (value/colSum)*100
-            // values.push(percentage);
         }
         values.push(tableSum);
 
@@ -73,8 +69,8 @@ const createPiechartData = (data, analysisParams) => {
     const piechartData: PiechartData[] = [];
     for (let i = 0; i < analysisParams.length; i++) {
         const analysisParam = analysisParams[i];
-        const findData = data.find((item) => item.varmeinstallation_t === analysisParam.title);
-        const value: number = findData && findData ? parseInt(findData['varmeinstallation_total_count']) : 0;
+        const findData = data.find((item) => item.varmeinstallation === analysisParam.title);
+        const value: number = findData && findData ? parseInt(findData['total_count']) : 0;
 
         piechartData.push({
             name: analysisParam.title,
@@ -87,13 +83,12 @@ const createPiechartData = (data, analysisParams) => {
 
 //createStackedbarData
 const createStackedbarData = (data, barCatagories, analysisParams) => {
-    
-    const filteredParams = analysisParams.filter((item) => item.on).map(item=>item.title)
-    const filteredData = data.filter((item) => filteredParams.includes(item.varmeinstallation_t))
+    const filteredParams = analysisParams.filter((item) => item.on).map((item) => item.title);
+    const filteredData = data.filter((item) => filteredParams.includes(item.varmeinstallation));
     const stackedbarData: StackedDataSeries[] = [];
     for (let i = 0; i < analysisParams.length; i++) {
         const analysisParam = analysisParams[i];
-        const findData = filteredData.find((item) => item.varmeinstallation_t === analysisParam.title);
+        const findData = filteredData.find((item) => item.varmeinstallation === analysisParam.title);
         const values: number[] = [];
 
         for (let j = 0; j < barCatagories.length; j++) {
@@ -147,12 +142,10 @@ const VillagesPage: FC = () => {
     const handleVillagesAreaOne = (event) => {
         setVillagesAreaOne(event.target.value);
         minimap.current.getMapControl().zoomToExtent(cityExtents[event.target.value]);
-        // setResidentialArea(undefined);
     };
     const handleVillagesAreaTwo = (event) => {
         setVillagesAreaTwo(event.target.value);
         minimapTwo.current.getMapControl().zoomToExtent(cityExtents[event.target.value]);
-        // setResidentialArea(undefined);
     };
 
     const villagesOneFilter = villagesData.filter((row) => row.navn === villagesAreaOne);
@@ -206,7 +199,6 @@ const VillagesPage: FC = () => {
     const villagesOneBarchartData = createStackedbarData(villagesOneFilter, barCatagories, villagesParams);
     const villagesTwoBarchartData = createStackedbarData(villagesTwoFilter, barCatagories, villagesParams);
 
-    
     // console.log('data: ', villagesOneFilter);
     // console.log('analysisParams: ', villagesOne);
 
