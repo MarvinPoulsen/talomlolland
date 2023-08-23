@@ -5,6 +5,8 @@ import Tables, { TablesData } from '../components/tables/Tables';
 import StackedbarNoLegend, { StackedDataSeries } from '../components/chartjs/StackedbarNoLegend';
 import LegendTableMulti, { LegendTableData } from '../components/chartjs/LegendTableMulti';
 import '../components/residentages/residentages.scss';
+import Slider from '../components/slider/Slider';
+import format from 'date-fns/format';
 
 //INTERFACES
 export interface ResidentAgesRow {
@@ -35,7 +37,7 @@ interface StackedbarData {
 //CONSTANTS
 const cityExtents = {
     Nakskov: [634800, 6076400, 640000, 6080600], // [x1, y1, x2, y2] ~ [minx, miny, maxx, maxy] ~ [left, bottom, right, top]
-    Maribo: [659500, 6070800, 663300, 6073800], 
+    Maribo: [659500, 6070800, 663300, 6073800],
 };
 
 //FUNCTIONS
@@ -50,9 +52,11 @@ const getDates = (data: ResidentAgesRow[]) => {
 };
 
 const getYearOfConstruction = (data: ResidentAgesRow[], area, dataDate) => {
+
     const omraade = area;
     const dato = dataDate;
-    const before1950 = data.filter((row) => parseInt(row.opfoerselsaar) < 1950);
+    const dataDateFiltered = data.filter((row) => row.dato === dato);
+    const before1950 = dataDateFiltered.filter((row) => parseInt(row.opfoerselsaar) < 1950);
     const result: object[] = [
         {
             opfoersel: 'before1950',
@@ -64,7 +68,7 @@ const getYearOfConstruction = (data: ResidentAgesRow[], area, dataDate) => {
             dato,
         },
     ];
-    const between50_59 = data.filter((row) => parseInt(row.opfoerselsaar) >= 1950 && parseInt(row.opfoerselsaar) < 1960);
+    const between50_59 = dataDateFiltered.filter((row) => parseInt(row.opfoerselsaar) >= 1950 && parseInt(row.opfoerselsaar) < 1960);
     result.push({
         opfoersel: 'between50_59',
         omraade,
@@ -74,7 +78,7 @@ const getYearOfConstruction = (data: ResidentAgesRow[], area, dataDate) => {
         age75plus: between50_59.reduce((sum, cur) => sum + parseInt(cur.age75plus), 0),
         dato,
     });
-    const between60_69 = data.filter((row) => parseInt(row.opfoerselsaar) >= 1960 && parseInt(row.opfoerselsaar) < 1970);
+    const between60_69 = dataDateFiltered.filter((row) => parseInt(row.opfoerselsaar) >= 1960 && parseInt(row.opfoerselsaar) < 1970);
     result.push({
         opfoersel: 'between60_69',
         omraade,
@@ -84,7 +88,7 @@ const getYearOfConstruction = (data: ResidentAgesRow[], area, dataDate) => {
         age75plus: between60_69.reduce((sum, cur) => sum + parseInt(cur.age75plus), 0),
         dato,
     });
-    const between70_79 = data.filter((row) => parseInt(row.opfoerselsaar) >= 1970 && parseInt(row.opfoerselsaar) < 1980);
+    const between70_79 = dataDateFiltered.filter((row) => parseInt(row.opfoerselsaar) >= 1970 && parseInt(row.opfoerselsaar) < 1980);
     result.push({
         opfoersel: 'between70_79',
         omraade,
@@ -94,7 +98,7 @@ const getYearOfConstruction = (data: ResidentAgesRow[], area, dataDate) => {
         age75plus: between70_79.reduce((sum, cur) => sum + parseInt(cur.age75plus), 0),
         dato,
     });
-    const between80_89 = data.filter((row) => parseInt(row.opfoerselsaar) >= 1980 && parseInt(row.opfoerselsaar) < 1990);
+    const between80_89 = dataDateFiltered.filter((row) => parseInt(row.opfoerselsaar) >= 1980 && parseInt(row.opfoerselsaar) < 1990);
     result.push({
         opfoersel: 'between80_89',
         omraade,
@@ -104,7 +108,7 @@ const getYearOfConstruction = (data: ResidentAgesRow[], area, dataDate) => {
         age75plus: between80_89.reduce((sum, cur) => sum + parseInt(cur.age75plus), 0),
         dato,
     });
-    const between90_99 = data.filter((row) => parseInt(row.opfoerselsaar) >= 1990 && parseInt(row.opfoerselsaar) < 2000);
+    const between90_99 = dataDateFiltered.filter((row) => parseInt(row.opfoerselsaar) >= 1990 && parseInt(row.opfoerselsaar) < 2000);
     result.push({
         opfoersel: 'between90_99',
         omraade,
@@ -114,7 +118,7 @@ const getYearOfConstruction = (data: ResidentAgesRow[], area, dataDate) => {
         age75plus: between90_99.reduce((sum, cur) => sum + parseInt(cur.age75plus), 0),
         dato,
     });
-    const after1999 = data.filter((row) => parseInt(row.opfoerselsaar) > 1999);
+    const after1999 = dataDateFiltered.filter((row) => parseInt(row.opfoerselsaar) > 1999);
     result.push({
         opfoersel: 'after1999',
         omraade,
@@ -128,27 +132,38 @@ const getYearOfConstruction = (data: ResidentAgesRow[], area, dataDate) => {
 };
 
 const getSummatedData = (data, area, dataDate) => {
+    const result: object[] = [];
     const omraade = area;
-    const dato = dataDate;
-    const age0_19 = data.reduce((sum, cur) => sum + parseInt(cur.age0_19), 0);
-    const age20_59 = data.reduce((sum, cur) => sum + parseInt(cur.age20_59), 0);
-    const age60_75 = data.reduce((sum, cur) => sum + parseInt(cur.age60_75), 0);
-    const age75plus = data.reduce((sum, cur) => sum + parseInt(cur.age75plus), 0);
-    const result: object[] = [
-        {
+    for (let i = 0; i < dataDate.length; i++) {
+        const dato = dataDate[i];
+        const dataDateFiltered = data.filter((row) => row.dato === dato);
+        const age0_19 = dataDateFiltered.reduce((sum, cur) => sum + parseInt(cur.age0_19), 0);
+        const age20_59 = dataDateFiltered.reduce((sum, cur) => sum + parseInt(cur.age20_59), 0);
+        const age60_75 = dataDateFiltered.reduce((sum, cur) => sum + parseInt(cur.age60_75), 0);
+        const age75plus = dataDateFiltered.reduce((sum, cur) => sum + parseInt(cur.age75plus), 0);
+        result.push({
             omraade,
             age0_19,
             age20_59,
             age60_75,
             age75plus,
             dato,
-        },
-    ];
+        });
+    }
+    // console.log('result: ',result)
+
     return result;
 };
 
 // createTablesData
 const createTablesData = (data, columnNames, analysisParams, dataDate) => {
+    // console.log('dataDate: ',dataDate)
+    // console.log('data: ',data)
+    // console.log('data: ',data)
+    const testfilter = data.filter((row) => row.dato === dataDate)
+    // console.log('testfilter: ',testfilter)
+    const test2filter = data.filter((row) => row.dato !== dataDate)
+    // console.log('test2filter: ',test2filter)
     const tablesData: TablesData[] = [];
     for (let i = 0; i < analysisParams.length; i++) {
         const analysisParam = analysisParams[i];
@@ -157,6 +172,7 @@ const createTablesData = (data, columnNames, analysisParams, dataDate) => {
         for (let i = 0; i < columnNames.length; i++) {
             const columnName = columnNames[i];
             const filteredData = data.length > 0 && data.filter((row) => row.opfoersel === columnName && row.dato === dataDate);
+
             const value: number = filteredData && parseInt(filteredData[0][analysisParam.code]);
             tableSum += value;
             values.push(value);
@@ -172,6 +188,7 @@ const createTablesData = (data, columnNames, analysisParams, dataDate) => {
 };
 // createLegendTableData
 const createLegendTableData = (data, columnNames, analysisParams, date) => {
+    // console.log('columnNames: ',columnNames)
     const legendTableData: LegendTableData[] = [];
     for (let i = 0; i < analysisParams.length; i++) {
         const analysisParam = analysisParams[i];
@@ -180,7 +197,8 @@ const createLegendTableData = (data, columnNames, analysisParams, date) => {
         for (let i = 0; i < columnNames.length; i++) {
             const columnName = columnNames[i];
             const filteredData = data.length > 0 && data.filter((row) => row.omraade === columnName && row.dato === date);
-            const value: number = filteredData && parseInt(filteredData[0][analysisParam.code]);
+            // console.log()
+            const value: number = filteredData && filteredData[0][analysisParam.code] ? parseInt(filteredData[0][analysisParam.code]): 0;
             tableSum += value;
             values.push(value);
         }
@@ -254,11 +272,14 @@ const ResidentAgesPage: FC = () => {
     };
 
     const residentialCityFilter = residentAgesData.filter((row) => row.omraade === cityArea);
-    const sumData = getSummatedData(residentialCityFilter, cityArea, date);
+    const sumData = getSummatedData(residentialCityFilter, cityArea, getDates(residentAgesData));
+    // console.log('residentialCityFilter: ', residentialCityFilter);
 
     const residentialAreaData = residentialArea
         ? residentialCityFilter.filter((row) => row.navn === residentialArea)
-        : getSummatedData(residentialCityFilter, cityArea, date);
+        : getSummatedData(residentialCityFilter, cityArea, getDates(residentAgesData));
+
+    // console.log('residentialAreaData: ',residentialAreaData)    
 
     const columnNames: string[] = [''];
     columnNames[0] = cityArea;
@@ -296,6 +317,9 @@ const ResidentAgesPage: FC = () => {
     const residentAgeStackedbar: HTMLDivElement[] = [];
     for (let i = 0; i < columnNames.length; i++) {
         const columnName = columnNames[i];
+        // console.log('residentialAreaData: ', residentialAreaData);
+        // console.log('columnName: ', columnName);
+        // console.log('residentAgesGroups: ', residentAgesGroups);
         residentAgeStackedbar.push(
             <div className="column is-6 resident-age-stackedbar" key={columnName}>
                 <StackedbarNoLegend
@@ -332,7 +356,9 @@ const ResidentAgesPage: FC = () => {
         yearOfConductParams,
         date
     );
-
+    const handleDateChange = (event) => {
+        setDate(dates[event]);
+    };
     return (
         <>
             <div id="residentages-tab-content" className="container hidden">
@@ -347,28 +373,47 @@ const ResidentAgesPage: FC = () => {
                         />
                         <div id="infoview"></div>
                         <div className="column is-6">
-                            <div className="field is-grouped">
-                                <div className="control">
-                                    <button
-                                        className={
-                                            cityArea === 'Nakskov' ? 'button is-info is-active' : 'button is-info is-light'
-                                        }
-                                        onClick={handleCityArea}
-                                        value="Nakskov"
-                                    >
-                                        Nakskov
-                                    </button>
+                            <div className="columns">
+                                <div className="column is-6">
+                                    <div className="field is-grouped">
+                                        <div className="control">
+                                            <button
+                                                className={
+                                                    cityArea === 'Nakskov'
+                                                        ? 'button is-info is-active'
+                                                        : 'button is-info is-light'
+                                                }
+                                                onClick={handleCityArea}
+                                                value="Nakskov"
+                                            >
+                                                Nakskov
+                                            </button>
+                                        </div>
+                                        <div className="control">
+                                            <button
+                                                className={
+                                                    cityArea === 'Maribo'
+                                                        ? 'button is-info is-active'
+                                                        : 'button is-info is-light'
+                                                }
+                                                onClick={handleCityArea}
+                                                value="Maribo"
+                                            >
+                                                Maribo
+                                            </button>
+                                        </div>
+                                    </div>
                                 </div>
-                                <div className="control">
-                                    <button
-                                        className={
-                                            cityArea === 'Maribo' ? 'button is-info is-active' : 'button is-info is-light'
-                                        }
-                                        onClick={handleCityArea}
-                                        value="Maribo"
-                                    >
-                                        Maribo
-                                    </button>
+                                <div className="field column">
+                                    <label className="label">Vælg dato: {format(new Date(date), 'dd-MM-yyyy')}</label>
+                                    <div className="control is-expanded">
+                                        <Slider
+                                            onRangeChange={handleDateChange}
+                                            maxValue={dates.length - 1}
+                                            minValue={0}
+                                            value={dates.findIndex((element) => element === date)}
+                                        />
+                                    </div>
                                 </div>
                             </div>
                             <div className="block">
@@ -376,6 +421,7 @@ const ResidentAgesPage: FC = () => {
                                     <h1>{cityArea}</h1>
                                 </div>
                                 <div id="year-of-conduct-table" className="year-of-conduct-legend content">
+                                    {/* {console.log('yearOfConductData: ',yearOfConductData)} */}
                                     <Tables
                                         headers={[
                                             'Aldersgruppe',
