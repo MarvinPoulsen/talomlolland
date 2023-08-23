@@ -38,6 +38,7 @@ const cityExtents = {
 const villages: string[] = ['Nørreballe', 'Stokkemarke', 'Dannemare', 'Hunseby', 'Sandby', 'Langø', 'Errindlev', 'Hillested'];
 const columnKeys: string[] = ['total_count', 'bygningenssamlboligareal', 'samlerhvervareal'];
 const barCatagories: string[] = ['bygningenssamlboligareal', 'samlerhvervareal'];
+const mapThemes: string[] = ['theme-lk_talomlolland_fjernvarme_view','theme-lk_talomlolland_elvarme_view','theme-lk_talomlolland_biobraendsel_view','theme-lk_talomlolland_olie_view','theme-lk_talomlolland_andet_view']
 
 // FUNCTIONS
 const createLegendTableData = (data, dataKeys, analysisParams) => {
@@ -123,6 +124,7 @@ const VillagesPage: FC = () => {
         { title: 'Olie', on: true },
         { title: 'Andet', on: true },
     ]);
+    const [themeIsOn, setThemeIsOn]= useState<string[]>([true]);
     const onMapReady = (mm) => {
         minimap.current = mm;
         const ses = mm.getSession();
@@ -147,6 +149,12 @@ const VillagesPage: FC = () => {
         setVillagesAreaTwo(event.target.value);
         minimapTwo.current.getMapControl().zoomToExtent(cityExtents[event.target.value]);
     };
+    const handleThemeToggle = (event) => {
+        console.log('event: ',event)
+        const theme = mapThemes[event]
+        minimap.current.getTheme(theme).toggle()
+        minimapTwo.current.getTheme(theme).toggle()
+    }
 
     const villagesOneFilter = villagesData.filter((row) => row.navn === villagesAreaOne);
     const villagesTwoFilter = villagesData.filter((row) => row.navn === villagesAreaTwo);
@@ -193,6 +201,7 @@ const VillagesPage: FC = () => {
         const updatedVillagesParams = [...villagesParams];
         updatedVillagesParams[rowIndex].on = !updatedVillagesParams[rowIndex].on;
         setVillagesParams(updatedVillagesParams);
+        handleThemeToggle(rowIndex)
     };
     const villagesOnePiechartData = createPiechartData(villagesOneFilter, villagesParams);
     const villagesTwoPiechartData = createPiechartData(villagesTwoFilter, villagesParams);
