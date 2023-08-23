@@ -35,6 +35,21 @@
     <target displayname="Varmekilder" name="lk_talomlolland_varmekilder" presentation="[module:talomlolland.dir]/presentations/pres-lk_talomlolland_varmekilder" themecondition="theme-lk_talomlolland_varmekilder">
         <datasource name="lk_talomlolland_varmekilder"/>
     </target>
+    <target displayname="Varmekilder" name="lk_talomlolland_andet_view" presentation="[module:talomlolland.dir]/presentations/pres-lk_talomlolland_varmekilder" themecondition="theme-lk_talomlolland_andet_view">
+        <datasource name="lk_talomlolland_andet_view"/>
+    </target>
+    <target displayname="Varmekilder" name="lk_talomlolland_olie_view" presentation="[module:talomlolland.dir]/presentations/pres-lk_talomlolland_varmekilder" themecondition="theme-lk_talomlolland_olie_view">
+        <datasource name="lk_talomlolland_olie_view"/>
+    </target>
+    <target displayname="Varmekilder" name="lk_talomlolland_biobraendsel_view" presentation="[module:talomlolland.dir]/presentations/pres-lk_talomlolland_varmekilder" themecondition="theme-lk_talomlolland_biobraendsel_view">
+        <datasource name="lk_talomlolland_biobraendsel_view"/>
+    </target>
+    <target displayname="Varmekilder" name="lk_talomlolland_elvarme_view" presentation="[module:talomlolland.dir]/presentations/pres-lk_talomlolland_varmekilder" themecondition="theme-lk_talomlolland_elvarme_view">
+        <datasource name="lk_talomlolland_elvarme_view"/>
+    </target>
+    <target displayname="Varmekilder" name="lk_talomlolland_fjernvarme_view" presentation="[module:talomlolland.dir]/presentations/pres-lk_talomlolland_varmekilder" themecondition="theme-lk_talomlolland_fjernvarme_view">
+        <datasource name="lk_talomlolland_fjernvarme_view"/>
+    </target>
 	
 	
     <target displayname="Lolland Kommune" name="lk_dagi_kommune" presentation="[module:dagi.dir]/presentations/pres-lk_dagi_kommune" themecondition="theme-lk_dagi_kommune">

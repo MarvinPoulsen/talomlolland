@@ -17,6 +17,25 @@
     <datasource displayname="Varmekilder" endpoint="ep_lk_talomlolland" name="lk_talomlolland_varmekilder">
         <table name="varmekilder" pkcolumn="id" schema="talomlolland" geometrycolumn="geom"/>
     </datasource>
+    <datasource displayname="Varmekilder (Andet)" endpoint="ep_lk_talomlolland" name="lk_talomlolland_andet_view">
+        <table name="andet_view" pkcolumn="id" schema="talomlolland" geometrycolumn="geom"/>
+    </datasource>
+    <datasource displayname="Varmekilder (Olie)" endpoint="ep_lk_talomlolland" name="lk_talomlolland_olie_view">
+        <table name="olie_view" pkcolumn="id" schema="talomlolland" geometrycolumn="geom"/>
+    </datasource>
+    <datasource displayname="Varmekilder (Biobrændsel)" endpoint="ep_lk_talomlolland" name="lk_talomlolland_biobraendsel_view">
+        <table name="biobraendsel_view" pkcolumn="id" schema="talomlolland" geometrycolumn="geom"/>
+    </datasource>
+    <datasource displayname="Varmekilder (Elvarme/Varmepumpe)" endpoint="ep_lk_talomlolland" name="lk_talomlolland_elvarme_view">
+        <table name="elvarme_view" pkcolumn="id" schema="talomlolland" geometrycolumn="geom"/>
+    </datasource>
+    <datasource displayname="Varmekilder (Fjernvarme/blokvarme)" endpoint="ep_lk_talomlolland" name="lk_talomlolland_fjernvarme_view">
+        <table name="fjernvarme_view" pkcolumn="id" schema="talomlolland" geometrycolumn="geom"/>
+    </datasource>
+
+
+
+
     <datasource displayname="" endpoint="ep_lk_talomlolland" name="lk_talomlolland_ejer_bopalsregion">
         <table name="ejer_bopalsregion" pkcolumn="id" schema="lois_sommerhus"/>
     </datasource>

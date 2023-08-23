@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<theme>
+    <clientlayers>
+        <clientlayer name="clientlayer">
+            <singletile>true</singletile>
+        </clientlayer>
+    </clientlayers>
+    <cbinfo-metadata>
+        <param name="metadata.text">Varmekilder fra BBR</param>
+        <!-- <param name="metadata.url"></param> -->
+    </cbinfo-metadata>
+    <layer datasource="lk_talomlolland_olie_view" name="lk_talomlolland_olie_view" type="point">[datasource:lk_talomlolland_olie_view.mapfile-datasource]
+        <class>
+            <name>Olie</name>
+            <style>
+                <color>255 51 51</color>
+                <size>5</size>
+                <symbol>square</symbol>
+            </style>
+        </class>
+    </layer>
+</theme>

@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<theme>
+    <clientlayers>
+        <clientlayer name="clientlayer">
+            <singletile>true</singletile>
+        </clientlayer>
+    </clientlayers>
+    <cbinfo-metadata>
+        <param name="metadata.text">Varmekilder fra BBR</param>
+        <!-- <param name="metadata.url"></param> -->
+    </cbinfo-metadata>
+    <layer datasource="lk_talomlolland_elvarme_view" name="lk_talomlolland_elvarme_view" type="point">[datasource:lk_talomlolland_elvarme_view.mapfile-datasource]
+		<class>
+            <name>Elvarme/Varmepumpe</name>
+            <style>
+                <color>255 255 0</color>
+                <size>5</size>
+                <symbol>square</symbol>
+            </style>
+        </class>
+    </layer>
+</theme>

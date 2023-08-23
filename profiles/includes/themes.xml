@@ -120,6 +120,46 @@
 			<displayname>Invert Landsbyafgrænsning</displayname>
 		</themeselector>
 	</theme>
+	<theme module="talomlolland" name="theme-lk_talomlolland_andet_view">
+		<themeselector>
+			<initialstate>[common.themes.initialstate]</initialstate>
+			<group>talomlolland</group>
+			<selectable>true</selectable>
+			<displayname>Varmekilder (Andet)</displayname>
+		</themeselector>
+	</theme>
+	<theme module="talomlolland" name="theme-lk_talomlolland_olie_view">
+		<themeselector>
+			<initialstate>[common.themes.initialstate]</initialstate>
+			<group>talomlolland</group>
+			<selectable>true</selectable>
+			<displayname>Varmekilder (Olie)</displayname>
+		</themeselector>
+	</theme>
+	<theme module="talomlolland" name="theme-lk_talomlolland_biobraendsel_view">
+		<themeselector>
+			<initialstate>[common.themes.initialstate]</initialstate>
+			<group>talomlolland</group>
+			<selectable>true</selectable>
+			<displayname>Varmekilder (Biobrændsel)</displayname>
+		</themeselector>
+	</theme>
+	<theme module="talomlolland" name="theme-lk_talomlolland_elvarme_view">
+		<themeselector>
+			<initialstate>[common.themes.initialstate]</initialstate>
+			<group>talomlolland</group>
+			<selectable>true</selectable>
+			<displayname>Varmekilder (Elvarme/Varmepumpe)</displayname>
+		</themeselector>
+	</theme>
+	<theme module="talomlolland" name="theme-lk_talomlolland_fjernvarme_view">
+		<themeselector>
+			<initialstate>[common.themes.initialstate]</initialstate>
+			<group>talomlolland</group>
+			<selectable>true</selectable>
+			<displayname>Varmekilder (Fjernvarme/blokvarme)</displayname>
+		</themeselector>
+	</theme>
 	<theme module="talomlolland" name="theme-lk_talomlolland_varmekilder">
 		<themeselector>
 			<initialstate>[common.themes.initialstate]</initialstate>
