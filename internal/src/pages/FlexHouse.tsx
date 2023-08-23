@@ -53,7 +53,11 @@ export const flexHouseHistoryData: FlexHouseHistoryRow[] = [
   },
   {
     aar: '2021',
-    antal: 168,
+    antal: 174,
+  },
+  {
+    aar: '2022',
+    antal: 121,
   },
 ];
 
@@ -68,7 +72,7 @@ const FlexHousePage: FC = () => {
       setFlexHouseData(rows);
     });
   };
-
+// console.log('flexHouseData: ',flexHouseData)
   return (
     <>
       <div id='flexhouse-tab-content' className='container'>
