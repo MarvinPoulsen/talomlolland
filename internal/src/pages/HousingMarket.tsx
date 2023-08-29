@@ -263,6 +263,7 @@ const HousingMarketPage: FC = () => {
                 sommer_total += parseInt(obj.summerhus_husstand_0);
                 return { ...obj, beboet_af_lejer: beboet_af_lejer, beboet_sommer: beboet_sommer, sommer_total: sommer_total };
             });
+            console.log('newArr: ',newArr)
             setEstateData(newArr);
         });
     };

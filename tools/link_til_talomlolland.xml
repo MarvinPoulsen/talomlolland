@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<tool>
+    <displayname><![CDATA[TOL]]></displayname>
+    <tooltip><![CDATA[Tal om Lolland]]></tooltip>
+
+    <onclick>talomlolland();</onclick>
+    <jssrc><![CDATA[
+        function talomlolland()
+        {
+           window.open ('/modules/talomlolland', 'Tal om Lolland');
+        }
+	]]></jssrc>
+</tool>
