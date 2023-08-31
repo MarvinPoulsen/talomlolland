@@ -124,7 +124,6 @@ const VillagesPage: FC = () => {
         { title: 'Olie', on: true },
         { title: 'Andet', on: true },
     ]);
-    const [themeIsOn, setThemeIsOn]= useState<string[]>([true]);
     const onMapReady = (mm) => {
         minimap.current = mm;
         const ses = mm.getSession();
