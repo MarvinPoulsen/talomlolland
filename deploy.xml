@@ -1,6 +1,13 @@
 <deploy>
-	<description>Tal om Lolland</description>
 	<version>1.0.0</version>
+	<description>Tal om Lolland</description>
+	
+    <param name="module.minimap2.searchresult.layer.polygon.color">0,102,255</param>
+    <param name="module.minimap2.searchresult.layer.polygon.opacity">0.3</param>
+    <param name="module.minimap2.searchresult.layer.polygon.outline.color">255,255,0</param>
+    <param name="module.minimap2.searchresult.layer.line.color">255,0,0</param>
+    <!-- <param name="module.minimap2.searchresult.layer.point.marker.url"></param> -->
+
     <makedir dir="[cbinfo.wwwroot.dir]/modules/talomlolland" />
     <copydir fromdir="[module:talomlolland.dir]/dist" todir="[cbinfo.wwwroot.dir]/modules/talomlolland" replacetext="true"/>
 </deploy>
