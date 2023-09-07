@@ -224,7 +224,7 @@ const VillagesPage: FC = () => {
 
                                 <div className="columns">
                                     <div className="column">
-                                        <div id="housing-type-table" className="legend">
+                                        <div id="villages-one-table" className="legend">
                                             <LegendTableMulti
                                                 headers={[
                                                     'Varmeinstalation',
@@ -290,7 +290,7 @@ const VillagesPage: FC = () => {
 
                                 <div className="columns">
                                     <div className="column">
-                                        <div id="housing-type-table" className="legend">
+                                        <div id="villages-two-table" className="legend">
                                             <LegendTableMulti
                                                 headers={[
                                                     'Varmeinstalation',
