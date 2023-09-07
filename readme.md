@@ -1,7 +1,7 @@
 
 MODULE TALOMLOLLAND
 --------------------
-Purpose, usage notes etc.....
+Visning af diverse tal om Lolland. Demografi, boligmasse, antal sommerhuse, flytte data
 
 DEPRECATION
 --------------------
