@@ -1,32 +1,31 @@
-const residentagesMinimapIdParam = '[module.talomlolland.residentages.minimapid]';
-const residentagesMinimapIdDev = 'bb623664-baee-4c20-a890-0baebcbac1ba';
-export const residentagesMinimapId = residentagesMinimapIdParam.includes('[') ? residentagesMinimapIdDev : residentagesMinimapIdParam;
-
-const accidentsMinimapIdParam = '[module.talomlolland.accidents.minimapid]';
-const accidentsMinimapIdDev = 'e2b08eb0-121c-4575-b3f6-3ef442a7a3ed';
-export const accidentsMinimapId = accidentsMinimapIdParam.includes('[') ? accidentsMinimapIdDev : accidentsMinimapIdParam;
-
-const demographyMinimapIdParam = '[module.talomlolland.demography.minimapid]';
-const demographyMinimapIdDev = '7d8daea0-bc36-4d08-a674-a090d791537a';
-export const demographyMinimapId = demographyMinimapIdParam.includes('[') ? demographyMinimapIdDev : demographyMinimapIdParam;
-
-const flexhouseMinimapIdParam = '[module.talomlolland.flexhouse.minimapid]';
-const flexhouseMinimapIdDev = '7a3276ac-ef3e-4a28-9b60-71c8e6241193';
-export const flexhouseMinimapId = flexhouseMinimapIdParam.includes('[') ? flexhouseMinimapIdDev : flexhouseMinimapIdParam;
-
-const estateMinimapIdParam = '[module.talomlolland.estate.minimapid]';
-const estateMinimapIdDev = '70dc35df-6168-460d-9c8c-444a5db2c646';
-export const estateMinimapId = estateMinimapIdParam.includes('[') ? estateMinimapIdDev : estateMinimapIdParam;
-
 const summerhouseMinimapIdParam = '[module.talomlolland.summerhouse.minimapid]';
-const summerhouseMinimapIdDev = '307f05d8-793f-44ae-9698-79990ac50a84';
+const summerhouseMinimapIdDev = '677add53-677d-46c2-95da-9f0e7cf3625a';
 export const summerhouseMinimapId = summerhouseMinimapIdParam.includes('[') ? summerhouseMinimapIdDev : summerhouseMinimapIdParam;
 
-const villagesMinimapIdParam = '[module.talomlolland.villages.minimapid]';
-const villagesMinimapIdDev = 'a793b41c-5eb6-4b09-922c-ff758689497f';
-export const villagesMinimapId = villagesMinimapIdParam.includes('[') ? villagesMinimapIdDev : villagesMinimapIdParam;
+const flexhouseMinimapIdParam = '[module.talomlolland.flexhouse.minimapid]';
+const flexhouseMinimapIdDev = '9c44a537-d1a8-4e1a-8527-a1cd7b7b2d48';
+export const flexhouseMinimapId = flexhouseMinimapIdParam.includes('[') ? flexhouseMinimapIdDev : flexhouseMinimapIdParam;
+
+const demographyMinimapIdParam = '[module.talomlolland.demography.minimapid]';
+const demographyMinimapIdDev = 'd1d3b557-a71a-4eed-ac58-75bb08ccbbd9';
+export const demographyMinimapId = demographyMinimapIdParam.includes('[') ? demographyMinimapIdDev : demographyMinimapIdParam;
+
+const estateMinimapIdParam = '[module.talomlolland.estate.minimapid]';
+const estateMinimapIdDev = '3505843b-bbdb-4632-992f-0023d47a8fb6';
+export const estateMinimapId = estateMinimapIdParam.includes('[') ? estateMinimapIdDev : estateMinimapIdParam;
+
+const accidentsMinimapIdParam = '[module.talomlolland.accidents.minimapid]';
+const accidentsMinimapIdDev = 'd94fb1b2-c119-4a2d-9a2b-30e193a290da';
+export const accidentsMinimapId = accidentsMinimapIdParam.includes('[') ? accidentsMinimapIdDev : accidentsMinimapIdParam;
+
+const residentagesMinimapIdParam = '[module.talomlolland.residentages.minimapid]';
+const residentagesMinimapIdDev = '71fa75b9-374a-4a9b-9f7b-50a51527c681';
+export const residentagesMinimapId = residentagesMinimapIdParam.includes('[') ? residentagesMinimapIdDev : residentagesMinimapIdParam;
+
+const villagesOneMinimapIdParam = '[module.talomlolland.villages.minimapid]';
+const villagesOneMinimapIdDev = '9406f637-bb57-46e4-93cf-85b5db17fe93';
+export const villagesOneMinimapId = villagesOneMinimapIdParam.includes('[') ? villagesOneMinimapIdDev : villagesOneMinimapIdParam;
 
 const villagesTwoMinimapIdParam = '[module.talomlolland.villagestwo.minimapid]';
-const villagesTwoMinimapIdDev = '4ac4dfa7-f31e-446a-8ca1-9452d4006b63';
+const villagesTwoMinimapIdDev = '95f24240-3660-483a-8139-4b158a95f78d';
 export const villagesTwoMinimapId = villagesTwoMinimapIdParam.includes('[') ? villagesTwoMinimapIdDev : villagesTwoMinimapIdParam;
-
