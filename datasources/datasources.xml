@@ -1,12 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <datasources>
-    <endpoint endpointtype="postgis" name="ep_lk_talomlolland">
-        <connect>[cbinfo.pg_endpoint.connect]</connect>
-        <user>[cbinfo.pg_endpoint.usr]</user>
-        <pwd>[cbinfo.pg_endpoint.pwd]</pwd>
+    <endpoint endpointtype="[cbinfo.connection.lolland_postgis.type]" name="ep_lk_talomlolland">
+        <connect>[cbinfo.connection.lolland_postgis.url]</connect>
+        <user>[cbinfo.connection.lolland_postgis.user]</user>
+        <pwd>[cbinfo.connection.lolland_postgis.pwd]</pwd>
     </endpoint>
     <datasource displayname="" endpoint="ep_lk_talomlolland" name="lk_talomlolland_landsbyer">
-        <table name="landsbyer" pkcolumn="id" schema="talomlolland"/>
+        <table name="vp_omraader" pkcolumn="id" schema="talomlolland"/>
     </datasource>
     <datasource displayname="Landsbyafgrænsning" endpoint="ep_lk_talomlolland" name="lk_talomlolland_landsbyafgraensning">
         <table name="landsbyafgraensning" pkcolumn="id" schema="talomlolland" geometrycolumn="geom"/>
@@ -31,6 +31,22 @@
     </datasource>
     <datasource displayname="Varmekilder (Fjernvarme/blokvarme)" endpoint="ep_lk_talomlolland" name="lk_talomlolland_fjernvarme_view">
         <table name="fjernvarme_view" pkcolumn="id" schema="talomlolland" geometrycolumn="geom"/>
+    </datasource>
+    
+    <datasource displayname="Varmekilder (Andet)" endpoint="ep_lk_talomlolland" name="lk_talomlolland_andet_view_lol">
+        <table name="andet_lolland_view" pkcolumn="id" schema="talomlolland" geometrycolumn="geom"/>
+    </datasource>
+    <datasource displayname="Varmekilder (Olie)" endpoint="ep_lk_talomlolland" name="lk_talomlolland_olie_view_lol">
+        <table name="olie_lolland_view" pkcolumn="id" schema="talomlolland" geometrycolumn="geom"/>
+    </datasource>
+    <datasource displayname="Varmekilder (Biobrændsel)" endpoint="ep_lk_talomlolland" name="lk_talomlolland_biobraendsel_view_lol">
+        <table name="biobraendsel_lolland_view" pkcolumn="id" schema="talomlolland" geometrycolumn="geom"/>
+    </datasource>
+    <datasource displayname="Varmekilder (Elvarme/Varmepumpe)" endpoint="ep_lk_talomlolland" name="lk_talomlolland_elvarme_view_lol">
+        <table name="elvarme_lolland_view" pkcolumn="id" schema="talomlolland" geometrycolumn="geom"/>
+    </datasource>
+    <datasource displayname="Varmekilder (Fjernvarme/blokvarme)" endpoint="ep_lk_talomlolland" name="lk_talomlolland_fjernvarme_view_lol">
+        <table name="fjernvarme_lolland_view" pkcolumn="id" schema="talomlolland" geometrycolumn="geom"/>
     </datasource>
 
 
@@ -66,10 +82,10 @@
     <datasource endpoint="ep_lk_talomlolland" name="lk_talomlolland_baba_vector">
         <table name="bolig_aar_beboer_alder" pkcolumn="id" schema="talomlolland" geometrycolumn="geom"/>
     </datasource>
-    <endpoint endpointtype="postgis" name="ep_lk_dem_flytning">
-        <connect>[cbinfo.pg_endpoint.connect]</connect>
-        <user>[cbinfo.pg_endpoint.usr]</user>
-        <pwd>[cbinfo.pg_endpoint.pwd]</pwd>
+    <endpoint endpointtype="[cbinfo.connection.lolland_postgis.type]" name="ep_lk_dem_flytning">
+        <connect>[cbinfo.connection.lolland_postgis.url]</connect>
+        <user>[cbinfo.connection.lolland_postgis.user]</user>
+        <pwd>[cbinfo.connection.lolland_postgis.pwd]</pwd>
     </endpoint>
 	<datasource endpoint="ep_lk_dem_flytning" name="lk_dem_flytning_flyttedata">
         <table name="flyttedata" pkcolumn="id" schema="dem_flytning"/>
@@ -77,10 +93,10 @@
 			<column name="aar" descending="false"/>
 		</sortorder>
     </datasource>
-    <endpoint endpointtype="postgis" name="ep_lk_pv_vej">
-        <connect>[cbinfo.pg_endpoint.connect]</connect>
-        <user>[cbinfo.pg_endpoint.usr]</user>
-        <pwd>[cbinfo.pg_endpoint.pwd]</pwd>
+    <endpoint endpointtype="[cbinfo.connection.lolland_postgis.type]" name="ep_lk_pv_vej">
+        <connect>[cbinfo.connection.lolland_postgis.url]</connect>
+        <user>[cbinfo.connection.lolland_postgis.user]</user>
+        <pwd>[cbinfo.connection.lolland_postgis.pwd]</pwd>
     </endpoint>
     <datasource displayname="Uheld sogn" endpoint="ep_lk_pv_vej" name="lk_pv_vej_accidents_parish">
         <table name="accidents_parish" pkcolumn="id" schema="pv_vej" geometrycolumn="geom"/>
@@ -88,19 +104,19 @@
     <datasource displayname="Uheld" endpoint="ep_lk_pv_vej" name="lk_pv_vej_accident_involved">
         <table name="accident_involved" pkcolumn="id" schema="pv_vej" geometrycolumn="geom"/>
     </datasource>
-    <endpoint endpointtype="postgis" name="ep_lk_byg_flex">
-        <connect>[cbinfo.pg_endpoint.connect]</connect>
-        <user>[cbinfo.pg_endpoint.usr]</user>
-        <pwd>[cbinfo.pg_endpoint.pwd]</pwd>
+    <endpoint endpointtype="[cbinfo.connection.lolland_postgis.type]" name="ep_lk_byg_flex">
+        <connect>[cbinfo.connection.lolland_postgis.url]</connect>
+        <user>[cbinfo.connection.lolland_postgis.user]</user>
+        <pwd>[cbinfo.connection.lolland_postgis.pwd]</pwd>
     </endpoint>
     <datasource displayname="Flexbolig distrikter"  endpoint="ep_lk_byg_flex" name="lk_byg_flex_count_flexboliger">
         <table geometrycolumn="geom" name="count_flexboliger" pkcolumn="id" schema="byg_flex"/>
     </datasource>
 
-    <endpoint endpointtype="postgis" name="ep_lk_dagi">
-        <connect>[cbinfo.pg_endpoint.connect]</connect>
-        <user>[cbinfo.pg_endpoint.usr]</user>
-        <pwd>[cbinfo.pg_endpoint.pwd]</pwd>
+    <endpoint endpointtype="[cbinfo.connection.lolland_postgis.type]" name="ep_lk_dagi">
+        <connect>[cbinfo.connection.lolland_postgis.url]</connect>
+        <user>[cbinfo.connection.lolland_postgis.user]</user>
+        <pwd>[cbinfo.connection.lolland_postgis.pwd]</pwd>
     </endpoint>
     <datasource displayname="Lolland Kommune" endpoint="ep_lk_dagi" name="lk_dagi_kommune">
         <table geometrycolumn="geom" name="kommune" pkcolumn="id" schema="dagi"/>

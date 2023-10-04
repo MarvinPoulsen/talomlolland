@@ -1,5 +1,5 @@
 import React, { FC, useRef, useState } from 'react';
-import { villagesMinimapId, villagesTwoMinimapId } from '../../config';
+import { villagesOneMinimapId, villagesTwoMinimapId } from '../../config';
 import Map from '../components/minimap/Minimap';
 import PiechartNoLegend, { PiechartData } from '../components/chartjs/PiechartNoLegend';
 import LegendTableMulti, { LegendTableData } from '../components/chartjs/LegendTableMulti';
@@ -34,13 +34,39 @@ const cityExtents = {
     Langø: [629100, 6075340, 630120, 6076400],
     Errindlev: [660400, 6060300, 661400, 6061450],
     Hillested: [656500, 6069300, 658000, 6071500],
+    Lolland: [623104, 6050048, 666521, 6101760],
 };
-const villages: string[] = ['Nørreballe', 'Stokkemarke', 'Dannemare', 'Hunseby', 'Sandby', 'Langø', 'Errindlev', 'Hillested'];
+const villages: string[] = ['Nørreballe', 'Stokkemarke', 'Dannemare', 'Hunseby', 'Sandby', 'Langø', 'Errindlev', 'Hillested', 'Lolland'];
 const columnKeys: string[] = ['total_count', 'bygningenssamlboligareal', 'samlerhvervareal'];
 const barCatagories: string[] = ['bygningenssamlboligareal', 'samlerhvervareal'];
 const mapThemes: string[] = ['theme-lk_talomlolland_fjernvarme_view','theme-lk_talomlolland_elvarme_view','theme-lk_talomlolland_biobraendsel_view','theme-lk_talomlolland_olie_view','theme-lk_talomlolland_andet_view']
+const mapLollandThemes: string[] = ['theme-lk_talomlolland_fjernvarme_view_lol','theme-lk_talomlolland_elvarme_view_lol','theme-lk_talomlolland_biobraendsel_view_lol','theme-lk_talomlolland_olie_view_lol','theme-lk_talomlolland_andet_view_lol']
 
 // FUNCTIONS
+const isRegionLolland = (currentMap)=>{
+    currentMap.getTheme("theme-lk_talomlolland_invert_landsbyafgr").hide();
+    currentMap.getTheme("theme-lk_talomlolland_landsbyafgraensning").hide();
+    handlemapLollandThemes(currentMap)
+}
+
+const isNotRegionLolland = (currentMap)=>{
+    currentMap.getTheme("theme-lk_talomlolland_invert_landsbyafgr").show();
+    currentMap.getTheme("theme-lk_talomlolland_landsbyafgraensning").show();
+    for(const element of mapLollandThemes){
+        currentMap.getTheme([element]).hide();
+    }
+}
+
+const handlemapLollandThemes = (currentMap)=>{
+    for (const [index, element] of mapThemes.entries()) {
+        if(currentMap.getTheme([element]).isVisible()){
+            currentMap.getTheme(mapLollandThemes[index]).show();
+        } else{
+            currentMap.getTheme(mapLollandThemes[index]).hide();
+        }    
+    }
+}
+
 const createLegendTableData = (data, dataKeys, analysisParams) => {
     const legendTableData: LegendTableData[] = [];
     for (let i = 0; i < analysisParams.length; i++) {
@@ -142,10 +168,20 @@ const VillagesPage: FC = () => {
     };
     const handleVillagesAreaOne = (event) => {
         setVillagesAreaOne(event.target.value);
+        if (event.target.value ==='Lolland'){
+            isRegionLolland(minimap.current)
+        } else {
+            isNotRegionLolland(minimap.current)
+        }
         minimap.current.getMapControl().zoomToExtent(cityExtents[event.target.value]);
     };
     const handleVillagesAreaTwo = (event) => {
         setVillagesAreaTwo(event.target.value);
+        if (event.target.value ==='Lolland'){
+            isRegionLolland(minimapTwo.current)
+        } else {
+            isNotRegionLolland(minimapTwo.current)
+        }
         minimapTwo.current.getMapControl().zoomToExtent(cityExtents[event.target.value]);
     };
     const handleThemeToggle = (event) => {
@@ -153,6 +189,13 @@ const VillagesPage: FC = () => {
         const theme = mapThemes[event]
         minimap.current.getTheme(theme).toggle()
         minimapTwo.current.getTheme(theme).toggle()
+        if(villagesAreaOne==='Lolland'){
+            const themeLolland = mapLollandThemes[event]
+            minimap.current.getTheme(themeLolland).toggle()
+        } else if(villagesAreaTwo==='Lolland'){
+            const themeLolland = mapLollandThemes[event]
+            minimapTwo.current.getTheme(themeLolland).toggle()
+        }
     }
 
     const villagesOneFilter = villagesData.filter((row) => row.navn === villagesAreaOne);
@@ -215,7 +258,7 @@ const VillagesPage: FC = () => {
             <div id="residentages-tab-content" className="container hidden">
                 <div className="block">
                     <div className="columns">
-                        <Map id={villagesMinimapId} name="villages" size="is-4" infoDiv="infoview" onReady={onMapReady} />
+                        <Map id={villagesOneMinimapId} name="villages" size="is-4" infoDiv="infoview" onReady={onMapReady} />
                         <div id="infoview"></div>
                         <div className="column is-8">
                             <div className="field is-grouped">{firstButtonRow}</div>

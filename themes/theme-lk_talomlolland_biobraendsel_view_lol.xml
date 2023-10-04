@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<theme>
+    <clientlayers>
+        <clientlayer name="clientlayer">
+            <singletile>true</singletile>
+        </clientlayer>
+    </clientlayers>
+    <cbinfo-metadata>
+        <param name="metadata.text">Varmekilder fra BBR</param>
+        <!-- <param name="metadata.url"></param> -->
+    </cbinfo-metadata>
+    <layer datasource="lk_talomlolland_biobraendsel_view_lol" name="lk_talomlolland_biobraendsel_view_lol" type="point">[datasource:lk_talomlolland_biobraendsel_view_lol.mapfile-datasource]
+        <class>
+            <name>Biobrændsel</name>
+            <style>
+                <color>255 153 0</color>
+                <size>5</size>
+                <symbol>square</symbol>
+            </style>
+        </class>
+    </layer>
+</theme>
