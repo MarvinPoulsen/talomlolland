@@ -8,7 +8,7 @@
     <cbinfo-metadata/>
     <layer name="lk_pv_vej_accident_involved_heatmap" type="raster">
 		<CONNECTIONTYPE>kerneldensity</CONNECTIONTYPE>
-		<CONNECTION>lk_pv_vej_accident_involved_point</CONNECTION>
+		<CONNECTION>theme-lk_pv_vej_accident_involved_heatmap_lk_pv_vej_accident_involved_point_i1</CONNECTION>
 		<PROCESSING>"RANGE_COLORSPACE=HSL"</PROCESSING>
 		<PROCESSING>"KERNELDENSITY_RADIUS=20"</PROCESSING>
 		<PROCESSING>"KERNELDENSITY_COMPUTE_BORDERS=ON"</PROCESSING>
