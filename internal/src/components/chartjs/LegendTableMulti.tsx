@@ -75,7 +75,7 @@ function LegendTableMulti(props: LegendTableProps) {
                     return (
                         <tr {...row.getRowProps()} onClick={() => props.onRowToggle(row.index)}>
                             {row.cells.map((cell) => {
-                                const isNumber = isNaN(cell.value) ? '' : ' has-text-right';
+                                const isNumber = isNaN(cell.value.replace('.', '')) ? '' : ' has-text-right';
                                 return (
                                     <td {...cell.getCellProps({ className: ' content' + (isOff ? ' is-off' : '') + isNumber })}>
                                         {cell.column.id === 'col1' && (
@@ -99,7 +99,7 @@ function LegendTableMulti(props: LegendTableProps) {
                 {footerGroups.map((group) => (
                     <tr {...group.getFooterGroupProps()}>
                         {group.headers.map((column) => (
-                            <th {...column.getFooterProps({ className: isNaN(column.Footer) ? '' : ' has-text-right' })}>
+                            <th {...column.getFooterProps({ className: isNaN(column.Footer.replace('.', '')) ? '' : ' has-text-right' })}>
                                 {column.render('Footer')}
                             </th>
                         ))}
