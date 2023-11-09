@@ -1,15 +1,21 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <datasources>
+    <endpoint endpointtype="[cbinfo.connection.lolland_postgis.type]" name="ep_lk_varmeplan">
+        <connect>[cbinfo.connection.lolland_postgis.url]</connect>
+        <user>[cbinfo.connection.lolland_postgis.user]</user>
+        <pwd>[cbinfo.connection.lolland_postgis.pwd]</pwd>
+    </endpoint>
+    <!-- varmeplan fanen i Tal om Lolland -->
+        <datasource displayname="" endpoint="ep_lk_varmeplan" name="lk_varmeplan_landsbyer_varmeplan">
+            <table name="landsbyer_varmeplan" pkcolumn="id" schema="varmeplan"/>
+        </datasource>
+    <!-- varmeplan fanen i Tal om Lolland -->
+
     <endpoint endpointtype="[cbinfo.connection.lolland_postgis.type]" name="ep_lk_talomlolland">
         <connect>[cbinfo.connection.lolland_postgis.url]</connect>
         <user>[cbinfo.connection.lolland_postgis.user]</user>
         <pwd>[cbinfo.connection.lolland_postgis.pwd]</pwd>
     </endpoint>
-<!-- varmeplan fanen i Tal om Lolland -->
-    <datasource displayname="" endpoint="ep_lk_talomlolland" name="lk_talomlolland_varmeplan">
-        <table name="vp_omraader" pkcolumn="id" schema="talomlolland"/>
-    </datasource>
-<!-- varmeplan fanen i Tal om Lolland -->
 <!-- Landsbyer fanen i Tal om Lolland (Strategisk Landsby Analyse)-->
     <!-- Data til Lansbyer -->
     <datasource displayname="" endpoint="ep_lk_talomlolland" name="lk_talomlolland_landsbyer">
