@@ -23,8 +23,10 @@ interface AnalysisParams {
 }
 
 //CONSTANTS
-const colorStartIndex: number = 13;
+const colorStartIndex: number = 13; //starter ved index 13 i arraysne i colors.tsx
+
 const cityExtents = {
+    // udbredelse kortet skal zoome til ved valg af område
     // [x1, y1, x2, y2] ~ [minx, miny, maxx, maxy] ~ [left, bottom, right, top]
     Nørreballe: [655000, 6074700, 657100, 6076500],
     Stokkemarke: [650800, 6078700, 652900, 6079700],
@@ -36,6 +38,7 @@ const cityExtents = {
     Hillested: [656500, 6069300, 658000, 6071500],
     Lolland: [623104, 6050048, 666521, 6101760],
 };
+
 const villages: string[] = ['Nørreballe', 'Stokkemarke', 'Dannemare', 'Hunseby', 'Sandby', 'Langø', 'Errindlev', 'Hillested', 'Lolland'];
 const columnKeys: string[] = ['total_count', 'bygningenssamlboligareal', 'samlerhvervareal'];
 const barCatagories: string[] = ['bygningenssamlboligareal', 'samlerhvervareal'];
@@ -141,8 +144,8 @@ const VillagesPage: FC = () => {
     const minimap: any = useRef(null);
     const minimapTwo: any = useRef(null);
     const [villagesData, setVillagesData] = useState([]);
-    const [villagesAreaOne, setVillagesAreaOne] = useState('Nørreballe'); // alternativ 'Maribo'
-    const [villagesAreaTwo, setVillagesAreaTwo] = useState('Stokkemarke'); // alternativ 'Maribo'
+    const [villagesAreaOne, setVillagesAreaOne] = useState('Nørreballe'); // bruges til valg af område i øverste graf/kort - default value sat
+    const [villagesAreaTwo, setVillagesAreaTwo] = useState('Stokkemarke'); // bruges til valg af område i nederste graf/kort - default value sat
     const [villagesParams, setVillagesParams] = useState<AnalysisParams[]>([
         { title: 'Fjernvarme/blokvarme', on: true },
         { title: 'Elvarme/Varmepumpe', on: true },
