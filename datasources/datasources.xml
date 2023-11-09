@@ -5,18 +5,25 @@
         <user>[cbinfo.connection.lolland_postgis.user]</user>
         <pwd>[cbinfo.connection.lolland_postgis.pwd]</pwd>
     </endpoint>
-    <datasource displayname="" endpoint="ep_lk_talomlolland" name="lk_talomlolland_landsbyer">
+<!-- varmeplan fanen i Tal om Lolland -->
+    <datasource displayname="" endpoint="ep_lk_talomlolland" name="lk_talomlolland_varmeplan">
         <table name="vp_omraader" pkcolumn="id" schema="talomlolland"/>
     </datasource>
+<!-- varmeplan fanen i Tal om Lolland -->
+<!-- Landsbyer fanen i Tal om Lolland (Strategisk Landsby Analyse)-->
+    <!-- Data til Lansbyer -->
+    <datasource displayname="" endpoint="ep_lk_talomlolland" name="lk_talomlolland_landsbyer">
+        <table name="sla_omraader" pkcolumn="id" schema="talomlolland"/>
+    </datasource>
+    <!-- Data til Lansbyer -->
+    <!-- bruges til kort i Landsbyer -->
     <datasource displayname="Landsbyafgrænsning" endpoint="ep_lk_talomlolland" name="lk_talomlolland_landsbyafgraensning">
         <table name="landsbyafgraensning" pkcolumn="id" schema="talomlolland" geometrycolumn="geom"/>
     </datasource>
     <datasource displayname="Invert Landsbyafgrænsning" endpoint="ep_lk_talomlolland" name="lk_talomlolland_invert_landsbyafgr">
         <table name="invert_landsbyafgr" pkcolumn="id" schema="talomlolland" geometrycolumn="geom"/>
     </datasource>
-    <datasource displayname="Varmekilder" endpoint="ep_lk_talomlolland" name="lk_talomlolland_varmekilder">
-        <table name="varmekilder" pkcolumn="id" schema="talomlolland" geometrycolumn="geom"/>
-    </datasource>
+
     <datasource displayname="Varmekilder (Andet)" endpoint="ep_lk_talomlolland" name="lk_talomlolland_andet_view">
         <table name="andet_view" pkcolumn="id" schema="talomlolland" geometrycolumn="geom"/>
     </datasource>
@@ -48,6 +55,8 @@
     <datasource displayname="Varmekilder (Fjernvarme/blokvarme)" endpoint="ep_lk_talomlolland" name="lk_talomlolland_fjernvarme_view_lol">
         <table name="fjernvarme_lolland_view" pkcolumn="id" schema="talomlolland" geometrycolumn="geom"/>
     </datasource>
+    <!-- bruges til kort i Landsbyer -->
+<!-- Landsbyer fanen i Tal om Lolland -->
 
 
 
