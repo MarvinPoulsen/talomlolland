@@ -19,7 +19,7 @@ const HeatPlanPage: FC = () => {
     const onMapReady = (mm) => {
         minimap.current = mm;
         const ses = mm.getSession();
-        const ds = ses.getDatasource('lk_talomlolland_varmeplan');
+        const ds = ses.getDatasource('lk_varmeplan_landsbyer_varmeplan');
         ds.execute({ command: 'read' }, function (rows: HeatPlanRow[]) {
             setHeatPlanData(rows);
         });
