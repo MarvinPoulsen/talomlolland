@@ -6,7 +6,7 @@ import datetime
     # Providing the folder path
 source = r"g:\sites\webgis-test.lolland.dk"
 origin = os.path.dirname(__file__)
-target = origin.replace(r"c:\spatialsuite-4.4.0\sites\sps440", source)
+target = origin.replace(r"c:\spatialsuite-4.5.0\sites\sps450", source)
 
     # Replacing text/url in index.html
 index_file = origin + r'\dist\index.html'
