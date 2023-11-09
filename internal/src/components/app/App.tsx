@@ -11,6 +11,7 @@ import HousingMarketPage from '../../pages/HousingMarket';
 import AccidentsPage from '../../pages/Accidents';
 import ResidentAgesPage from '../../pages/ResidentAges';
 import VillagesPage from '../../pages/Villages';
+import HeatPlanPage from '../../pages/HeatPlan';
 
 
 const App: FC = () => {
@@ -31,6 +32,7 @@ const App: FC = () => {
                         <Route path='/uheld' element={<AccidentsPage />} />
                         <Route path='/boligomrade' element={<ResidentAgesPage />} />
                         <Route path='/landsbyer' element={<VillagesPage />} />
+                        <Route path='/varmeplan' element={<HeatPlanPage />} />
                     </Route>
                 </Routes>
 		    </section>
