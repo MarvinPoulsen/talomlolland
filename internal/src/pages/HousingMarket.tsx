@@ -46,9 +46,9 @@ interface EstateRow {
     husstand_3: string;
     husstand_4: string;
     husstand_5: string;
-    ib1: string;
-    ib2: string;
-    ib3: string;
+    // ib1: string;
+    // ib2: string;
+    // ib3: string;
     kondemnret: string;
     nedrevne: string;
     omraade: string;
@@ -193,7 +193,8 @@ interface PiechartDataSeries {
 const HousingMarketPage: FC = () => {
     const minimap: any = useRef(null);
     const [estateData, setEstateData] = useState([]);
-    const [date, setDate] = useState<string>('2022-02-15 00:00:00.0');
+    // const [date, setDate] = useState<string>('2022-02-15 00:00:00.0');
+    const [date, setDate] = useState<string>('2020-01-01 00:00:00.0');
     const [housingTypes, setHousingTypes] = useState<AnalysisParams[]>([
         { title: 'Stuehus til landbrugsejendom', code: 'bt1', on: true },
         { title: 'Parcelhus', code: 'bt2', on: true },
@@ -263,7 +264,6 @@ const HousingMarketPage: FC = () => {
                 sommer_total += parseInt(obj.summerhus_husstand_0);
                 return { ...obj, beboet_af_lejer: beboet_af_lejer, beboet_sommer: beboet_sommer, sommer_total: sommer_total };
             });
-            console.log('newArr: ',newArr)
             setEstateData(newArr);
         });
     };
@@ -516,7 +516,7 @@ const HousingMarketPage: FC = () => {
     // Egnet til beboelse
     const suitableForHabitationParams = [
         { title: 'Kondemneret', code: 'kondemnret' },
-        { title: 'Antal nedrevne boliger i 2021', code: 'nedrevne' },
+        // { title: 'Antal nedrevne boliger', code: 'nedrevne' },
         { title: 'Kondemneret sommerhus', code: 'summerhus_kondemnret' },
     ];
 
@@ -556,7 +556,7 @@ const HousingMarketPage: FC = () => {
                             />
                             <label className="label">Ændre datoen ved at flytte på slideren</label>
                             <p>
-                                Til søjlediagrammerne tilføjes ny data hver den 15. i måneden. Søjlediagrammerne viser således
+                                Til søjlediagrammerne tilføjes ny data hvert kvartal. Søjlediagrammerne viser således
                                 udviklingen for det på gældende geografiske område.
                             </p>
                             <p>Alle optællinger baserer sig på 4 geografiske områder:</p>
@@ -582,6 +582,7 @@ const HousingMarketPage: FC = () => {
                                     headers={['Boligtype', 'Nakskov', 'Maribo', 'Rødby', 'Øvrigt', 'I alt']}
                                     data={housingTypesTableData}
                                     onRowToggle={onHousingTypeToggle}
+                                    date={format(new Date(date), 'd. MMMM yyyy', { locale: da })}
                                 />
                             </div>
                             <div className="content">
@@ -614,6 +615,7 @@ const HousingMarketPage: FC = () => {
                                     headers={['Ejerforhold', 'Nakskov', 'Maribo', 'Rødby', 'Øvrigt', 'I alt']}
                                     data={ownershipTableData}
                                     onRowToggle={onOwnershipToggle}
+                                    date={format(new Date(date), 'd. MMMM yyyy', { locale: da })}
                                 />
                             </div>
                             <div className="content">
@@ -639,6 +641,7 @@ const HousingMarketPage: FC = () => {
                                     headers={['Boligstørrelse', 'Nakskov', 'Maribo', 'Rødby', 'Øvrigt', 'I alt']}
                                     data={housingSizeTableData}
                                     onRowToggle={onHousingSizeToggle}
+                                    date={format(new Date(date), 'd. MMMM yyyy', { locale: da })}
                                 />
                             </div>
                             <div className="content">
@@ -666,6 +669,7 @@ const HousingMarketPage: FC = () => {
                                     headers={['Boligalder', 'Nakskov', 'Maribo', 'Rødby', 'Øvrigt', 'I alt']}
                                     data={housingAgeTableData}
                                     onRowToggle={onHousingAgeToggle}
+                                    date={format(new Date(date), 'd. MMMM yyyy', { locale: da })}
                                 />
                             </div>
                             <div className="content">
@@ -693,6 +697,7 @@ const HousingMarketPage: FC = () => {
                                     headers={['Husstand størrelse', 'Nakskov', 'Maribo', 'Rødby', 'Øvrigt', 'I alt']}
                                     data={householdSizeTableData}
                                     onRowToggle={onHouseholdSizeToggle}
+                                    date={format(new Date(date), 'd. MMMM yyyy', { locale: da })}
                                 />
                             </div>
                             <div className="content">
@@ -720,6 +725,7 @@ const HousingMarketPage: FC = () => {
                                     headers={['Udlejningsforhold', 'Nakskov', 'Maribo', 'Rødby', 'Øvrigt', 'I alt']}
                                     data={rentalConditionTableData}
                                     onRowToggle={onRentalConditionToggle}
+                                    date={format(new Date(date), 'd. MMMM yyyy', { locale: da })}
                                 />
                             </div>
                             <div className="content">
@@ -745,6 +751,7 @@ const HousingMarketPage: FC = () => {
                             <Tables
                                 headers={['Egnet til beboelse', 'Nakskov', 'Maribo', 'Rødby', 'Øvrigt', 'I alt']}
                                 data={suitableForHabitation}
+                                date={format(new Date(date), 'd. MMMM yyyy', { locale: da })}
                             />
                         </div>
                         <div className="column">
@@ -753,7 +760,7 @@ const HousingMarketPage: FC = () => {
                                     Egnethed til beboelse beregnes udfra BBR, Kode for Kondemneret boligenhed (BoligKondemKode)
                                     fra enhedsniveauet
                                 </p>
-                                <p>Samt Lolland Kommunes egne registreringer af nedrevne boliger</p>
+                                {/* <p>Samt Lolland Kommunes egne registreringer af nedrevne boliger</p> */}
                             </div>
                         </div>
                     </div>
@@ -768,6 +775,7 @@ const HousingMarketPage: FC = () => {
                             <Tables
                                 headers={['Status', 'Nakskov', 'Maribo', 'Rødby', 'Øvrigt', 'I alt']}
                                 data={housingStatus}
+                                date={format(new Date(date), 'd. MMMM yyyy', { locale: da })}
                             />
                         </div>
                         <div className="column">
@@ -789,7 +797,7 @@ const HousingMarketPage: FC = () => {
                     </div>
                 </div>
 
-                <div className="block">
+                {/* <div className="block">
                     <div className="content">
                         <h1>Fakta om Beliggenhed af boliger i Lolland Kommune</h1>
                     </div>
@@ -842,7 +850,7 @@ const HousingMarketPage: FC = () => {
                             </div>
                         </div>
                     </div>
-                </div>
+                </div> */}
             </div>
         </>
     );
