@@ -9,6 +9,7 @@ export interface TablesData {
 interface TablesProps {
     headers: string[];
     data: TablesData[];
+    date?: string;
 }
 
 const createTablesData = (data, headers) => {
@@ -48,6 +49,7 @@ function Tables(props: TablesProps) {
                 className: 'table is-bordered is-hoverable is-size-7 is-fullwidth is-narrow',
             })}
         >
+        {props.date ? <caption>Tabellen viser data for {props.date}</caption>:'' }
             <thead>
                 {headerGroups.map((headerGroup) => (
                     <tr {...headerGroup.getHeaderGroupProps()}>

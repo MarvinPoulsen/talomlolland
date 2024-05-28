@@ -14,6 +14,7 @@ interface LegendTableProps {
     data: LegendTableData[];
     onRowToggle: (rowIndex: number) => void;
     abbreviation?: string[] | undefined;
+    date?: string;
 }
 
 const createTableData = (data: LegendTableData[], headers: string[], abbreviations?: string[]) => {
@@ -55,6 +56,7 @@ function LegendTableMulti(props: LegendTableProps) {
                 className: 'table is-bordered is-hoverable is-size-7 is-fullwidth is-narrow',
             })}
         >
+        {props.date ? <caption>Tabellen viser data for {props.date}</caption>:'' }
             <thead>
                 {headerGroups.map((headerGroup) => (
                     <tr {...headerGroup.getHeaderGroupProps()}>
