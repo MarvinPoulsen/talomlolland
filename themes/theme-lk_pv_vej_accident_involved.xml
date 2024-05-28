@@ -10,8 +10,9 @@
         <class>
             <name>Sogne med uheldsdata</name>
             <style>
-            <COLORRANGE>"#0000ff00"  "#0000ffff"</COLORRANGE>
-            <DATARANGE>0 32</DATARANGE>
+                <RANGEITEM>uheldssituation</RANGEITEM>
+                <COLORRANGE>"#0000ff00"  "#0000ffff"</COLORRANGE>
+                <DATARANGE>0 1000</DATARANGE>
                 <size>12</size>
                 <symbol>circle</symbol>
             </style>
