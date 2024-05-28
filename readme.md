@@ -40,3 +40,4 @@ CHANGES
 ```
 Date           Version        Ini            Description 
 2023-01-09     1.0.0          MARPO          Modulet oprettet
+2024-04-22     1.1.0          MARPO          Opdateret med data fra LOIS
