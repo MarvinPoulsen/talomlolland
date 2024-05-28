@@ -85,7 +85,7 @@ const SummerHousePage: FC = () => {
                             <div className="block">
                                 <div className="content">
                                     <h1>Fakta om sommerhuse i Lolland Kommune</h1>
-                                    <p id="total-summerhouse">I Lolland Kommune findes {sommerhusSum} sommerhuse.</p>
+                                    <p id="total-summerhouse">I Lolland Kommune findes {sommerhusSum} sommerhuse inden for sommerhusområderne.</p>
                                     <p id="empty-summerhouse">
                                         Desuden findes {tommeSommerhusgrundeSum} tomme sommerhusgrunde i allerede lokalplanlagte
                                         sommerhusområder.
