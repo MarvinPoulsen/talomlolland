@@ -6,7 +6,7 @@
         <pwd>[cbinfo.connection.lolland_postgis.pwd]</pwd>
     </endpoint>
     <!-- varmeplan fanen i Tal om Lolland -->
-        <datasource displayname="" endpoint="ep_lk_varmeplan" name="lk_varmeplan_landsbyer_varmeplan">
+        <datasource displayname="" endpoint="ep_lk_varmeplan" name="ds_varmeplan_landsbyer_varmeplan">
             <table name="landsbyer_varmeplan" pkcolumn="id" schema="varmeplan"/>
         </datasource>
     <!-- varmeplan fanen i Tal om Lolland -->
@@ -86,13 +86,13 @@
         <table name="sogne_beboelsesenhed" pkcolumn="id" schema="talomlolland" geometrycolumn="geom"/>
     </datasource>
     <datasource displayname="Boligmarked" endpoint="ep_lk_talomlolland" name="lk_talomlolland_boligmarked">
-        <table name="boligmarked_view" schema="talomlolland"/>
+        <table name="boligmarked" schema="talomlolland"/>
     </datasource>
     <datasource displayname="Boligmarked områder" endpoint="ep_lk_talomlolland" name="lk_talomlolland_boligmarked_omraader">
-        <table name="boligmarked_omraader_view" pkcolumn="id" schema="talomlolland" geometrycolumn="geom"/>
+        <table name="boligmarked_omr" pkcolumn="id" schema="talomlolland" geometrycolumn="geom"/>
     </datasource>
     <datasource endpoint="ep_lk_talomlolland" name="lk_talomlolland_bolig_aar_beboer_alder">
-        <table name="bolig_aar_beboer_alder" pkcolumn="id" schema="talomlolland" geometrycolumn="geom"/>
+        <table name="bolig_aar_beboer_alder_lois" pkcolumn="id" schema="talomlolland" geometrycolumn="geom"/>
     </datasource>
     <datasource endpoint="ep_lk_talomlolland" name="lk_talomlolland_baba_vector">
         <table name="bolig_aar_beboer_alder" pkcolumn="id" schema="talomlolland" geometrycolumn="geom"/>
