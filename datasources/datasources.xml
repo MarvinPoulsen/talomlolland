@@ -16,12 +16,20 @@
         <user>[cbinfo.connection.lolland_postgis.user]</user>
         <pwd>[cbinfo.connection.lolland_postgis.pwd]</pwd>
     </endpoint>
+<!-- Faciliteter fanen i Tal om Lolland -->
+    <datasource displayname="" endpoint="ep_lk_talomlolland" name="lk_talomlolland_faciliteter_haller_borger">
+        <table name="faciliteter_borger" pkcolumn="id" schema="talomlolland"/>
+    </datasource>
+    <datasource displayname="" endpoint="ep_lk_talomlolland" name="lk_talomlolland_faciliteter_haller_map">
+        <table name="faciliteter_haller_map" pkcolumn="id" schema="talomlolland" geometrycolumn="geom"/>
+    </datasource>
+<!-- Faciliteter fanen i Tal om Lolland -->
 <!-- Landsbyer fanen i Tal om Lolland (Strategisk Landsby Analyse)-->
-    <!-- Data til Lansbyer -->
+    <!-- Data til Landsbyer -->
     <datasource displayname="" endpoint="ep_lk_talomlolland" name="lk_talomlolland_landsbyer">
         <table name="sla_omraader" pkcolumn="id" schema="talomlolland"/>
     </datasource>
-    <!-- Data til Lansbyer -->
+    <!-- Data til Landsbyer -->
     <!-- bruges til kort i Landsbyer -->
     <datasource displayname="Landsbyafgrænsning" endpoint="ep_lk_talomlolland" name="lk_talomlolland_landsbyafgraensning">
         <table name="landsbyafgraensning" pkcolumn="id" schema="talomlolland" geometrycolumn="geom"/>
