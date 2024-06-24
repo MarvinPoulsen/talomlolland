@@ -33,3 +33,7 @@ export const villagesTwoMinimapId = villagesTwoMinimapIdParam.includes('[') ? vi
 const heatplanMinimapIdParam = '[module.talomlolland.heatplan.minimapid]';
 const heatplanMinimapIdDev = '95f24240-3660-483a-8139-4b158a95f78d';
 export const heatplanMinimapId = heatplanMinimapIdParam.includes('[') ? heatplanMinimapIdDev : heatplanMinimapIdParam;
+
+const facilitiesMinimapIdParam = '[module.talomlolland.facilities.minimapid]';
+const facilitiesMinimapIdDev = 'acb08f51-be40-4ccb-a396-60582b0c6be0';
+export const facilitiesMinimapId = facilitiesMinimapIdParam.includes('[') ? facilitiesMinimapIdDev : facilitiesMinimapIdParam;
