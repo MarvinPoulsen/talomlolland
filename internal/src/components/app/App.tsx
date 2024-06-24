@@ -12,6 +12,7 @@ import AccidentsPage from '../../pages/Accidents';
 import ResidentAgesPage from '../../pages/ResidentAges';
 import VillagesPage from '../../pages/Villages';
 import HeatPlanPage from '../../pages/HeatPlan';
+import FacilitiesPage from '../../pages/Facilities';
 
 
 const App: FC = () => {
@@ -33,6 +34,7 @@ const App: FC = () => {
                         <Route path='/boligomrade' element={<ResidentAgesPage />} />
                         <Route path='/landsbyer' element={<VillagesPage />} />
                         <Route path='/varmeplan' element={<HeatPlanPage />} />
+                        <Route path='/faciliteter' element={<FacilitiesPage />} />
                     </Route>
                 </Routes>
 		    </section>

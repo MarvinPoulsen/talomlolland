@@ -24,6 +24,7 @@ import {
     mdiThermometer,
     mdiHomeLightningBolt,
     mdiBillboard,
+    mdiRun,
 } from '@mdi/js';
 enum Tab {
     SummerHouse,
@@ -35,6 +36,7 @@ enum Tab {
     ResidentAges,
     Villages,
     HeatPlan,
+    Facilities,
 }
 const HeroNavigation: FC = () => {
     let location = useLocation();
@@ -69,6 +71,9 @@ const HeroNavigation: FC = () => {
                 break;
             case '/varmeplan':
                 setActiveTab(Tab.HeatPlan);
+                break;
+            case '/faciliteter':
+                setActiveTab(Tab.Facilities);
                 break;
             default:
                 setActiveTab(null);
@@ -158,6 +163,14 @@ const HeroNavigation: FC = () => {
                                     <span>Varmeplan</span>
                                 </Link>
                             </li> */}
+                            <li className={isActiveTab === Tab.Facilities ? 'is-active' : ''}>
+                                <Link to="/faciliteter">
+                                    <span>
+                                        <Icon path={mdiRun} size={1} />
+                                    </span>
+                                    <span>Faciliteter</span>
+                                </Link>
+                            </li>
                         </ul>
                     </div>
                 </nav>
