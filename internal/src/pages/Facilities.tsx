@@ -1,9 +1,11 @@
-import React, { FC, useRef, useState } from 'react';
+// Import statements
+import React, { FC, useRef, useState, useEffect } from 'react';
 import Map from '../components/minimap/Minimap';
 import { facilitiesMinimapId } from '../../config';
 import Slider from '../components/slider/Slider';
 import LegendTableMulti, { LegendTableData } from '../components/chartjs/LegendTableMulti';
 
+// Interface definitions
 export interface FacilitiesRow {
     id: string;
     alder: string;
@@ -24,24 +26,22 @@ export interface FacilitiesRow {
     km9: string;
     km10: string;
 }
-
 export interface MarkingRow {
     isokron: string;
     shape_wkt: { wkt: string };
 }
-
 interface AnalysisParams {
     title: string;
     code: string;
     filterValue: (item: FacilitiesRow) => boolean;
     on: boolean;
 }
-
 interface FilterKeys {
     isokron: string;
     distance: number;
 }
 
+// Constants
 const distances: FilterKeys[] = [
     { isokron: 'km1', distance: 1000 },
     { isokron: 'km2', distance: 2000 },
@@ -55,7 +55,8 @@ const distances: FilterKeys[] = [
     { isokron: 'km10', distance: 10000 },
 ];
 
-const createBasisData = (data, distance, analysisParams) => {
+// Helper functions
+const createTableData = (data, distance, analysisParams) => {
     const result: LegendTableData[] = [];
     const dataInside = data.filter((row) => row.distance <= distance && row.distance !== '');
     const dataOutside = data.filter((row) => row.distance > distance || row.distance === '');
@@ -73,9 +74,11 @@ const createBasisData = (data, distance, analysisParams) => {
     return result;
 };
 
+// Component
 const FacilitiesPage: FC = () => {
-    const minimap: any = useRef(null);
-    const [facilities, setFacilities] = useState<string>('haller');
+
+    // useState hooks
+    // const [facilities, setFacilities] = useState<string>('haller');
     const [facilitiesData, setFacilitiesData] = useState<FacilitiesRow[]>([]);
     const [markingData, setMarkingData] = useState([]);
     const [selectedDistance, setSelectedDistanse] = useState<FilterKeys>({ isokron: 'km5', distance: 5000 });
@@ -88,6 +91,11 @@ const FacilitiesPage: FC = () => {
         { title: '65-79 år', code: 'age65_79', filterValue: (item) => item.alder >= 65 && item.alder <= 79, on: true },
         { title: '80+ år', code: 'age80plus', filterValue: (item) => item.alder >= 80, on: true },
     ]);
+
+    // useRef hooks
+    const minimap: any = useRef(null);
+
+    // Functions
     const onMapReady = (mm) => {
         minimap.current = mm;
         const ses = mm.getSession();
@@ -99,42 +107,34 @@ const FacilitiesPage: FC = () => {
         dsMarking.execute({ command: 'read' }, function (markingRows: MarkingRow[]) {
             setMarkingData(markingRows);
         });
-        filterOnDistance;
-    };
-    const filterOnDistance = () => {
-        if (markingData.length > 0) {
-            const filteredMarkings = markingData.filter((item) => item.isokron === selectedDistance.isokron);
-            for (let i = 0; i < filteredMarkings.length; i++) {
-                const shape_wkt = filteredMarkings[i].shape_wkt;
-                if (i === 0) {
-                    minimap.current.getMapControl().setMarkingGeometry(shape_wkt, true, null, 3000);
-                } else {
-                    // console.log(shape_wkt);
-                }
-            }
-        }
     };
 
     const handleSliderChange = (event) => {
         setSelectedDistanse(distances[event]);
-        filterOnDistance();
     };
 
-    const facilitiesAgeTableData: LegendTableData[] = createBasisData(facilitiesData, selectedDistance.distance, facilitiesAgesGroups);
-
     const onFacilitiesAgeToggle = (rowIndex: number) => {
-        console.log('rowIndex: ', rowIndex);
-
         const updatedFacilitiesAgesGroups = [...facilitiesAgesGroups];
         updatedFacilitiesAgesGroups[rowIndex].on = !updatedFacilitiesAgesGroups[rowIndex].on;
         setFacilitiesAgesGroups(updatedFacilitiesAgesGroups);
     };
 
-    const tester = () => {
-        const tester = createBasisData(facilitiesData, selectedDistance.distance, facilitiesAgesGroups);
-        console.log('tester: ', tester);
-    };
+    // useEffect hooks
+    useEffect(() => {
+        if (minimap.current) {
+            const filteredMarkings = markingData.find((item) => item.isokron === selectedDistance.isokron).shape_wkt;
+            minimap.current.getMapControl().setMarkingGeometry(filteredMarkings, true, null, 3000);
+        }
+    }, [selectedDistance, markingData]);
 
+    // Constants defined with helper functions
+    const facilitiesAgeTableData: LegendTableData[] = createTableData(
+        facilitiesData,
+        selectedDistance.distance,
+        facilitiesAgesGroups
+    );
+
+    // Component return
     return (
         <>
             <div id="facilities-tab-content" className="container hidden">
@@ -143,30 +143,23 @@ const FacilitiesPage: FC = () => {
                         <Map id={facilitiesMinimapId} name="facilities" size="is-6" infoDiv="infoview" onReady={onMapReady} />
                         <div id="infoview"></div>
                         <div className="column">
-                            {/* <div className="control">
-                                <button className="button is-info is-light" onClick={tester} value="Tester">
-                                    Test
-                                </button>
-                            </div> */}
-                            {/* <div className="field column"> */}
-                                <label className="label">Vælg en afstand: {selectedDistance.isokron}</label>
-                                <div className="control is-expanded block">
-                                {/* <div className="control"> */}
-                                    <Slider
-                                        onRangeChange={handleSliderChange}
-                                        maxValue={9}
-                                        minValue={0}
-                                        value={distances.findIndex((element) => element.isokron === selectedDistance.isokron)}
-                                    />{' '}
-                                </div>
-                                    <div id="facilities-age-table" className="legend block">
-                                        <LegendTableMulti
-                                            headers={['Aldersgrupper', 'Indenfor', 'Udenfor', 'I alt']}
-                                            data={facilitiesAgeTableData}
-                                            onRowToggle={onFacilitiesAgeToggle}
-                                        />
-                                    </div>
-                            {/* </div> */}
+                            <label className="label">Vælg en afstand: {selectedDistance.isokron}</label>
+                            {/* <div className="control is-expanded block"> */}
+                                <div className="control block">
+                                <Slider
+                                    onRangeChange={handleSliderChange}
+                                    maxValue={9}
+                                    minValue={0}
+                                    value={distances.findIndex((element) => element.isokron === selectedDistance.isokron)}
+                                />{' '}
+                            </div>
+                            <div id="facilities-age-table" className="legend block">
+                                <LegendTableMulti
+                                    headers={['Aldersgrupper', 'Indenfor', 'Udenfor', 'I alt']}
+                                    data={facilitiesAgeTableData}
+                                    onRowToggle={onFacilitiesAgeToggle}
+                                />
+                            </div>
                         </div>
                     </div>
                 </div>
