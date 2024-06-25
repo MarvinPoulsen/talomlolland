@@ -547,6 +547,8 @@ const HousingMarketPage: FC = () => {
                                 Alt data i tabeller og lagkagediagrammer er trukket den{' '}
                                 {format(new Date(date), 'dd. MMMM yyyy', { locale: da })}.
                             </p>
+                            <div className="columns">
+                            <div className="column is-8">
                                     
                             <Slider
                                 onRangeChange={handleDateChange}
@@ -554,6 +556,8 @@ const HousingMarketPage: FC = () => {
                                 minValue={0}
                                 value={dates.findIndex((element) => element === date)}
                             />
+                        </div>
+                        </div>
                             <label className="label">Ændre datoen ved at flytte på slideren</label>
                             <p>
                                 Til søjlediagrammerne tilføjes ny data hvert kvartal. Søjlediagrammerne viser således
