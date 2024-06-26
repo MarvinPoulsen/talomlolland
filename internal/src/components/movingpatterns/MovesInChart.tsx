@@ -1,29 +1,13 @@
-import React, { FC } from 'react';
-// import { Bar } from 'react-chartjs-2';
-import {
-  Chart as ChartJS,
-  CategoryScale,
-  LinearScale,
-  BarElement,
-  Title,
-  Tooltip,
-  Legend,
-} from 'chart.js';
+import React from 'react';
+import { Chart as ChartJS, CategoryScale, LinearScale, BarElement, Title, Tooltip, Legend } from 'chart.js';
 import { MovingPatternsRow } from '../../pages/MovingPatterns';
-ChartJS.register(
-  CategoryScale,
-  LinearScale,
-  BarElement,
-  Title,
-  Tooltip,
-  Legend
-);
+ChartJS.register(CategoryScale, LinearScale, BarElement, Title, Tooltip, Legend);
 import colors from '../../../colors';
 import { Bar } from 'react-chartjs-2';
 interface MovesInChartProps {
-  data: MovingPatternsRow[];
-  max: number;
-  labels: string[];
+    data: MovingPatternsRow[];
+    max: number;
+    labels: string[];
 }
 interface ChartData {
     labels: string[];
@@ -34,57 +18,59 @@ interface ChartData {
     }[];
 }
 
-const MovesInChart: FC = (props: MovesInChartProps) => {
-// OPTIONS
+const MovesInChart = (props: MovesInChartProps) => {
+    // OPTIONS
     const options = {
         interaction: {
-            mode: 'index'
+            mode: 'index',
         },
         scales: {
             x: {
-                stacked: true
+                stacked: true,
             },
             y: {
                 stacked: true,
                 beginAtZero: true,
-                suggestedMax: props.max
-            }
+                suggestedMax: props.max,
+            },
         },
         plugins: {
             title: {
                 display: false,
-                text: 'tilflyttere Chart Title'
+                text: 'tilflyttere Chart Title',
             },
             legend: {
                 display: true,
-            position: 'right'
-            }
+                position: 'right',
+            },
         },
-      };
-// DATA      
+    };
+    // DATA
     // DATASET LABEL
-    const datasetLabel =  [...new Set(props.data.map(item => item.regionsnavn))];
+    const datasetLabel = [...new Set(props.data.map((item) => item.regionsnavn))];
     // DATASET DATA
-    const datasets:any[] =  [];
+    const datasets: any[] = [];
     datasetLabel.forEach((element, index) => {
-        const filteredData = props.data.filter((te)=>te.regionsnavn === element);
-        
-        const dataset ={
-            label: element.replace('Region ',''),
-            data: filteredData.map(item => parseInt(item.tilflyttere) || 0),
-            backgroundColor: colors.bgColors[index]
-        }
-        datasets.push(dataset)
+        const filteredData = props.data.filter((te) => te.regionsnavn === element);
+
+        const dataset = {
+            label: element.replace('Region ', ''),
+            data: filteredData.map((item) => parseInt(item.tilflyttere) || 0),
+            backgroundColor: colors.bgColors[index],
+        };
+        datasets.push(dataset);
     });
     const barData: ChartData = {
         labels: props.labels,
         datasets,
     };
 
-    return <Bar    
-/* @ts-ignore */
-        options={options}
-        data={barData}
-    />;
-}
-    export default MovesInChart;
+    return (
+        <Bar
+            /* @ts-ignore */
+            options={options}
+            data={barData}
+        />
+    );
+};
+export default MovesInChart;

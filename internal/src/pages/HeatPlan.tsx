@@ -15,7 +15,7 @@ export interface HeatPlanRow {
 
 const HeatPlanPage: FC = () => {
     const minimap: any = useRef(null);
-    const [heatPlanData, setHeatPlanData] = useState([]);
+    const [heatPlanData, setHeatPlanData] = useState<HeatPlanRow[]>([]);
     const onMapReady = (mm) => {
         minimap.current = mm;
         const ses = mm.getSession();
@@ -25,24 +25,20 @@ const HeatPlanPage: FC = () => {
         });
     };
 
-console.log('heatPlanData: ',heatPlanData)
+    console.log('heatPlanData: ', heatPlanData);
 
     return (
         <>
-        <div id="heatplan-tab-content" className="container">
-            <div className="block">
-                <div className="columns">
-                    <Map id={heatplanMinimapId} name="heatplan" size="is-5" onReady={onMapReady} />
-                    <div className="column">
-                        <div className="block">
-                            {minimap.current && (
-                                <p>Varmeplan</p>
-                            )}
-                        </div>
+            <div id="heatplan-tab-content" className="container">
+                <div className="block">
+                    <div className="columns">
+                        <Map id={heatplanMinimapId} name="heatplan" size="is-5" onReady={onMapReady} />
+                        <div className="column">
+                            <div className="block">{minimap.current && <p>Varmeplan</p>}</div>
                         </div>
                     </div>
                 </div>
-                </div>
+            </div>
         </>
     );
 };

@@ -2,6 +2,7 @@ import React, { useRef, useEffect } from 'react';
 import { getBackgroundColor, getBorderColor } from '../../../utils';
 import { Chart as ChartJS, ArcElement, Tooltip, Legend, InteractionMode } from 'chart.js';
 import { Pie, Doughnut } from 'react-chartjs-2';
+import { ChartJSOrUndefined } from 'react-chartjs-2/dist/types';
 
 ChartJS.register(ArcElement, Tooltip, Legend);
 
@@ -30,14 +31,18 @@ interface PieData {
 }
 
 export function PiechartNoLegend(props: PiechartProps) {
-    const chartRef = useRef();
+    const doughnutChartRef = useRef<ChartJSOrUndefined<'doughnut', number[], string>>();
+    const pieChartRef = useRef<ChartJSOrUndefined<'pie', number[], string>>();
     useEffect(() => {
-        for (let i = 0; i < props.visibility.length; i++) {
-            if (chartRef.current.getDataVisibility(i) !== props.visibility[i]) {
-                chartRef.current.toggleDataVisibility(i);
+        const chartRef = props.type === 'doughnut' ? doughnutChartRef.current : pieChartRef.current;
+        if (chartRef) {
+            for (let i = 0; i < props.visibility.length; i++) {
+                if (chartRef.getDataVisibility(i) !== props.visibility[i]) {
+                    chartRef.toggleDataVisibility(i);
+                }
             }
+            chartRef.update();
         }
-        chartRef.current.update();
     }, [props.visibility]);
     const options = {
         responsive: true,
@@ -89,9 +94,9 @@ export function PiechartNoLegend(props: PiechartProps) {
     };
     const chartForm =
         props.type === 'doughnut' ? (
-            <Doughnut ref={chartRef} options={options} data={data} />
+            <Doughnut ref={doughnutChartRef} options={options} data={data} />
         ) : (
-            <Pie ref={chartRef} options={options} data={data} />
+            <Pie ref={pieChartRef} options={options} data={data} />
         );
     return <>{chartForm}</>;
 }

@@ -1,10 +1,10 @@
 import React from 'react';
 import { useTable } from 'react-table';
-import { SummerhouseRow } from '../../pages/SummerHouse';
+import { SummerhouseOwnerRow } from '../../pages/SummerHouse';
 import { toPrettyNumber } from '../../../utils';
 
 interface SummerhouseResidenceTableProps {
-    data: SummerhouseRow[];
+    data: SummerhouseOwnerRow[];
 }
 
 const createTableData = (data) => {

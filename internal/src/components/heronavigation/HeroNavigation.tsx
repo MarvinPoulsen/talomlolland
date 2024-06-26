@@ -41,7 +41,7 @@ enum Tab {
 const HeroNavigation: FC = () => {
     let location = useLocation();
 
-    const [isActiveTab, setActiveTab] = useState<Tab>(null);
+    const [isActiveTab, setActiveTab] = useState<Tab | null>(null);
     React.useEffect(() => {
         switch (location.pathname) {
             case '/':

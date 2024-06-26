@@ -16,15 +16,19 @@
   "license": "ISC",
   "devDependencies": {
     "@parcel/transformer-sass": "^2.8.2",
+    "@types/react": "^18.3.3",
     "install": "^0.13.0",
     "npm": "^9.2.0",
     "parcel": "^2.8.2",
     "process": "^0.11.10",
-    "react": "^18.2.0"
+    "react": "^18.2.0",
+    "typescript": "^5.5.2"
   },
   "dependencies": {
     "@mdi/js": "^7.1.96",
     "@mdi/react": "^1.6.1",
+    "@types/node": "^20.14.8",
+    "@types/ol": "^7.0.0",
     "bulma": "^0.9.4",
     "chart.js": "^3.9.1",
     "date-fns": "^2.30.0",

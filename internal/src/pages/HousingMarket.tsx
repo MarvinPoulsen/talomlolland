@@ -46,9 +46,6 @@ interface EstateRow {
     husstand_3: string;
     husstand_4: string;
     husstand_5: string;
-    // ib1: string;
-    // ib2: string;
-    // ib3: string;
     kondemnret: string;
     nedrevne: string;
     omraade: string;
@@ -192,9 +189,8 @@ interface PiechartDataSeries {
 
 const HousingMarketPage: FC = () => {
     const minimap: any = useRef(null);
-    const [estateData, setEstateData] = useState([]);
-    // const [date, setDate] = useState<string>('2022-02-15 00:00:00.0');
-    const [date, setDate] = useState<string>('2020-01-01 00:00:00.0');
+    const [estateData, setEstateData] = useState<EstateRow[]>([]);
+    const [date, setDate] = useState<string>('2024-02-15 00:00:00.0');
     const [housingTypes, setHousingTypes] = useState<AnalysisParams[]>([
         { title: 'Stuehus til landbrugsejendom', code: 'bt1', on: true },
         { title: 'Parcelhus', code: 'bt2', on: true },
@@ -265,6 +261,7 @@ const HousingMarketPage: FC = () => {
                 return { ...obj, beboet_af_lejer: beboet_af_lejer, beboet_sommer: beboet_sommer, sommer_total: sommer_total };
             });
             setEstateData(newArr);
+            console.log('newArr: ', newArr);
         });
     };
 
@@ -294,7 +291,7 @@ const HousingMarketPage: FC = () => {
     };
 
     const housingTypesStackedData = createStackedbarData(estateData, areaCodes, housingTypes);
-    const housingTypeStackedbar: HTMLDivElement[] = [];
+    const housingTypeStackedbar: JSX.Element[] = [];
     for (let i = 0; i < areaCodes.length; i++) {
         const areaCode = areaCodes[i];
         const title = areaName[i];
@@ -311,7 +308,7 @@ const HousingMarketPage: FC = () => {
     }
 
     const housingTypesPiechartData = createPiechartDataSeries(estateData, areaCodes, housingTypes);
-    const housingTypePiechart: HTMLDivElement[] = [];
+    const housingTypePiechart: JSX.Element[] = [];
     for (let i = 0; i < areaCodes.length; i++) {
         const areaCode = areaCodes[i];
         housingTypePiechart.push(
@@ -333,7 +330,7 @@ const HousingMarketPage: FC = () => {
     };
 
     const ownershipsStackedData = createStackedbarData(estateData, areaCodes, ownerships);
-    const ownershipStackedbar: HTMLDivElement[] = [];
+    const ownershipStackedbar: JSX.Element[] = [];
     for (let i = 0; i < areaCodes.length; i++) {
         const areaCode = areaCodes[i];
         const title = areaName[i];
@@ -350,7 +347,7 @@ const HousingMarketPage: FC = () => {
     }
 
     const ownershipsPiechartData = createPiechartDataSeries(estateData, areaCodes, ownerships);
-    const ownershipPiechart: HTMLDivElement[] = [];
+    const ownershipPiechart: JSX.Element[] = [];
     for (let i = 0; i < areaCodes.length; i++) {
         const areaCode = areaCodes[i];
         ownershipPiechart.push(
@@ -372,7 +369,7 @@ const HousingMarketPage: FC = () => {
     };
 
     const housingSizeStackedData = createStackedbarData(estateData, areaCodes, housingSizes);
-    const housingSizeStackedbar: HTMLDivElement[] = [];
+    const housingSizeStackedbar: JSX.Element[] = [];
     for (let i = 0; i < areaCodes.length; i++) {
         const areaCode = areaCodes[i];
         const title = areaName[i];
@@ -389,7 +386,7 @@ const HousingMarketPage: FC = () => {
     }
 
     const housingSizePiechartData = createPiechartDataSeries(estateData, areaCodes, housingSizes);
-    const housingSizePiechart: HTMLDivElement[] = [];
+    const housingSizePiechart: JSX.Element[] = [];
     for (let i = 0; i < areaCodes.length; i++) {
         const areaCode = areaCodes[i];
         housingSizePiechart.push(
@@ -408,7 +405,7 @@ const HousingMarketPage: FC = () => {
     };
 
     const housingAgeStackedData = createStackedbarData(estateData, areaCodes, housingAges);
-    const housingAgeStackedbar: HTMLDivElement[] = [];
+    const housingAgeStackedbar: JSX.Element[] = [];
     for (let i = 0; i < areaCodes.length; i++) {
         const areaCode = areaCodes[i];
         const title = areaName[i];
@@ -425,7 +422,7 @@ const HousingMarketPage: FC = () => {
     }
 
     const housingAgePiechartData = createPiechartDataSeries(estateData, areaCodes, housingAges);
-    const housingAgePiechart: HTMLDivElement[] = [];
+    const housingAgePiechart: JSX.Element[] = [];
     for (let i = 0; i < areaCodes.length; i++) {
         const areaCode = areaCodes[i];
         housingAgePiechart.push(
@@ -444,7 +441,7 @@ const HousingMarketPage: FC = () => {
     };
 
     const householdSizeStackedData = createStackedbarData(estateData, areaCodes, householdSizes);
-    const householdSizeStackedbar: HTMLDivElement[] = [];
+    const householdSizeStackedbar: JSX.Element[] = [];
     for (let i = 0; i < areaCodes.length; i++) {
         const areaCode = areaCodes[i];
         const title = areaName[i];
@@ -461,7 +458,7 @@ const HousingMarketPage: FC = () => {
     }
 
     const householdSizePiechartData = createPiechartDataSeries(estateData, areaCodes, householdSizes);
-    const householdSizePiechart: HTMLDivElement[] = [];
+    const householdSizePiechart: JSX.Element[] = [];
     for (let i = 0; i < areaCodes.length; i++) {
         const areaCode = areaCodes[i];
         householdSizePiechart.push(
@@ -483,7 +480,7 @@ const HousingMarketPage: FC = () => {
     };
 
     const rentalConditionStackedData = createStackedbarData(estateData, areaCodes, rentalConditions);
-    const rentalConditionStackedbar: HTMLDivElement[] = [];
+    const rentalConditionStackedbar: JSX.Element[] = [];
     for (let i = 0; i < areaCodes.length; i++) {
         const areaCode = areaCodes[i];
         const title = areaName[i];
@@ -500,7 +497,7 @@ const HousingMarketPage: FC = () => {
     }
 
     const rentalConditionPiechartData = createPiechartDataSeries(estateData, areaCodes, rentalConditions);
-    const rentalConditionPiechart: HTMLDivElement[] = [];
+    const rentalConditionPiechart: JSX.Element[] = [];
     for (let i = 0; i < areaCodes.length; i++) {
         const areaCode = areaCodes[i];
         rentalConditionPiechart.push(
@@ -548,16 +545,15 @@ const HousingMarketPage: FC = () => {
                                 {format(new Date(date), 'dd. MMMM yyyy', { locale: da })}.
                             </p>
                             <div className="columns">
-                            <div className="column is-8">
-                                    
-                            <Slider
-                                onRangeChange={handleDateChange}
-                                maxValue={dates.length - 1}
-                                minValue={0}
-                                value={dates.findIndex((element) => element === date)}
-                            />
-                        </div>
-                        </div>
+                                <div className="column is-8">
+                                    <Slider
+                                        onRangeChange={handleDateChange}
+                                        maxValue={dates.length - 1}
+                                        minValue={0}
+                                        value={dates.findIndex((element) => element === date)}
+                                    />
+                                </div>
+                            </div>
                             <label className="label">Ændre datoen ved at flytte på slideren</label>
                             <p>
                                 Til søjlediagrammerne tilføjes ny data hvert kvartal. Søjlediagrammerne viser således
@@ -800,61 +796,6 @@ const HousingMarketPage: FC = () => {
                         </div>
                     </div>
                 </div>
-
-                {/* <div className="block">
-                    <div className="content">
-                        <h1>Fakta om Beliggenhed af boliger i Lolland Kommune</h1>
-                    </div>
-                    <div className="columns">
-                        <div id="location-table" className="location-legend column is-two-fifths">
-                            <table className="table is-bordered is-hoverable is-size-7 is-fullwidth is-narrow">
-                                <thead>
-                                    <tr>
-                                        <th>Beliggenhed</th>
-                                        <th>
-                                            <abbr title="Hele Lolland Kommune">I alt</abbr>
-                                        </th>
-                                    </tr>
-                                </thead>
-                                <tbody>
-                                    <tr>
-                                        <td className="has-text-left content">Færre end 1000 indbyggere</td>
-                                        <td className="has-text-right content">2.142</td>
-                                    </tr>
-                                    <tr>
-                                        <td className="has-text-left content">1000 – 4999 indbyggere</td>
-                                        <td className="has-text-right content">3.616</td>
-                                    </tr>
-                                    <tr>
-                                        <td className="has-text-left content">5000 – 9999 indbyggere</td>
-                                        <td className="has-text-right content">9.864</td>
-                                    </tr>
-                                    <tr>
-                                        <td className="has-text-left content">Landdistrikt</td>
-                                        <td className="has-text-right content">8.755</td>
-                                    </tr>
-                                    <tr>
-                                        <th className="has-text-left content">SUM</th>
-                                        <th className="has-text-right content">24.377</th>
-                                    </tr>
-                                </tbody>
-                            </table>
-                        </div>
-                        <div className="column">
-                            <div className="content">
-                                <p>Beliggenhed er beregnet ud fra KMD P-data, Zonekort, BBR</p>
-                                <p>
-                                    By størrelse er beregnet som antallet af personer med adresse i sammenhængende byzoner eller
-                                    tætliggende byzoner
-                                </p>
-                                <p>
-                                    Tallet for beliggenhed viser antallet af boligenheder i sammenhængende byzoner kategoriseret
-                                    efter antallet af beboere.
-                                </p>
-                            </div>
-                        </div>
-                    </div>
-                </div> */}
             </div>
         </>
     );

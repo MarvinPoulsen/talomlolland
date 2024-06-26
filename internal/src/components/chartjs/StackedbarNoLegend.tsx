@@ -1,9 +1,10 @@
 import React, { useRef, useEffect } from 'react';
 import { Bar } from 'react-chartjs-2';
-import { InteractionMode } from 'chart.js';
+import { BubbleDataPoint, InteractionMode, ScatterDataPoint } from 'chart.js';
 import colors from '../../../colors';
 import { Chart as ChartJS, CategoryScale, LinearScale, BarElement, Title, Tooltip, Legend } from 'chart.js';
 import { toPrettyNumber } from '../../../utils';
+import { ChartJSOrUndefined } from 'react-chartjs-2/dist/types';
 ChartJS.register(CategoryScale, LinearScale, BarElement, Title, Tooltip, Legend);
 export interface StackedDataSeries {
     name: string;
@@ -30,13 +31,17 @@ interface StackedBarData {
 }
 
 export function StackedbarNoLegend(props: StackedbarProps) {
-    const chartRef = useRef();
+    const chartRef = useRef<ChartJSOrUndefined<'bar', (number | ScatterDataPoint | BubbleDataPoint | null)[], unknown>>();
+
     useEffect(() => {
-        for (let i = 0; i < props.visibility.length; i++) {
-            chartRef.current.setDatasetVisibility(i, props.visibility[i]);
+        if (chartRef.current) {
+            for (let i = 0; i < props.visibility.length; i++) {
+                chartRef.current.setDatasetVisibility(i, props.visibility[i]);
+            }
+            chartRef.current.update();
         }
-        chartRef.current.update();
     }, [props.visibility]);
+
     const options = {
         maintainAspectRatio: false,
         responsive: true,
@@ -76,10 +81,10 @@ export function StackedbarNoLegend(props: StackedbarProps) {
                         const tooltipContent = `${label}: ${toPrettyNumber(context.parsed.y)}`;
                         return tooltipContent;
                     },
-                    footer: (items)=> {
-                      const footerContent = `Total: ${toPrettyNumber(items.reduce((a, b) => a + b.parsed.y, 0))}`;
-                      return footerContent
-                    }
+                    footer: (items) => {
+                        const footerContent = `Total: ${toPrettyNumber(items.reduce((a, b) => a + b.parsed.y, 0))}`;
+                        return footerContent;
+                    },
                 },
             },
         },

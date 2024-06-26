@@ -21,8 +21,8 @@ export interface SummerhouseOwnerRow {
 }
 const SummerHousePage: FC = () => {
     const minimap: any = useRef(null);
-    const [summerhouseData, setSummerhouseData] = useState([]);
-    const [summerhouseOwnerData, setSummerhouseOwnerData] = useState([]);
+    const [summerhouseData, setSummerhouseData] = useState<SummerhouseRow[]>([]);
+    const [summerhouseOwnerData, setSummerhouseOwnerData] = useState<SummerhouseOwnerRow[]>([]);
     const onMapReady = (mm) => {
         minimap.current = mm;
         const ses = mm.getSession();
@@ -50,18 +50,18 @@ const SummerHousePage: FC = () => {
         }
     };
     const tommeSommerhusgrundeSum: number = summerhouseData.reduce(
-        (total, currentItem) => (total = total + parseInt(currentItem.tomme_sommerhusgrunde_count || 0)),
+        (total, currentItem) => (total = total + parseInt(String(currentItem.tomme_sommerhusgrunde_count || 0))),
         0
     );
 
     let sommerhusSum = 0;
 
     const ubeboedeSommerhusSum: number = summerhouseData.reduce(
-        (total, currentItem) => (total = total + parseInt(currentItem.ubeboede_count || 0)),
+        (total, currentItem) => (total = total + parseInt(String(currentItem.ubeboede_count || 0))),
         0
     );
     const beboedeSommerhusSum: number = summerhouseData.reduce(
-        (total, currentItem) => (total = total + parseInt(currentItem.beboede_count || 0)),
+        (total, currentItem) => (total = total + parseInt(String(currentItem.beboede_count || 0))),
         0
     );
     sommerhusSum = ubeboedeSommerhusSum + beboedeSommerhusSum;
@@ -85,7 +85,9 @@ const SummerHousePage: FC = () => {
                             <div className="block">
                                 <div className="content">
                                     <h1>Fakta om sommerhuse i Lolland Kommune</h1>
-                                    <p id="total-summerhouse">I Lolland Kommune findes {sommerhusSum} sommerhuse inden for sommerhusområderne.</p>
+                                    <p id="total-summerhouse">
+                                        I Lolland Kommune findes {sommerhusSum} sommerhuse inden for sommerhusområderne.
+                                    </p>
                                     <p id="empty-summerhouse">
                                         Desuden findes {tommeSommerhusgrundeSum} tomme sommerhusgrunde i allerede lokalplanlagte
                                         sommerhusområder.

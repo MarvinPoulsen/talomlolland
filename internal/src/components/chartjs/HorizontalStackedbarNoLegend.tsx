@@ -2,7 +2,8 @@ import React, { useRef, useEffect } from 'react';
 import { Bar } from 'react-chartjs-2';
 import { InteractionMode } from 'chart.js';
 import { getBackgroundColor } from '../../../utils';
-import { Chart as ChartJS, CategoryScale, LinearScale, BarElement, Title, Tooltip, Legend } from 'chart.js';
+import { Chart as ChartJS, CategoryScale, LinearScale, BarElement, Title, Tooltip, Legend, ChartData} from 'chart.js';
+import { ChartJSOrUndefined } from 'react-chartjs-2/dist/types';
 ChartJS.register(CategoryScale, LinearScale, BarElement, Title, Tooltip, Legend);
 export interface StackedDataSeries {
     name: string;
@@ -27,14 +28,18 @@ interface StackedBarData {
     labels: string[];
     datasets: StackedDatasets[];
 }
+type TData = number[];
+type TLabel = string;
 
 export function StackedbarNoLegend(props: StackedbarProps) {
-    const chartRef = useRef();
+    const chartRef = useRef<ChartJSOrUndefined<"bar", TData, TLabel>>();
     useEffect(() => {
+        if (chartRef.current) {
         for (let i = 0; i < props.visibility.length; i++) {
             chartRef.current.setDatasetVisibility(i, props.visibility[i]);
         }
         chartRef.current.update();
+    }
     }, [props.visibility]);
     const options = {
         indexAxis: 'y' as const,

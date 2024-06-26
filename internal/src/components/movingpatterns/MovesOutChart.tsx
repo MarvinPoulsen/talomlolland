@@ -1,29 +1,13 @@
-import React, { useRef, useEffect, FC } from 'react';
+import React, { useRef, useEffect } from 'react';
 import colors from '../../../colors';
-// import { Bar } from 'react-chartjs-2';
-import {
-  Chart as ChartJS,
-  CategoryScale,
-  LinearScale,
-  BarElement,
-  Title,
-  Tooltip,
-  Legend,
-} from 'chart.js';
+import { Chart as ChartJS, CategoryScale, LinearScale, BarElement, Title, Tooltip, Legend } from 'chart.js';
 import { MovingPatternsRow } from '../../pages/MovingPatterns';
 import { Bar } from 'react-chartjs-2';
-ChartJS.register(
-  CategoryScale,
-  LinearScale,
-  BarElement,
-  Title,
-  Tooltip,
-  Legend
-);
+ChartJS.register(CategoryScale, LinearScale, BarElement, Title, Tooltip, Legend);
 interface MovesOutChartProps {
-  data: MovingPatternsRow[];
-  max: number;
-  labels: string[];
+    data: MovingPatternsRow[];
+    max: number;
+    labels: string[];
 }
 interface ChartData {
     labels: string[];
@@ -34,69 +18,70 @@ interface ChartData {
     }[];
 }
 
-const MovesOutChart: FC = (props: MovesOutChartProps) => {
-    
-const chartRef = useRef(null);
+const MovesOutChart = (props: MovesOutChartProps) => {
+    const chartRef = useRef(null);
 
-useEffect(() => {
-  const chart = chartRef.current;
+    useEffect(() => {
+        const chart = chartRef.current;
 
-  if (chart) {
-  }
-}, []);
+        if (chart) {
+        }
+    }, []);
 
-// OPTIONS
+    // OPTIONS
     const options = {
         // version 3.6.2
         interaction: {
-            mode: 'index'
+            mode: 'index',
         },
         scales: {
             x: {
-                stacked: true
+                stacked: true,
             },
             y: {
                 stacked: true,
                 beginAtZero: true,
-                suggestedMax: props.max
-            }
+                suggestedMax: props.max,
+            },
         },
         plugins: {
             title: {
                 display: false,
-                text: 'Fraflyttere Chart Title'
+                text: 'Fraflyttere Chart Title',
             },
             legend: {
                 display: true,
-            position: 'right'
-            }
+                position: 'right',
+            },
         },
-      };
-// DATA
+    };
+    // DATA
     // DATASET LABEL
-    const datasetLabel =  [...new Set(props.data.map(item => item.regionsnavn))];
+    const datasetLabel = [...new Set(props.data.map((item) => item.regionsnavn))];
     // DATASET DATA
-    const datasets:any[] =  [];
+    const datasets: any[] = [];
     datasetLabel.forEach((element, index) => {
-        const filteredData = props.data.filter((te)=>te.regionsnavn === element);
-        
-        const dataset ={
-            label: element.replace('Region ',''),
-            data: filteredData.map(item => parseInt(item.fraflyttere) || 0),
-            backgroundColor: colors.bgColors[index]
-        }
-        datasets.push(dataset)
+        const filteredData = props.data.filter((te) => te.regionsnavn === element);
+
+        const dataset = {
+            label: element.replace('Region ', ''),
+            data: filteredData.map((item) => parseInt(item.fraflyttere) || 0),
+            backgroundColor: colors.bgColors[index],
+        };
+        datasets.push(dataset);
     });
     const barData: ChartData = {
         labels: props.labels,
         datasets,
     };
 
-    return <Bar 
-        ref={chartRef} 
-/* @ts-ignore */
-        options={options}
-        data={barData}
-    />;
-}
-    export default MovesOutChart;
+    return (
+        <Bar
+            ref={chartRef}
+            /* @ts-ignore */
+            options={options}
+            data={barData}
+        />
+    );
+};
+export default MovesOutChart;

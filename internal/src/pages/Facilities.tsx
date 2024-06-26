@@ -56,10 +56,10 @@ const distances: FilterKeys[] = [
 ];
 
 // Helper functions
-const createTableData = (data, distance, analysisParams) => {
+const createTableData = (data: FacilitiesRow[], distance: number, analysisParams: AnalysisParams[]) => {
     const result: LegendTableData[] = [];
-    const dataInside = data.filter((row) => row.distance <= distance && row.distance !== '');
-    const dataOutside = data.filter((row) => row.distance > distance || row.distance === '');
+    const dataInside = data.filter((row) => parseFloat(row.distance) <= distance && row.distance !== '');
+    const dataOutside = data.filter((row) => parseFloat(row.distance) > distance || row.distance === '');
 
     for (let i = 0; i < analysisParams.length; i++) {
         const analysisParam = analysisParams[i];
@@ -76,20 +76,44 @@ const createTableData = (data, distance, analysisParams) => {
 
 // Component
 const FacilitiesPage: FC = () => {
-
     // useState hooks
     // const [facilities, setFacilities] = useState<string>('haller');
     const [facilitiesData, setFacilitiesData] = useState<FacilitiesRow[]>([]);
-    const [markingData, setMarkingData] = useState([]);
+    const [markingData, setMarkingData] = useState<MarkingRow[]>([]);
     const [selectedDistance, setSelectedDistanse] = useState<FilterKeys>({ isokron: 'km5', distance: 5000 });
     const [facilitiesAgesGroups, setFacilitiesAgesGroups] = useState<AnalysisParams[]>([
-        { title: '0-5 år', code: 'age0_5', filterValue: (item) => item.alder <= 5, on: true },
-        { title: '6-17 år', code: 'age6_17', filterValue: (item) => item.alder >= 6 && item.alder <= 17, on: true },
-        { title: '18-24 år', code: 'age18_24', filterValue: (item) => item.alder >= 18 && item.alder <= 24, on: true },
-        { title: '25-44 år', code: 'age25_44', filterValue: (item) => item.alder >= 25 && item.alder <= 44, on: true },
-        { title: '45-64 år', code: 'age45_64', filterValue: (item) => item.alder >= 45 && item.alder <= 64, on: true },
-        { title: '65-79 år', code: 'age65_79', filterValue: (item) => item.alder >= 65 && item.alder <= 79, on: true },
-        { title: '80+ år', code: 'age80plus', filterValue: (item) => item.alder >= 80, on: true },
+        { title: '0-5 år', code: 'age0_5', filterValue: (item) => parseInt(item.alder) <= 5, on: true },
+        {
+            title: '6-17 år',
+            code: 'age6_17',
+            filterValue: (item) => parseInt(item.alder) >= 6 && parseInt(item.alder) <= 17,
+            on: true,
+        },
+        {
+            title: '18-24 år',
+            code: 'age18_24',
+            filterValue: (item) => parseInt(item.alder) >= 18 && parseInt(item.alder) <= 24,
+            on: true,
+        },
+        {
+            title: '25-44 år',
+            code: 'age25_44',
+            filterValue: (item) => parseInt(item.alder) >= 25 && parseInt(item.alder) <= 44,
+            on: true,
+        },
+        {
+            title: '45-64 år',
+            code: 'age45_64',
+            filterValue: (item) => parseInt(item.alder) >= 45 && parseInt(item.alder) <= 64,
+            on: true,
+        },
+        {
+            title: '65-79 år',
+            code: 'age65_79',
+            filterValue: (item) => parseInt(item.alder) >= 65 && parseInt(item.alder) <= 79,
+            on: true,
+        },
+        { title: '80+ år', code: 'age80plus', filterValue: (item) => parseInt(item.alder) >= 80, on: true },
     ]);
 
     // useRef hooks
@@ -122,8 +146,11 @@ const FacilitiesPage: FC = () => {
     // useEffect hooks
     useEffect(() => {
         if (minimap.current) {
-            const filteredMarkings = markingData.find((item) => item.isokron === selectedDistance.isokron).shape_wkt;
-            minimap.current.getMapControl().setMarkingGeometry(filteredMarkings, true, null, 3000);
+            const markingItem = markingData.find((item) => item.isokron === selectedDistance.isokron);
+            if (markingItem) {
+                const filteredMarkings = markingItem.shape_wkt;
+                minimap.current.getMapControl().setMarkingGeometry(filteredMarkings, false, null, 3000);
+            }
         }
     }, [selectedDistance, markingData]);
 
@@ -145,7 +172,7 @@ const FacilitiesPage: FC = () => {
                         <div className="column">
                             <label className="label">Vælg en afstand: {selectedDistance.isokron}</label>
                             {/* <div className="control is-expanded block"> */}
-                                <div className="control block">
+                            <div className="control block">
                                 <Slider
                                     onRangeChange={handleSliderChange}
                                     maxValue={9}
