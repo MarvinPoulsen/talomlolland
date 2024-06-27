@@ -21,7 +21,10 @@
         <table name="faciliteter_borger" pkcolumn="id" schema="talomlolland"/>
     </datasource>
     <datasource displayname="" endpoint="ep_lk_talomlolland" name="lk_talomlolland_faciliteter_haller_map">
-        <table name="faciliteter_haller_map" pkcolumn="id" schema="talomlolland" geometrycolumn="geom"/>
+        <table name="faciliteter_minimap" pkcolumn="id" schema="talomlolland" geometrycolumn="geom"/>
+    </datasource>
+    <datasource displayname="" endpoint="ep_lk_talomlolland" name="lk_talomlolland_faciliteter_lokalitet">
+        <table name="faciliteter_borger_lokatitet" pkcolumn="id" schema="talomlolland" geometrycolumn="geom"/>
     </datasource>
 <!-- Faciliteter fanen i Tal om Lolland -->
 <!-- Landsbyer fanen i Tal om Lolland (Strategisk Landsby Analyse)-->
