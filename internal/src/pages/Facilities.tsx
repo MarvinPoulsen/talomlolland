@@ -263,7 +263,7 @@ const FacilitiesPage: FC = () => {
         'km8',
         'km9',
         'km10',
-        '>10 km',
+        `>${selectedDistance.isokron}`,
     ];
 
     const handleConsoleLog = () => {
