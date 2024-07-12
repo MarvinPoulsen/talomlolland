@@ -8,3 +8,8 @@ td.is-off{
     margin-right: 6px;
     width: 12px;
 }
+
+.table td.is-selected, .table th.is-selected {
+	background-color: #3e8ed0 !important;
+	color: #fff;
+}
