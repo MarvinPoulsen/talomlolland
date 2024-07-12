@@ -7,7 +7,9 @@ declare namespace MiniMap {
     class DatasourceSearchService {}
     class DrawingTheme {}
     class DynamicTheme {}
-    class Events {}
+    class Events {
+        addListener(event: string, callback: Function): MiniMap.EventListener;
+    }
     class GeoSearchService {}
     class GSearchService {}
     class InfoQueryHandler {}
@@ -35,6 +37,9 @@ declare namespace MiniMap {
 
         searchHandler: SearchHandler;
         infoQueryHandler: InfoQueryHandler;
+        getSession(): SpatialServer.Session;
+        getEvents(): Events; // Added getEvents method
+        getMapControl():MapControl;
     }
 
     // Namespaces
