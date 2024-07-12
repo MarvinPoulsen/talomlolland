@@ -1,5 +1,5 @@
 import React from 'react';
-import { useTable } from 'react-table';
+import { useTable, Column } from 'react-table';
 import './legendTable.scss';
 import { toPrettyNumber, getBackgroundColor, getBorderColor } from '../../../utils';
 
@@ -17,9 +17,11 @@ interface LegendTableProps {
     date?: string;
 }
 
+type MyColumn = Column<object> & { title?: string };
+
 const createTableData = (data: LegendTableData[], headers: string[], abbreviations?: string[]) => {
     const tableData: object[] = [];
-    const tableColumns: object[] = [];
+    const tableColumns: MyColumn[] = [];
     for (let i = 0; i < headers.length; i++) {
         const header = headers[i];
         const title = abbreviations && abbreviations[i] ? abbreviations[i] : header;
@@ -34,7 +36,7 @@ const createTableData = (data: LegendTableData[], headers: string[], abbreviatio
         });
     }
     data.forEach((element) => {
-        const row = { col1: element.name };
+        const row: { [key: string]: string } = { col1: element.name };
         for (let i = 1; i < headers.length; i++) {
             const accessor = 'col' + (i + 1).toString();
             row[accessor] = toPrettyNumber(element.values[i - 1]);
@@ -45,26 +47,36 @@ const createTableData = (data: LegendTableData[], headers: string[], abbreviatio
 };
 
 function LegendTableMulti(props: LegendTableProps) {
+    console.log('LegendTableProps: ',props)
     const [data, columns] = React.useMemo(
         () => createTableData(props.data, props.headers, props.abbreviation),
         [props.data, props.headers, props.abbreviation]
     );
-    const { getTableProps, getTableBodyProps, headerGroups, footerGroups, rows, prepareRow } = useTable({ columns, data });
+    const { getTableProps, getTableBodyProps, headerGroups, footerGroups, rows, prepareRow } = useTable({
+        columns: columns as Column<object>[],
+        data,
+    });
     return (
         <table
             {...getTableProps({
                 className: 'table is-bordered is-hoverable is-size-7 is-fullwidth is-narrow',
             })}
         >
-        {props.date ? <caption>Tabellen viser data for {props.date}</caption>:'' }
+            {props.date ? <caption>Tabellen viser data for {props.date}</caption> : ''}
             <thead>
                 {headerGroups.map((headerGroup) => (
                     <tr {...headerGroup.getHeaderGroupProps()}>
-                        {headerGroup.headers.map((column) => (
-                            <th {...column.getHeaderProps()}>
-                                <abbr title={column.render('title')}>{column.render('Header')}</abbr>
-                            </th>
-                        ))}
+                        {headerGroup.headers.map((column) => {
+                            console.log('column: ',column)
+                            const title = column && column.render ? column.render('title') : undefined;
+                            return (
+                                <th {...column.getHeaderProps()}>
+                                    <abbr title={title !== null && title !== undefined ? title.toString() : undefined}>
+                                        {column.render('Header')}
+                                    </abbr>
+                                </th>
+                            );
+                        })}
                     </tr>
                 ))}
             </thead>
@@ -72,8 +84,8 @@ function LegendTableMulti(props: LegendTableProps) {
                 {rows.map((row) => {
                     prepareRow(row);
                     const isOff = !props.data[row.index].on;
-                    const background = getBackgroundColor(props.colorsStart);
-                    const borderColor = getBorderColor(props.colorsStart);
+                    const background = props.colorsStart ? getBackgroundColor(props.colorsStart) : getBackgroundColor(0);
+                    const borderColor = props.colorsStart ? getBorderColor(props.colorsStart) : getBorderColor(0);
                     return (
                         <tr {...row.getRowProps()} onClick={() => props.onRowToggle(row.index)}>
                             {row.cells.map((cell) => {
@@ -101,7 +113,12 @@ function LegendTableMulti(props: LegendTableProps) {
                 {footerGroups.map((group) => (
                     <tr {...group.getFooterGroupProps()}>
                         {group.headers.map((column) => (
-                            <th {...column.getFooterProps({ className: isNaN(column.Footer.replace('.', '')) ? '' : ' has-text-right' })}>
+                            <th
+                                {...column.getFooterProps({
+                                    // @ts-ignore
+                                    className: isNaN(column.Footer.replace('.', '')) ? '' : ' has-text-right',
+                                })}
+                            >
                                 {column.render('Footer')}
                             </th>
                         ))}

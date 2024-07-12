@@ -17,8 +17,26 @@ export interface DemographicsRow {
     koen: string;
     sogn: string;
     sognekode: string;
-    shape_wkt: { wkt: string };
+    // shape_wkt: { wkt: string };
 }
+
+interface Attributes {
+    id: number;
+    navn: string;
+    sognekode: number;
+}
+
+interface Feature {
+    wkt: string;
+    id: number;
+    attributes: Attributes;
+}
+
+interface AgeGroup {
+    title: string;
+    on: boolean;
+}
+
 const getAgeGroups = (data: DemographicsRow[]) => {
     const uniqueAgeGroupes = [...new Set(data.map((item) => item.aldersgruppe))];
     uniqueAgeGroupes.sort((a, b) => parseInt(a) - parseInt(b));
@@ -44,17 +62,13 @@ const getParish = (data: DemographicsRow[]) => {
     );
     return uniqueParish;
 };
-interface AgeGroup {
-    title: string;
-    on: boolean;
-}
 const DemographicsPage: FC = () => {
     const minimap: any = useRef(null);
     const [demographicsData, setDemographicsData] = useState<DemographicsRow[]>([]);
     const [selectedDate, setSelectedDate] = useState<string | null>(null);
     const [parishCode, setParishCode] = useState('');
     const [ageGroups, setAgeGroups] = useState<AgeGroup[]>([]);
-    const onMapReady = (mm) => {
+    const onMapReady = (mm: MiniMap.Widget) => {
         minimap.current = mm;
         const ses = mm.getSession();
         const ds = ses.getDatasource('lk_talomlolland_aldersfordeling');
@@ -63,11 +77,11 @@ const DemographicsPage: FC = () => {
             setSelectedDate(getDates(rows)[0]);
             setAgeGroups(getAgeGroups(rows));
         });
-        mm.getEvents().addListener('FEATURE_SELECTED', function (_e, feature) {
+        mm.getEvents().addListener('FEATURE_SELECTED', function (_e: Event, feature: Feature) {
             mm.getMapControl().setMarkingGeometry(feature.wkt, false, null, 3000);
             setParishCode(feature.attributes.sognekode.toString());
         });
-        mm.getEvents().addListener('FEATURE_DESELECTED', function (_e) {
+        mm.getEvents().addListener('FEATURE_DESELECTED', function (_e: Event) {
             mm.getMapControl().setMarkingGeometry();
             setParishCode('');
         });
@@ -300,7 +314,7 @@ const DemographicsPage: FC = () => {
             bothGenders: parishData.reduce((sum, cur) => sum + parseInt(cur.antal), 0),
         });
     }
-
+    
     const selectedParish = demographicsData.find((item) => item.sognekode === parishCode);
     const description1 =
         selectedParish && selectedParish.sognekode !== ''
