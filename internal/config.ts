@@ -1,3 +1,8 @@
+const forceMapExtentParam = '[module.varmeplan.force.mapextent]';
+const forceMapExtentDev = undefined;
+// const forceMapExtentDev = [625400,6052300,668000,6102000];
+export const forceMapExtent = forceMapExtentParam.includes('[') ? forceMapExtentDev : forceMapExtentParam;
+
 const summerhouseMinimapIdParam = '[module.talomlolland.summerhouse.minimapid]';
 const summerhouseMinimapIdDev = '677add53-677d-46c2-95da-9f0e7cf3625a';
 export const summerhouseMinimapId = summerhouseMinimapIdParam.includes('[') ? summerhouseMinimapIdDev : summerhouseMinimapIdParam;
