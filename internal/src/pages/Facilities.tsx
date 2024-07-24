@@ -13,11 +13,21 @@ export interface FacilitiesRow {
     id: string;
     alder: string;
     koen: string;
-    type: string;
+    facilitet: string;
     navn: string;
-    adresse: string;
-    beskrivelse: string;
     distance: string;
+    isokron: string;
+    km1: string;
+    km2: string;
+    km3: string;
+    km4: string;
+    km5: string;
+    km6: string;
+    km7: string;
+    km8: string;
+    km9: string;
+    km10: string;
+    [key: string]: string;
 }
 export interface MarkingRow {
     isokron: string;
@@ -45,7 +55,7 @@ interface FilterKeys {
     distance: number;
 }
 
-interface selectOptions {
+interface SelectOptions {
     value: string;
     label: string;
 }
@@ -65,29 +75,52 @@ const distances: FilterKeys[] = [
 ];
 
 // Helper functions
+/**
+ * Denne funktion opretter tabeldata baseret på facilitetsdata, afstand, analyseparametre, kolonneparametre og en specifik streng.
+ *
+ * @param {FacilitiesRow[]} data - En liste af facilitetsdata.
+ * @param {number} distance - En numerisk værdi, der repræsenterer afstanden.
+ * @param {AnalysisParams[]} analysisParams - En liste af analyseparametre.
+ * @param {FilterKeys[]} columnParams - En liste af kolonneparametre.
+ * @param {string} specific - En valgfri streng, der bruges til at filtrere dataene.
+ * @returns {LegendTableData[]} - Returnerer en liste af LegendTableData objekter.
+ */
 const createTableData = (
-    data: FacilitiesRow[],
-    distance: number,
-    analysisParams: AnalysisParams[],
-    columnParams: FilterKeys[],
-    specific?: string,
+    data: FacilitiesRow[], // Inputdata som skal analyseres.
+    distance: number, // Afstandsværdi til filtrering af data.
+    analysisParams: AnalysisParams[], // Parametre for analyse af data.
+    columnParams: FilterKeys[], // Parametre for kolonnefiltrering.
+    specific?: string // Specifik værdi til filtrering af data.
 ) => {
-
-const filteredData = specific ? data.filter((item) => item.navn === specific) : data;
+    // Initialiserer et tomt array til at holde resultaterne.
     const result: LegendTableData[] = [];
+    
+    // Filtrerer dataene for rækker, hvor afstanden er større end den angivne afstand, eller afstanden er tom.
     const dataOutside = data.filter((row) => parseFloat(row.distance) > distance || row.distance === '');
-
+    
+    // Itererer over hvert analyseparameter.
     for (let i = 0; i < analysisParams.length; i++) {
         const analysisParam = analysisParams[i];
+        
+        // Initialiserer et tomt array til at holde værdierne.
         const values: number[] = [];
+        
+        // Itererer over hvert kolonneparameter.
         for (let j = 0; j < columnParams.length; j++) {
             const columnParam = columnParams[j];
-            const dataInside = filteredData.filter((row) => parseFloat(row.distance) <= columnParam.distance && row.distance !== '');
+            
+            // Filtrerer dataene baseret på det specifikke kriterium, hvis det er angivet, ellers baseret på afstanden.
+            const dataInside = specific
+                ? data.filter((item) => item[columnParam.isokron].includes(specific))
+                : data.filter((row) => parseFloat(row.distance) <= columnParam.distance && row.distance !== '');
+            
+            // Beregner antallet af rækker, der opfylder filterværdien for det aktuelle analyseparameter.
             const value = dataInside.filter(analysisParam.filterValue).length;
             values.push(value);
         }
+        
+        // Tilføjer antallet af rækker uden for den angivne afstand, der opfylder filterværdien for det aktuelle analyseparameter.
         values.push(dataOutside.filter(analysisParam.filterValue).length);
-
         result.push({
             name: analysisParam.title,
             values,
@@ -96,6 +129,7 @@ const filteredData = specific ? data.filter((item) => item.navn === specific) : 
     }
     return result;
 };
+
 
 const getLocalities = (data: FacilitiesRow[]) => {
     const uniqueLocalities = [...new Set(data.map((item) => item.navn))];
@@ -112,6 +146,7 @@ const FacilitiesPage: FC = () => {
     const [locality, setLocality] = useState<string | undefined>(undefined);
     const [localitiesData, setLocalitiesData] = useState<LocalitiesRow[]>([]);
     const [facilitiesData, setFacilitiesData] = useState<FacilitiesRow[]>([]);
+    const [selectOptions, setSelectOptions] = useState<SelectOptions[] | undefined>(undefined);
     const [markingData, setMarkingData] = useState<MarkingRow[]>([]);
     const [selectedDistance, setSelectedDistanse] = useState<FilterKeys>({ isokron: 'km5', distance: 5000 });
     const [facilitiesAgesGroups, setFacilitiesAgesGroups] = useState<AnalysisParams[]>([
@@ -164,11 +199,22 @@ const FacilitiesPage: FC = () => {
 
     // Functions
     const onMapReady = (mm: MiniMap.Widget) => {
+        // console.log(mm);
         minimap.current = mm;
         const ses = mm.getSession();
         const ds = ses.getDatasource('lk_talomlolland_faciliteter_haller_borger');
         ds.execute({ command: 'read' }, function (rows: FacilitiesRow[]) {
             setFacilitiesData(rows);
+            const uniqueLocalities: string[] = getLocalities(rows);
+            const options = uniqueLocalities.map((element) => {
+                const value = element;
+                const label = element;
+                return {
+                    value,
+                    label,
+                };
+            });
+            setSelectOptions(options);
         });
         const dsMarking = ses.getDatasource('lk_talomlolland_faciliteter_haller_map');
         dsMarking.execute({ command: 'read' }, function (markingRows: MarkingRow[]) {
@@ -190,7 +236,7 @@ const FacilitiesPage: FC = () => {
         setFacilitiesAgesGroups(updatedFacilitiesAgesGroups);
     };
 
-    const handleLocalityFilter = (event: selectOptions | null) => {
+    const handleLocalityFilter = (event: SelectOptions | null) => {
         const locality = event ? event.value : undefined;
         setLocality(locality);
     };
@@ -199,7 +245,7 @@ const FacilitiesPage: FC = () => {
     useEffect(() => {
         if (minimap.current) {
             if (locality) {
-                console.log('locality er sat!');
+                // console.log('locality er sat!');
                 const filteredLocalitiesData = localitiesData.filter((item) => item.navn === locality);
                 const markingItem = filteredLocalitiesData.find((item) => item.isokron === selectedDistance.isokron);
                 if (markingItem) {
@@ -207,7 +253,7 @@ const FacilitiesPage: FC = () => {
                     minimap.current.getMapControl().setMarkingGeometry(filteredMarkings, true, null, 3000);
                 }
             } else {
-                console.log('locality er IKKE sat!');
+                // console.log('locality er IKKE sat!');
                 const markingItem = markingData.find((item) => item.isokron === selectedDistance.isokron);
                 if (markingItem) {
                     const filteredMarkings = markingItem.shape_wkt;
@@ -229,47 +275,26 @@ const FacilitiesPage: FC = () => {
         locality
     );
 
-    const uniqueLocalities: string[] = getLocalities(facilitiesData);
-    const options = uniqueLocalities.map((element) => {
-        const value = element;
-        const label = element;
-        return {
-            value,
-            label,
-        };
-    });
+    const headers = locality
+        ? ['Aldersgrupper', 'km1', 'km2', 'km3', 'km4', 'km5', 'km6', 'km7', 'km8', 'km9', 'km10']
+        : [
+              'Aldersgrupper',
+              'km1',
+              'km2',
+              'km3',
+              'km4',
+              'km5',
+              'km6',
+              'km7',
+              'km8',
+              'km9',
+              'km10',
+              `>${selectedDistance.isokron}`,
+          ];
 
-    const headers = locality ? [
-        'Aldersgrupper',
-        'km1',
-        'km2',
-        'km3',
-        'km4',
-        'km5',
-        'km6',
-        'km7',
-        'km8',
-        'km9',
-        'km10',
-    ] : [
-        'Aldersgrupper',
-        'km1',
-        'km2',
-        'km3',
-        'km4',
-        'km5',
-        'km6',
-        'km7',
-        'km8',
-        'km9',
-        'km10',
-        `>${selectedDistance.isokron}`,
-    ];
-
-    const handleConsoleLog = () => {
-        console.log('Test: ', uniqueLocalities);
-        console.log('Test: ', options);
-    };
+    // const handleConsoleLog = () => {
+    //     console.log('facilitiesData: ', facilitiesData);
+    // };
 
     // Component return
     return (
@@ -285,7 +310,7 @@ const FacilitiesPage: FC = () => {
                                     <label className="label">Vælg en lokalitet</label>
                                     <Select
                                         name="locality"
-                                        options={options}
+                                        options={selectOptions}
                                         className="basic-single"
                                         classNamePrefix="select"
                                         isClearable={true}
@@ -306,7 +331,6 @@ const FacilitiesPage: FC = () => {
                                 </div>
                                 <div className="column is-6">
                                     <label className="label">Vælg en afstand: {selectedDistance.isokron}</label>
-                                    {/* <div className="control is-expanded block"> */}
                                     <div className="control block">
                                         <Slider
                                             onRangeChange={handleSliderChange}
@@ -328,11 +352,11 @@ const FacilitiesPage: FC = () => {
                                     selectedColumn={selectedDistance.isokron}
                                 />
                             </div>
-                            <div className="control">
+                            {/* <div className="control">
                                 <button className="button is-info is-light" onClick={handleConsoleLog} value="console">
                                     Console.log()
                                 </button>
-                            </div>
+                            </div> */}
                         </div>
                     </div>
                 </div>

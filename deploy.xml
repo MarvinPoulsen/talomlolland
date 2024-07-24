@@ -1,5 +1,5 @@
 <deploy>
-	<version>1.0.0</version>
+	<version>1.1.0</version>
 	<description>Tal om Lolland</description>
 	
     <param name="module.minimap2.searchresult.layer.polygon.color">0,102,255</param>
