@@ -1,0 +1,11 @@
+Ja, det er muligt at bruge et array til at filtrere dataene. Du kan ændre din filtreringslogik til at tjekke, om nogen af elementerne i dit array matcher nogen af elementerne i item[columnParam.isokron]. Her er et eksempel på, hvordan du kan gøre det:
+
+// Array af specifikke kriterier
+const specificArray = ['marvin', 'holger', 'sofus'];
+
+// Filtrerer dataene baseret på de specifikke kriterier, hvis de er angivet, ellers baseret på afstanden.
+const dataInside = specificArray.length > 0
+    ? data.filter((item) => specificArray.some(specific => item[columnParam.isokron].includes(specific)))
+    : data.filter((row) => parseFloat(row.distance) <= columnParam.distance && row.distance !== '');
+
+I dette eksempel bruger vi Array.prototype.some() til at tjekke, om nogen af elementerne i specificArray findes i item[columnParam.isokron]. Hvis specificArray indeholder nogen værdier, vil filteret anvende disse kriterier; ellers vil det filtrere baseret på afstanden.

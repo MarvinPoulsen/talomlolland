@@ -9,5 +9,5 @@
     <!-- <param name="module.minimap2.searchresult.layer.point.marker.url"></param> -->
 
     <makedir dir="[cbinfo.wwwroot.dir]/modules/talomlolland" />
-    <copydir fromdir="[module:talomlolland.dir]/dist" todir="[cbinfo.wwwroot.dir]/modules/talomlolland" replacetext="true"/>
+    <!-- <copydir fromdir="[module:talomlolland.dir]/dist" todir="[cbinfo.wwwroot.dir]/modules/talomlolland" replacetext="true"/> -->
 </deploy>

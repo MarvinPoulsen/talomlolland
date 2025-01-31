@@ -49,6 +49,7 @@ function SummerhouseResidenceTable(props: SummerhouseResidenceTableProps) {
                     return (
                         <tr {...row.getRowProps()}>
                             {row.cells.map((cell) => {
+                                console.log('cell: ',cell)
                                 const isNumber = isNaN(cell.value) ? '' : ' has-text-right';
                                 return (
                                     <td {...cell.getCellProps({ className: ' content' + isNumber })}>{cell.render('Cell')}</td>
