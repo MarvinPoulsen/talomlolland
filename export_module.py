@@ -10,7 +10,7 @@ target = origin.replace(r"c:\spatialsuite-4.5.0\sites\sps450", source)
 
     # Replacing text/url in index.html
 index_file = origin + r'\dist\index.html'
-search_text = "http://localhost:8080/"
+search_text = "http://localhost:8181/"
 replace_text = "/"
 with open(index_file, 'r') as file:
     data = file.read()
