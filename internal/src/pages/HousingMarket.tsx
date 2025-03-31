@@ -190,7 +190,7 @@ interface PiechartDataSeries {
 const HousingMarketPage: FC = () => {
     const minimap: any = useRef(null);
     const [estateData, setEstateData] = useState<EstateRow[]>([]);
-    const [date, setDate] = useState<string>('2024-02-15 00:00:00.0');
+    const [date, setDate] = useState<string>('2025-02-15 00:00:00.0');
     const [housingTypes, setHousingTypes] = useState<AnalysisParams[]>([
         { title: 'Stuehus til landbrugsejendom', code: 'bt1', on: true },
         { title: 'Parcelhus', code: 'bt2', on: true },
