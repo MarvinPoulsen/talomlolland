@@ -160,14 +160,14 @@
 			<displayname>Varmekilder (Fjernvarme/blokvarme)</displayname>
 		</themeselector>
 	</theme>
-	<theme module="talomlolland" name="theme-lk_talomlolland_varmekilder">
+	<!-- <theme module="talomlolland" name="theme-lk_talomlolland_varmekilder">
 		<themeselector>
 			<initialstate>[common.themes.initialstate]</initialstate>
 			<group>talomlolland</group>
 			<selectable>true</selectable>
 			<displayname>Varmekilder</displayname>
 		</themeselector>
-	</theme>
+	</theme> -->
 	<theme module="talomlolland" name="theme-lk_talomlolland_andet_view_lol">
 		<themeselector>
 			<initialstate>[common.themes.initialstate]</initialstate>
